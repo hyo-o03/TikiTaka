@@ -1,0 +1,30 @@
+package com.somsoms.tikitaka.controller;
+
+import java.util.List;
+import com.somsoms.tikitaka.domain.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+public class MatchingController {
+	
+	@PostMapping("/match/request")
+	public ResponseEntity<String> requestMatch(@RequestParam int user_id) {}
+	//매칭 요청
+
+	@GetMapping("/match/result/all")
+	public ResponseEntity<List<Matching>> getMatchResults(@RequestParam int user_id) {}
+	//매칭 모든 결과값
+
+	@GetMapping("/match/result/one")
+	public ResponseEntity<Matching> getMatchResult(@RequestParam int match_id) {}
+	//매칭 하나의 결과값
+
+	@PostMapping("/match/respond")
+	public ResponseEntity<String> respondToMatch(
+	    @RequestParam int match_id,
+	    @RequestParam String status // "ACCEPTED" or "REJECTED"
+	) {}
+
+}
