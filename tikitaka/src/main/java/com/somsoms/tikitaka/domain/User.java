@@ -18,6 +18,8 @@ public class User {
 	private String address;
 	private String introduce;
 	private String mbti;
+	private String fashion;
+	private boolean smoke;
 	
 	/* Constructors */
 	
@@ -51,5 +53,9 @@ public class User {
 	public void setIntroduce(String introduce) { this.introduce = introduce; }
 	public String getMbti() { return mbti; }
 	public void setMbti(String mbti) { this.mbti = mbti; }
+	public String getFashion() { return fashion; }
+	public void setFashion(String fashion) { this.fashion = fashion; }
+	public boolean isSmoke() { return smoke; }
+	public void setSmoke(boolean smoke) { this.smoke = smoke; }
 	
 }

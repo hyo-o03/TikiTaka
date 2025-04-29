@@ -11,6 +11,8 @@ public class Idealtype {
     private String itMbti;
     private String itAddress;
     private String itFacialtype;
+    private String itFashion;
+    private boolean itSmoke;
 
     /* Constructors */
     
@@ -30,5 +32,9 @@ public class Idealtype {
     public void setItAddress(String itAddress) { this.itAddress = itAddress; }
     public String getItFacialtype() { return itFacialtype; }
     public void setItFacialtype(String itFacialtype) { this.itFacialtype = itFacialtype; }
-
+	public String getItFashion() { return itFashion; }
+	public void setItFashion(String itFashion) { this.itFashion = itFashion; }
+	public boolean isItSmoke() { return itSmoke; }
+	public void setItSmoke(boolean itSmoke) { this.itSmoke = itSmoke; }
+	
 }

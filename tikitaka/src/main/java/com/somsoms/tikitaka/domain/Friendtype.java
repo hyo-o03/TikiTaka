@@ -11,6 +11,7 @@ public class Friendtype {
     private String ftMbti;
     private String ftHobby;
     private String ftAddress;
+    private boolean ftSmoke;
 
     /* Constructors */
     
@@ -30,5 +31,7 @@ public class Friendtype {
     public void setFtHobby(String ftHobby) { this.ftHobby = ftHobby; }
     public String getFtAddress() { return ftAddress; }
     public void setFtAddress(String ftAddress) { this.ftAddress = ftAddress; }
-
+	public boolean isFtSmoke() { return ftSmoke; }
+	public void setFtSmoke(boolean ftSmoke) { this.ftSmoke = ftSmoke; }
+    
 }
