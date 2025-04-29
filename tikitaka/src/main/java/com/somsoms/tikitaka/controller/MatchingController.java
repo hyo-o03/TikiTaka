@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MatchingController {
 	
 	@PostMapping("/match/request")
-	public ResponseEntity<String> requestMatch(@RequestParam int user_id) {}
+	public ResponseEntity<String> requestMatch(@RequestParam int userId) {}
 	//매칭 요청
 
 	@GetMapping("/match/result/all")
-	public ResponseEntity<List<Matching>> getMatchResults(@RequestParam int user_id) {}
+	public ResponseEntity<List<Matching>> getMatchResults(@RequestParam int userId) {}
 	//매칭 모든 결과값
 
 	@GetMapping("/match/result/one")
-	public ResponseEntity<Matching> getMatchResult(@RequestParam int match_id) {}
+	public ResponseEntity<Matching> getMatchResult(@RequestParam int matchId) {}
 	//매칭 하나의 결과값
 
 	@PostMapping("/match/respond")
-	public ResponseEntity<String> respondToMatch(
-	    @RequestParam int match_id,
+	public ResponseEntity<String> respondToMatching(
+	    @RequestParam int matchId,
 	    @RequestParam String status // "ACCEPTED" or "REJECTED"
 	) {}
 

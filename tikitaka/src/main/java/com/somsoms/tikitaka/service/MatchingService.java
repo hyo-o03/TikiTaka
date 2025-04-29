@@ -5,19 +5,19 @@ import com.somsoms.tikitaka.domain.*;
 
 public class MatchingService {
 	
-	void requestMatching(int user_id) {}
+	void requestMatching(int userId) {}
 	  // MatchingResult에서 user_id로 생성된 매칭결과가 있는지 확인
 	  // 있다면 매칭 불가
 	  // 없다면 findItypeByUserId 혹은 findFtypeByUserId로 유저 조건에 맞는 매칭 진행
 	  // MatchingResult, Matching에 insert
 
-	void respondToMatching(int match_id, String status) {}
+	void respondToMatching(int matchId, String status) {}
 	  // updateMatchStatus로 결과 업데이트
 
-	Matching getMatchingResult(int match_id) {}
+	Matching getMatchingResult(int matchId) {}
 	  // findResultByMatchId로 매칭 하나의 결과 받아오기
 
-	List<Matching> getMatchingResults(int user_id) {}
+	List<Matching> getMatchingResults(int userId) {}
 	  // findAllResultByUserId로 매칭 전체 결과 받아오기
 
 	void deleteMatchingResult() {}
