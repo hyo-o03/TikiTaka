@@ -12,6 +12,7 @@ public class MatchingDao {
 
 	Matching findResultByMatchId(int matchId)
 	//매칭 결과 하나 가져오기
+	//이 결과로 매칭된 유저 프로필도 가져올 수 있음
 
 	List<Matching> findAllResultByUserId(int userId)
 	//유저별 매칭 결과 모두 가져오기

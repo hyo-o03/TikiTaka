@@ -16,6 +16,7 @@ public class MatchingService {
 
 	Matching getMatchingResult(int matchId) {}
 	  // findResultByMatchId로 매칭 하나의 결과 받아오기
+	  // 이 결과로 매칭된 유저 프로필도 가져올 수 있음
 
 	List<Matching> getMatchingResults(int userId) {}
 	  // findAllResultByUserId로 매칭 전체 결과 받아오기
