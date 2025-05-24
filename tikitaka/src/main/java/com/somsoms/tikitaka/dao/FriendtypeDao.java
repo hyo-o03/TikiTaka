@@ -4,13 +4,18 @@ import com.somsoms.tikitaka.domain.*;
 
 public class FriendtypeDao {
 	
-    void insertFriendtype(Friendtype friendtype);
+    void insertFriendtype(Friendtype friendtype) {
+	}
     
-    Friendtype findFriendtypeByUserId(Long userId);
+    Friendtype findFriendtypeByUserId(Long userId) {
+		return null;
+	}
 	/* Friendtype findFtypeByUserId(int user_id) */
     
-    void updateFriendtype(Friendtype friendtype);
+    void updateFriendtype(Friendtype friendtype) {
+	}
     
-    void deleteFriendtype(Long userId);
+    void deleteFriendtype(Long userId) {
+	}
 	
 }

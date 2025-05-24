@@ -14,11 +14,13 @@ public class MatchingService {
 	void respondToMatching(int matchId, String status) {}
 	  // updateMatchStatus로 결과 업데이트
 
-	Matching getMatchingResult(int matchId) {}
+	Matching getMatchingResult(int matchId) {
+		return null;}
 	  // findResultByMatchId로 매칭 하나의 결과 받아오기
 	  // 이 결과로 매칭된 유저 프로필도 가져올 수 있음
 
-	List<Matching> getMatchingResults(int userId) {}
+	List<Matching> getMatchingResults(int userId) {
+		return null;}
 	  // findAllResultByUserId로 매칭 전체 결과 받아오기
 
 	void deleteMatchingResult() {}

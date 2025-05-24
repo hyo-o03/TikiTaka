@@ -4,13 +4,18 @@ import com.somsoms.tikitaka.domain.*;
 
 public class IdealtypeDao {
 
-    void insertIdealtype(Idealtype idealtype);
+    void insertIdealtype(Idealtype idealtype) {
+	}
 	
-    Idealtype findIdealtypeByUserId(Long userId);
+    Idealtype findIdealtypeByUserId(Long userId) {
+		return null;
+	}
 	/* Idealtype findItypeByUserId(int user_id) */
     
-    void updateIdealtype(Idealtype idealtype);
+    void updateIdealtype(Idealtype idealtype) {
+	}
     
-    void deleteIdealtype(Long userId);
+    void deleteIdealtype(Long userId) {
+	}
     
 }

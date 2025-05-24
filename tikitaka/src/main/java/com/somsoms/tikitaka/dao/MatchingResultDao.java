@@ -5,12 +5,13 @@ import com.somsoms.tikitaka.domain.*;
 
 public class MatchingResultDao {
 
-	void insertMatchResult
+	void insertMatchResult() {}
 
-	void deleteMatchResult(int result_id, Date requestTime)
+	void deleteMatchResult(int result_id, Date requestTime) {}
 	//24시간 주기로 매칭 결과 정보 삭제(ON DELETE CASCADE)
 
-	Date findRequestTimeByUserId(int userId)
+	Date findRequestTimeByUserId(int userId) {
+		return null;}
 	//유저별 매칭 시간 가져오기
 
 }
