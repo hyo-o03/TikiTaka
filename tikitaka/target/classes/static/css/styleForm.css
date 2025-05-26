@@ -1,0 +1,25 @@
+.style-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 60px;
+}
+
+.style-tag {
+    aspect-ratio: 1 / 1;
+    background-color: #f6f3ff;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #000;
+}
+
+
+.style-tag.selected {
+    background-color: #DFD8FE;
+    color: #7656D6;
+    box-shadow: inset 0 0 0 1px #7656D6;
+}
