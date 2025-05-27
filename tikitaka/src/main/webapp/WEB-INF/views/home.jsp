@@ -6,11 +6,18 @@
     <title>Matching Home</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
     <meta charset="UTF-8">
+    <script>
+		function exit() {
+		    if (confirm("설문 작성을 취소하시겠습니까?")) {
+		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		    }
+		}
+	</script>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <div class="logo">Tiki-Taka</div>
+        <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
         <div class="icons">
             <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
             <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
@@ -20,13 +27,13 @@
         <p class="todayMatching">오늘의 매칭</p>
         <div class="matchings">
             <div class="friendMatching">
-                <a href="${pageContext.request.contextPath}/match/idealTypeLanking" style="text-decoration: none; color: inherit;">
+                <a href="${pageContext.request.contextPath}/match/prioritySelect" style="text-decoration: none; color: inherit;">
                     <p class="matchingMent">오늘의 친구를<br>만나러 가요</p>
                     <img src="${pageContext.request.contextPath}/images/friendHeart.png">
                 </a>
             </div>
             <div class="loverMatching">
-                <a href="${pageContext.request.contextPath}/match/idealTypeLanking" style="text-decoration: none; color: inherit;">
+                <a href="${pageContext.request.contextPath}/match/prioritySelect" style="text-decoration: none; color: inherit;">
                     <p class="matchingMent">오늘의 인연을<br>만나러 가요</p>
                     <img src="${pageContext.request.contextPath}/images/loverHeart.png">
                 </a>

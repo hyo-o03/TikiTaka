@@ -4,14 +4,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/matchingCss.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/matchBase.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/prioritySelect.css">
     <title>Matching Result Page</title>
+    <script>
+		function exit() {
+		    if (confirm("시작 페이지로 돌아가시겠습니까?")) {
+		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		    }
+		}
+	</script>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <img src="${pageContext.request.contextPath}/images/leftBtn.png">
-        <img src="${pageContext.request.contextPath}/images/escBtn.png">
+        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
     </div>
     <form action="${pageContext.request.contextPath}/match/matchRequestDone``1" method="post" class="form-layout">
 	    <div class="content">

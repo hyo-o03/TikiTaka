@@ -8,12 +8,19 @@
     <title>관심사</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/hobbyForm.css">
+    <script>
+		function exit() {
+		    if (confirm("설문 작성을 취소하시겠습니까?")) {
+		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		    }
+		}
+	</script>
 </head>
 <body>
 	<div class="container">
 	    <div class="header">
-	        <img src="${pageContext.request.contextPath}/images/leftBtn.png">
-	        <img src="${pageContext.request.contextPath}/images/escBtn.png">
+	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
 	    </div>
 	    <form action="${pageContext.request.contextPath}/user/mbti" method="post" class="form-layout">
 		<div class="content">
