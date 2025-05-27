@@ -2,7 +2,10 @@ package com.somsoms.tikitaka.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,6 +16,8 @@ public class User {
 	
 	// db 자동 생성
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
+	@SequenceGenerator(name = "user_id_seq", sequenceName = "USER_SEQ", allocationSize = 1)
 	@Column(name = "ID") // Oracle에서는 기본 키가 ID로 되어 있음
 	private int userId;
 
