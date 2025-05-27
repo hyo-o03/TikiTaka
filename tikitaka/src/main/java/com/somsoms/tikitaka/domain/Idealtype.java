@@ -14,6 +14,7 @@ public class Idealtype {
     private String itFacialtype;
     private String itFashion;
     private boolean itSmoke;
+    private String itHobby;
 
     /* Constructors */
     
@@ -39,5 +40,7 @@ public class Idealtype {
 	public void setItFashion(String itFashion) { this.itFashion = itFashion; }
 	public boolean isItSmoke() { return itSmoke; }
 	public void setItSmoke(boolean itSmoke) { this.itSmoke = itSmoke; }
+	public String isItHobby() { return itHobby; }
+	public void setItHobby(String itHobby) { this.itHobby = itHobby; }
 	
 }

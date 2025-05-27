@@ -1,25 +1,65 @@
 package com.somsoms.tikitaka.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="USERINFO")
 public class User {
 	
 	/* Private Fields */
 	
 	// db 자동 생성
+	@Id
+	@Column(name = "ID") // Oracle에서는 기본 키가 ID로 되어 있음
 	private int userId;
+
+	@Column(name = "FACIAL_TYPE", nullable = false, length = 10)
 	private String facialType;
+
+	@Column(name = "AGE", nullable = false)
 	private int age;
+
+	@Column(name = "GENDER", nullable = false, length = 2)
 	private String gender;
+
+	@Column(name = "HEIGHT", nullable = false)
 	private double height;
-	private double weight;
+
+	@Column(name = "WEIGHT")
+	private Double weight;
+
+	@Column(name = "KAKAO_ID", nullable = false, length = 20)
 	private String kakaoId;
+
+	@Column(name = "EMAIL", nullable = false, length = 20)
 	private String email;
+
+	@Column(name = "PHONE", nullable = false, length = 11)
 	private String phone;
+
+	@Column(name = "HOBBY", nullable = false, length = 10)
 	private String hobby;
+
+	@Column(name = "ADDRESS", nullable = false, length = 10)
 	private String address;
+
+	@Column(name = "INTRODUCE")
 	private String introduce;
+
+	@Column(name = "MBTI", nullable = false, length = 5)
 	private String mbti;
+
+	@Column(name = "RELIGION", length = 10)
+	private String religion;
+
+	@Column(name = "FASHION", length = 10)
 	private String fashion;
-	private boolean smoke;
+
+	@Column(name = "SMOKE")
+	private String smoke; // CHAR(1) → boolean이 아니라 String으로 매핑
 	
 	/* Constructors */
 	
@@ -55,7 +95,9 @@ public class User {
 	public void setMbti(String mbti) { this.mbti = mbti; }
 	public String getFashion() { return fashion; }
 	public void setFashion(String fashion) { this.fashion = fashion; }
-	public boolean isSmoke() { return smoke; }
-	public void setSmoke(boolean smoke) { this.smoke = smoke; }
+	public String getReligion() { return religion; }
+	public void setReligion(String religion) { this.religion = religion; }
+	public String isSmoke() { return smoke; }
+	public void setSmoke(String smoke) { this.smoke = smoke; }
 	
 }
