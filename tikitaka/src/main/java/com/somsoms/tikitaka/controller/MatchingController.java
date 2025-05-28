@@ -3,8 +3,14 @@ package com.somsoms.tikitaka.controller;
 import java.util.ArrayList;
 import java.util.List;
 import com.somsoms.tikitaka.domain.*;
+import com.somsoms.tikitaka.service.MatchingService;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +19,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/match")
 public class MatchingController {
+    
+    @Autowired
+    private MatchingService matchingService;
+    
 	@GetMapping("/idealTypeLanking")
 	public String showIdealTypeLanking() {
 		return "idealTypeLanking";
 	}
 	
 	@GetMapping("/matchingResultPage")
-	public String showMatchingResultPage() {
+	public String showMatchingResultPage(Model model) {
+	    
+	    int userId = 4; //임시로 정해놈
+	    
+	    List<User> matchingList = matchingService.getMatchingResults(userId);
+
+        
+	    
+	    model.addAttribute("matchingList", matchingList);
+	    
 		return "matchingResultPage";
 	}
 	
@@ -27,6 +46,18 @@ public class MatchingController {
 	public String showMatchRequestDone() {
 		return "matchRequestDone";
 	}
+	
+	@GetMapping("/idealTypeInfo")
+    public String showIdealTypeInfo(@RequestParam("address") String address, @RequestParam("age") int age, @RequestParam("introduce") String introduce, Model model) {
+        // 디버깅용 로그 추가
+//        System.out.println("IdealType Data: " + place + ", " + age + ", " + introduce + ", " + imageUrl);
+
+        // 모델에 데이터를 담아서 뷰로 전달
+        User userInfo = new User(address, age, introduce);
+        System.out.println("User Data: " + address + ", " + age + ", " + introduce);
+        model.addAttribute("userInfo", userInfo);
+        return "idealTypeInfo";
+    }
 	
 //	@PostMapping("/match/request")
 //	public ResponseEntity<String> requestMatch(@RequestParam int userId) {}

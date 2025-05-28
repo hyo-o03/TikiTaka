@@ -2,7 +2,10 @@ package com.somsoms.tikitaka.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,6 +16,8 @@ public class User {
 	
 	// db 자동 생성
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
+	@SequenceGenerator(name = "user_id_seq", sequenceName = "USER_SEQ", allocationSize = 1)
 	@Column(name = "ID") // Oracle에서는 기본 키가 ID로 되어 있음
 	private int userId;
 
@@ -67,7 +72,13 @@ public class User {
 
 	/* JavaBeans Properties */
 	
-	public int getUserId() { return userId; }
+	public User(String address, int age, String introduce) {
+        this.address = address;
+        this.age = age;
+        this.introduce = introduce;
+    }
+
+    public int getUserId() { return userId; }
 	public void setUserId(int userId) { this.userId = userId; }
 	public String getFacialType() { return facialType; }
 	public void setFacialType(String facialType) { this.facialType = facialType; }

@@ -1,9 +1,23 @@
 package com.somsoms.tikitaka.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import com.somsoms.tikitaka.domain.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.somsoms.tikitaka.domain.*;
+import com.somsoms.tikitaka.repository.MatchingRepository;
+import com.somsoms.tikitaka.repository.UserRepository;
+
+@Service
 public class MatchingService {
+    
+    @Autowired
+    private MatchingRepository matchingRepository;
+    
+    @Autowired
+    private UserRepository userRepository;
 	
 	void requestMatching(int userId) {}
 	  // MatchingResult에서 user_id로 생성된 매칭결과가 있는지 확인
@@ -19,8 +33,16 @@ public class MatchingService {
 	  // findResultByMatchId로 매칭 하나의 결과 받아오기
 	  // 이 결과로 매칭된 유저 프로필도 가져올 수 있음
 
-	List<Matching> getMatchingResults(int userId) {
-        return null;}
+	public List<User> getMatchingResults(int userId) {
+	    List<Matching> matchings = matchingRepository.findByUser_UserId(userId);
+	    
+	    List<Integer> matchedUserIds = new ArrayList<>();
+	    for (Matching m : matchings) {
+	        matchedUserIds.add(m.getMatchedUserId());
+	    }
+	    
+	    return userRepository.findAllById(matchedUserIds);
+    }
 	  // findAllResultByUserId로 매칭 전체 결과 받아오기
 
 	void deleteMatchingResult() {}
