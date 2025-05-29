@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/match")
 public class MatchingController {
-	@GetMapping("/idealTypeLanking")
+	@GetMapping("/prioritySelect")
 	public String showIdealTypeLanking() {
-		return "idealTypeLanking";
+		return "prioritySelect";
 	}
 	
 	@GetMapping("/matchingResultPage")

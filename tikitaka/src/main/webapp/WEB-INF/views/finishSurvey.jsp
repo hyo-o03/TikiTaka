@@ -11,13 +11,20 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/finishSurvey.css">
 
     <meta charset="UTF-8">
+    <script>
+		function exit() {
+		    if (confirm("시작 페이지로 돌아가시겠습니까?")) {
+		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		    }
+		}
+	</script>
 </head>
 
 <body>
     <div class="container">
 	    <div class="header">
-	        <img src="${pageContext.request.contextPath}/images/leftBtn.png">
-	        <img src="${pageContext.request.contextPath}/images/escBtn.png">
+	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
 	    </div>
         <div class="complete-container">
             <h2 class="complete-title">드디어 모든 절차가 끝났어요</h2>

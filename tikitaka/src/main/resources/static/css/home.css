@@ -35,6 +35,11 @@ body {
     color: #444;
 }
 
+a {
+	text-decoration: none;
+	color: inherit; /* 부모 요소 글자 색 따라가기 */
+}
+
 .icons {
     margin-left: 10px;
     cursor: pointer;

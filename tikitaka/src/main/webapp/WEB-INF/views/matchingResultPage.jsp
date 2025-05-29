@@ -4,23 +4,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/matchingCss.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/matchBase.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/matchingResultPage.css">
     <title>Matching Result Page</title>
-    <style>
-	    .container {
-		    background-image:
-		            radial-gradient(circle 500px at top right, #FFDAED 0%, #FFDAED 30%, transparent 100%),
-		            radial-gradient(circle 500px at bottom left, #D5DCED 0%, #D5DCED 30%, transparent 100%);
-		    background-repeat: no-repeat;
-		    background-size: 100% 100%;
+    <script>
+		function exit() {
+		    if (confirm("시작 페이지로 돌아가시겠습니까?")) {
+		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		    }
 		}
-    </style>
+	</script>
 </head>
 <body>
     <div class="container" >
         <div class="header">
-            <img src="${pageContext.request.contextPath}/images/leftBtn.png">
-            <img src="${pageContext.request.contextPath}/images/escBtn.png">
+	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
         </div>
         <div class="content">
             <div class="title">소개팅으로 매칭할 상대를 선택해주세요</div>
