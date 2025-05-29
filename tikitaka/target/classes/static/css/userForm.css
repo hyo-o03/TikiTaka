@@ -35,6 +35,15 @@ form.form-layout {
     border-bottom: 1px solid #ddd;
 }
 
+img {
+	cursor: pointer;
+}
+
+a {
+	text-decoration: none;
+	color: inherit; /* 부모 요소 글자 색 따라가기 */
+}
+
 .content {
     flex: 1;
     overflow-y: auto;
