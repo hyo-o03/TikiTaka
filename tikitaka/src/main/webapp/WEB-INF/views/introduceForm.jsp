@@ -31,7 +31,7 @@
 	        	<div class="title">간단한 한 줄 소개를 해주세요</div>
 	        	<div class="description">매칭 시 상대에게 보여질 자기소개를 작성해주세요!</div>
 	            <div class="intro-box">
-	                <textarea class="intro-textarea" placeholder="자기소개를 입력해주세요 :)"></textarea>
+	                <textarea class="intro-textarea" name="introduce" placeholder="자기소개를 입력해주세요 :)"></textarea>
 	            </div>
 	        </div>
 	        <div class="footer">

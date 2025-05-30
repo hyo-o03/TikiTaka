@@ -29,16 +29,16 @@
 			
 			    <div class="region-input">
 			        <label for="userRegion">내 거주 지역</label>
-			        <input type="text" id="userRegion" name="userRegion" placeholder="예: 서울시 마포구">
+			        <input type="text" id="address" name="address" placeholder="예: 서울시 마포구">
 			    </div>
 			    
 			    <div class="preference-options">
 			        <label class="option">
-			            <input type="radio" name="distancePreference" value="close">
+			            <input type="radio" name="itAddressPref" value="close">
 			            가까웠으면 좋겠어요
 			        </label>
 			        <label class="option">
-			            <input type="radio" name="distancePreference" value="far">
+			            <input type="radio" name="itAddressPref" value="far">
 			            멀어도 괜찮아요
 			        </label>
 			    </div>

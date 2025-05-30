@@ -17,6 +17,35 @@
 		        window.location.href = "${pageContext.request.contextPath}/signup/start";
 		    }
 		}
+		
+		window.onload = function () {
+	        const snsInput = document.getElementById("snsId");
+	        const unknownBtn = document.getElementById("noSnsBtn");
+
+	        // 없어요 버튼 클릭 시
+	        unknownBtn.addEventListener("click", function (e) {
+	        	e.preventDefault(); // form submit 막음
+	        	
+	        	if (snsInput.disabled) {
+	                // 다시 입력 가능하게
+	                snsInput.disabled = false;
+	                snsInput.value = "";
+	                noSnsBtn.classList.remove("selected");
+	            } else {
+	                // 비활성화 및 초기화
+	                snsInput.disabled = true;
+	                snsInput.value = "";
+	                noSnsBtn.classList.add("selected");
+	            }
+	        });
+
+	        // 추가입력시
+	        snsInput.addEventListener("input", function () {
+	        	if (!snsInput.disabled && snsInput.value.trim() !== "") {
+	                noSnsBtn.classList.remove("selected");
+	            }
+	        });
+	    };
 	</script>
 </head>
 
@@ -32,11 +61,11 @@
 	        	<div class="description">카카오톡 아이디는 매칭후 연락수단으로 필수 입력입니다.</div>
 	            <div class="sns-section">
 	                <label class="sns-label">필수공개</label>
-	                <input type="text" class="sns-input" placeholder="카카오톡 아이디">
+	                <input type="text" class="sns-input" id="kakaoId" name="kakaoId" placeholder="카카오톡 아이디">
 	              
 	                <label class="sns-label">기타 sns</label>
-	                <input type="text" class="sns-input" id="extraSnsInput" placeholder="공개할 sns 추가입력">
-					<button class="sns-option" id="noSnsBtn">sns가 없어요</button>
+	                <input type="text" class="sns-input" id="snsId" name="snsId" placeholder="공개할 sns 추가입력">
+					<button type="button" class="sns-option" id="noSnsBtn">sns가 없어요</button>
 	
 	              </div>
 	        </div>

@@ -16,6 +16,26 @@
 		        window.location.href = "${pageContext.request.contextPath}/signup/start";
 		    }
 		}
+		
+		window.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll('.style-tag');
+            const hiddenInput = document.getElementById("selectedFashionType");
+
+            buttons.forEach(button => {
+                button.addEventListener("click", function (e) {
+                    e.preventDefault(); // form submit 방지
+
+                    // 기존 선택 해제
+                    buttons.forEach(b => b.classList.remove("selected"));
+
+                    // 새로 선택
+                    this.classList.add("selected");
+
+                    // 값 저장
+                    hiddenInput.value = this.innerText.trim();
+                });
+            });
+        });
 	</script>
 </head>
 <body>
@@ -28,6 +48,10 @@
 	<form action="${pageContext.request.contextPath}/user/smoke" method="post" class="form-layout">
 	    <div class="content">
 			<div class="title">평소 사복 스타일이 궁금해요</div>
+			
+			<!-- 패션 선택 값 담을 hidden input -->
+			<input type="hidden" name="fashion" id="selectedFashionType">
+				
 	        <div class="style-grid">
 	            <button class="style-tag">캐주얼</button>
 	            <button class="style-tag">모던</button>
@@ -42,13 +66,6 @@
         </div>
     </form>
 </div>
-<script>
-    document.querySelectorAll('.style-tag').forEach(tag => {
-      tag.addEventListener('click', () => {
-        tag.classList.toggle('selected');
-      });
-    });
-</script>
   
 </body>
 </html>
