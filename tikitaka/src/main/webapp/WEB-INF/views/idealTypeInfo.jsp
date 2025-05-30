@@ -1,7 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class ="escBtn">
+    <img class ="escBtn" src="${pageContext.request.contextPath}/images/escBtn.png" 
+        alt="profile image" onclick="window.closePopup()">
+</div>
+
 <div class="mProfileImg">
-    <<!-- <img src="${userInfo.facialType}" alt="profile image">  -->
+    <!-- <img src="${userInfo.facialType}" alt="profile image">  -->
 </div>
 <div class="profileInfo">
     <p class="basigInfo">기본정보</p>
@@ -19,5 +24,7 @@
     <p class="infoIntroduce">${userInfo.introduce}</p>
 </div>
 <div class="matchingBtn">
-    <button>매칭하기</button>
+    <a href="${pageContext.request.contextPath}/match/matchRequestDone?type=I&idealId=${userInfo.userId}">
+        <button>매칭하기</button>
+    </a>
 </div>

@@ -160,7 +160,7 @@ button {
     justify-items: center;
     justify-content: center;
     gap: 20px;
-    padding: 10px;
+    padding: 0 7px;
 }
 
 .idealTypeDetail {
@@ -225,7 +225,11 @@ button {
     background: linear-gradient(to bottom, #EAE5FF, #FBFBFB);
     width: 300px;
     height: 530px;
+    overflow-y: auto; 
 
+}
+#popupModal::-webkit-scrollbar {
+    width: 6px;  /* 세로 스크롤바 너비 */
 }
 .mProfileImg {
     width: 100%;
@@ -260,8 +264,23 @@ button {
 .matchingBtn{
     width: 100%;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 0;
+}
+
+div.escBtn {
+    text-align: right;
+    width: 100%;
+    padding:0;
+    margin:0;
+
+}
+
+img.escBtn {
+	width: 25px;
+	padding:0;
+	margin: 0;
+	cursor: pointer;
 }
 
 button {
@@ -270,6 +289,6 @@ button {
     border-radius: 25px;
     background: #7656D6;
     color: #FFFFFF;
-
     font-size: 16px;
+    cursor: pointer;
 }

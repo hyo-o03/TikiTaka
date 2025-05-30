@@ -72,10 +72,11 @@ public class User {
 
 	/* JavaBeans Properties */
 	
-	public User(String address, int age, String introduce) {
+	public User(String address, int age, String introduce, int userId) {
         this.address = address;
         this.age = age;
         this.introduce = introduce;
+        this.userId = userId;
     }
 
     public int getUserId() { return userId; }

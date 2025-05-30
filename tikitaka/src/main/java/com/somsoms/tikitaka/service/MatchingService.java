@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.somsoms.tikitaka.domain.*;
 import com.somsoms.tikitaka.repository.MatchingRepository;
+import com.somsoms.tikitaka.repository.MatchingresultRepository;
 import com.somsoms.tikitaka.repository.UserRepository;
 
 @Service
@@ -15,6 +16,9 @@ public class MatchingService {
     
     @Autowired
     private MatchingRepository matchingRepository;
+    
+    @Autowired
+    private MatchingresultRepository matchingresultRepository;
     
     @Autowired
     private UserRepository userRepository;
@@ -42,6 +46,23 @@ public class MatchingService {
 	    }
 	    
 	    return userRepository.findAllById(matchedUserIds);
+    }
+	
+	public void acceptMatchesByUserId(int userId, String type, int idealId) {
+	    MatchingResult result = matchingresultRepository.findByUserUserIdAndRequestType(userId, type);
+        if (result == null) return;
+        System.out.println(result.getResultId());
+        
+        List<Matching> matchList = matchingRepository.findByMatchingResultResultId(result.getResultId());
+        
+        for (Matching match : matchList) {
+            System.out.println(match.getMatchedUserId()+","+idealId);
+            if(match.getMatchedUserId() == idealId)
+                match.setStatus("ACCEPTED");
+            else
+                match.setStatus("REJECTED");
+        }
+        matchingRepository.saveAll(matchList);
     }
 	  // findAllResultByUserId로 매칭 전체 결과 받아오기
 

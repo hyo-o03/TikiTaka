@@ -14,4 +14,6 @@ import java.util.List;
 public interface MatchingRepository extends JpaRepository<Matching, Integer> {
     List<Matching> findByUser_UserId(int userId);
     
+    List<Matching> findByMatchingResultResultId(int matchingResultId);
+    
 }
