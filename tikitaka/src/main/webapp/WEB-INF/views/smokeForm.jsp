@@ -34,13 +34,13 @@
 	            <div class="option-box">
 	                <label class="option">
 	                  <span class="label-text">🚭비흡연자</span>
-	                  <input type="radio" name="distance" value="near">
+	                  <input type="radio" name="smoke" value="비흡연">
 	                  <span class="circle"></span>
 	                </label>
 	              
 	                <label class="option">
 	                  <span class="label-text">🚬흡연자</span>
-	                  <input type="radio" name="distance" value="far">
+	                  <input type="radio" name="smoke" value="흡연">
 	                  <span class="circle"></span>
 	                </label>
 	              </div>

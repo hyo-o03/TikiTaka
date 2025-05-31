@@ -35,3 +35,9 @@
 .mbti-dropdown::placeholder {
     color: #aaa;
 }
+
+.mbti-option.selected {
+    background-color: #DFD8FE;
+    color: #7656D6;
+    border: 1px solid #7656D6;
+}

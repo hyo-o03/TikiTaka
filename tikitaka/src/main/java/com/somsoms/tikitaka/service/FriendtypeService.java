@@ -1,7 +1,7 @@
 package com.somsoms.tikitaka.service;
 
 import org.springframework.stereotype.Service;
-
+import com.somsoms.tikitaka.dao.FriendtypeDao;
 import com.somsoms.tikitaka.domain.*;
 
 @Service
