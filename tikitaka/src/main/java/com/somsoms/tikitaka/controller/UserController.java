@@ -1,81 +1,102 @@
 package com.somsoms.tikitaka.controller;
 
-import com.somsoms.tikitaka.domain.*;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.somsoms.tikitaka.domain.User;
+import com.somsoms.tikitaka.service.UserService;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
-//	private UserService userService;
-	
-	@GetMapping("/profile")
-	public String showProfile() {
-		return "profileForm";
-	}
-	
-	@PostMapping("/address")
+	private final UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+ // 마이페이지 홈
+    @GetMapping("/myPage")
+    public String showMyPage() {
+        return "myPage";
+    }
+    // 프로필 정보 폼
+    @GetMapping("/profile")
+    public String showProfileForm() {
+        return "profileForm";
+    }
+ // 마이페이지 정보 수정 (editMyProfile.jsp)
+    @GetMapping("/mypage/edit")
+    public String showEditMyProfile(Model model) {
+        User user = userService.getUserById(1); // 임시 ID
+        model.addAttribute("user", user);
+        return "editMyProfile";
+    }
+ // 자기소개 수정
+    @GetMapping("/editIntroduce")
+    public String showEditIntroduce() {
+        return "editIntroduce";
+    }
+ // 프로필 동물 수정
+    @GetMapping("/editProfile")
+    public String showEditProfile() {
+        return "editProfile";
+    }
+	@GetMapping("/address")
 	public String showAddress() {
 		return "addressForm";
 	}
 	
-	@PostMapping("/hobby")
+	@GetMapping("/hobby")
 	public String showHobby() {
 		return "hobbyForm";
 	}
 	
-	@PostMapping("/mbti")
-	public String showMbti() {
-		return "mbtiForm";
-	}
+	// MBTI 수정
+    @GetMapping("/editMbti")
+    public String showEditMbti() {
+        return "editMbti";
+    }
 
-	@PostMapping("/sns")
+
+	@GetMapping("/sns")
 	public String showSns() {
 		return "snsForm";
 	}
 	
-	@PostMapping("/style")
+	@GetMapping("/style")
 	public String showStyle() {
 		return "styleForm";
 	}
 	
-	@PostMapping("/smoke")
+	@GetMapping("/smoke")
 	public String showSmoke() {
 		return "smokeForm";
 	}
 	
-	@PostMapping("/religion")
-	public String showReligion() {
-		return "religionForm";
-	}
+	// 종교 수정
+    @GetMapping("/editReligion")
+    public String showEditReligion() {
+        return "editReligion";
+    }
 	
-	@PostMapping("/introduce")
-	public String showIntroduce() {
-		return "introduceForm";
-	}
 	
-	@PostMapping("/home")
+	@GetMapping("/home")
 	public String showHome() {
 		return "home";
 	}
 	
-	@GetMapping("/home")
-	public String showGetHome() {
-		return "home";
-	}
 	
-	@PostMapping("/finishSurvey")
-	public String showEnd() {
-		return "finishSurvey";
-	}
+    // 설문 완료
+    @GetMapping("/finishSurvey")
+    public String showFinishSurvey() {
+        return "finishSurvey";
+    }
 	
-	@GetMapping("/myPage")
-	public String showMypage() {
-		return "myPage";
-	}
 
 //    public ResponseEntity<String> registerUser(@RequestBody UserCommand userCommand);
 //    

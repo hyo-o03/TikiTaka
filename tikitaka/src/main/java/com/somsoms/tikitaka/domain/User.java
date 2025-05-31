@@ -1,26 +1,90 @@
 package com.somsoms.tikitaka.domain;
 
+import jakarta.persistence.*;
+
+
+@Entity
+@Table(name = "USERINFO")
 public class User {
 	
 	/* Private Fields */
 	
 	// db 자동 생성
-	private int userId;
-	private String facialType;
-	private int age;
-	private String gender;
-	private double height;
-	private double weight;
-	private String kakaoId;
-	private String email;
-	private String phone;
-	private String hobby;
-	private String address;
-	private String introduce;
-	private String mbti;
-	private String fashion;
-	private boolean smoke;
-	
+//	private int userId;
+//	private String facialType;
+//	private int age;
+//	private String gender;
+//	private double height;
+//	private double weight;
+//	private String kakaoId;
+//	private String email;
+//	private String phone;
+//	private String hobby;
+//	private String address;
+//	private String introduce;
+//	private String mbti;
+//	private String fashion;
+//	private boolean smoke;
+	 @Id
+	 @SequenceGenerator(
+			    name = "userinfo_seq_gen",          
+			    sequenceName = "USER_SEQ",      
+			    allocationSize = 1
+			)
+	 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_gen")
+			private int userId;
+
+	    @Column(name = "FACIAL_TYPE")
+	    private String facialType;
+
+	    private int age;
+
+	    private String gender;
+
+	    private double height;
+
+	    private double weight;
+
+	    @Column(name = "KAKAO_ID")
+	    private String kakaoId;
+
+	    private String email;
+
+	    private String phone;
+
+	    private String hobby;
+
+	    private String address;
+
+	    @Lob
+	    private String introduce;
+
+	    private String mbti;
+
+	    private String religion;
+
+	    private String fashion;
+
+	    private String smoke;
+
+
+	    @Column(name = "WEIGHT_PRIVATE")
+	    private String weightPrivate;
+
+	    @Column(name = "ALARM_AGREE")
+	    private String alarmAgree;
+
+	    @Column(name = "SNS_ID")
+	    private String snsId;
+	    
+	    
+	    //패스워드 임시생성
+	    @Column(name = "PASSWORD")
+	    private String password;
+
+	    public String getPassword() { return password; }
+	    public void setPassword(String password) { this.password = password; }
+
 	/* Constructors */
 	
 	User() {}
@@ -53,9 +117,11 @@ public class User {
 	public void setIntroduce(String introduce) { this.introduce = introduce; }
 	public String getMbti() { return mbti; }
 	public void setMbti(String mbti) { this.mbti = mbti; }
+	public String getReligion() { return religion; }
+	public void setReligion(String religion) { this.religion = religion; }
 	public String getFashion() { return fashion; }
 	public void setFashion(String fashion) { this.fashion = fashion; }
-	public boolean isSmoke() { return smoke; }
-	public void setSmoke(boolean smoke) { this.smoke = smoke; }
+	public String getSmoke() { return smoke; }
+	public void setSmoke(String smoke) { this.smoke = smoke; }
 	
 }

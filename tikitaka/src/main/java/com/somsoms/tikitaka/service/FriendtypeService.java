@@ -4,8 +4,11 @@ import com.somsoms.tikitaka.domain.*;
 
 public class FriendtypeService {
 	
-    Friendtype getFriendtype(Long userId);
+    Friendtype getFriendtype(Long userId) {
+        return null;
+    }
     
-    void updateFriendtype(FriendtypeCommand friendtypeCommand);
+    void updateFriendtype(Friendtype friendtypeCommand) {
+    }
     
 }
