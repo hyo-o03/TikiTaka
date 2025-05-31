@@ -46,25 +46,24 @@ public class MatchingService {
 	    }
 	    
 	    return userRepository.findAllById(matchedUserIds);
-    }
-	
+	}
+
 	public void acceptMatchesByUserId(int userId, String type, int idealId) {
 	    MatchingResult result = matchingresultRepository.findByUserUserIdAndRequestType(userId, type);
-        if (result == null) return;
-        System.out.println(result.getResultId());
-        
-        List<Matching> matchList = matchingRepository.findByMatchingResultResultId(result.getResultId());
-        
-        for (Matching match : matchList) {
-            System.out.println(match.getMatchedUserId()+","+idealId);
-            if(match.getMatchedUserId() == idealId)
-                match.setStatus("ACCEPTED");
-            else
-                match.setStatus("REJECTED");
-        }
-        matchingRepository.saveAll(matchList);
-    }
-	  // findAllResultByUserId로 매칭 전체 결과 받아오기
+	    if (result == null) return;
+	    System.out.println(result.getResultId());
+	    
+	    List<Matching> matchList = matchingRepository.findByMatchingResultResultId(result.getResultId());
+	    
+	    for (Matching match : matchList) {
+	        System.out.println(match.getMatchedUserId() + "," + idealId);
+	        if (match.getMatchedUserId() == idealId)
+	            match.setStatus("ACCEPTED");
+	        else
+	            match.setStatus("REJECTED");
+	    }
+	    matchingRepository.saveAll(matchList);
+	}
 
 	void deleteMatchingResult() {}
 	  // MatchingResult의 모든 유저의 요청 시간과 현재 시간을 비교
