@@ -24,13 +24,13 @@
         <div class="content">
             <div class="title">소개팅으로 매칭할 상대를 선택해주세요</div>
             <div class="idealTypes">
-                <c:forEach var="type" items="${idealTypes}">
-                    <div class="idealType" onclick="loadPopup('${type.place}', '${type.age}', '${type.introduce}' , '${type.imageUrl}')">
+                <c:forEach var="type" items="${matchingList}">
+                    <div class="idealType" onclick="loadPopup('${type.address}', '${type.age}', '${type.introduce}' , '${type.userId}')">
                         <div class="profileImg">
-                            <img src="${type.imageUrl}" alt="profile image"> <!-- 예시: 이미지 -->
+                            <img src="${type.facialType}" alt="profile image"> <!-- 예시: 이미지 -->
                         </div>
                         <div class="else">
-                            <p>${type.place}  |  ${type.age}살</p> <!-- 예시: 이름 -->
+                            <p>${type.address}  |  ${type.age}살</p> <!-- 예시: 이름 -->
                             <p>${type.introduce}</p>
                         </div>
                         <div class="rightBtn">
@@ -38,12 +38,15 @@
                         </div>
                     </div>
                     <!-- 모달 영역 (처음엔 숨겨짐) -->
-                    <div id="popupModal" class="modal">
-                        <div class="modal-content" id="popupContent">
-
-                        </div>
-                    </div>
+                    
                 </c:forEach>
+                
+                
+            </div>
+            <div id="popupModal" class="modal">
+                <div class="modal-content" id="popupContent">
+
+                </div>
             </div>
         </div>
     </div>
@@ -51,8 +54,8 @@
 </html>
 
 <script>
-    function loadPopup(place, age, imageUrl, introduce) {
-        fetch('/idealTypeInfo?place=' + place + '&age=' + encodeURIComponent(age) + '&introduce='+ encodeURIComponent(introduce) + '&imageUrl=' + encodeURIComponent(imageUrl)) // Spring Controller에 매핑된 경로
+    function loadPopup(address, age, introduce, userId) {
+        fetch('${pageContext.request.contextPath}/match/idealTypeInfo?address=' + encodeURIComponent(address) + '&age=' + encodeURIComponent(age) + '&introduce='+ encodeURIComponent(introduce)+ '&userId='+encodeURIComponent(userId)) // Spring Controller에 매핑된 경로
             .then(response => response.text())
             .then(data => {
                 document.getElementById('popupContent').innerHTML = data;
@@ -61,7 +64,7 @@
     }
 
     function closePopup() {
-        const popup = document.getElementById('choicePopup');
+        const popup = document.getElementById('popupModal');
         popup.style.display = 'none';
     }
 </script>

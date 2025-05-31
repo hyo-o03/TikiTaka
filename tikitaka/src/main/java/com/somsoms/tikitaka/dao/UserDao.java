@@ -4,14 +4,21 @@ import com.somsoms.tikitaka.domain.*;
 
 public class UserDao {
 	
-    void insertUser(User user);
+    void insertUser(User user) {
+    }
     
-    User findUserByEmailAndPassword(String email, String password);
+    User findUserByEmailAndPassword(String email, String password) {
+        return null;
+    }
     
-    User findUserById(Long id);
+    User findUserById(Long id) {
+        return null;
+    }
     
-    void updateUser(User user);
+    void updateUser(User user) {
+    }
     
-    void deleteUser(Long id);
+    void deleteUser(Long id) {
+    }
     
 }

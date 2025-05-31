@@ -19,11 +19,11 @@ import jakarta.persistence.SequenceGenerator;
 public class MatchingResult {
 
     /* Private Fields */
-	
+    
     // db 자동 생성
     @Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "result_id_seq")
-	@SequenceGenerator(name = "result_id_seq", sequenceName = "MATCHING_RESULT_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "result_id_seq")
+    @SequenceGenerator(name = "result_id_seq", sequenceName = "MATCHING_RESULT_SEQ", allocationSize = 1)
     @Column(name = "RESULT_ID")
     private int resultId;
 

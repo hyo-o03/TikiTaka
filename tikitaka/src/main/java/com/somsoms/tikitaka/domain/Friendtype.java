@@ -15,11 +15,11 @@ import jakarta.persistence.Table;
 public class Friendtype {
 
     /* Private Fields */
-	
+    
     // db 자동 생성
     @Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "friend_id_seq")
-	@SequenceGenerator(name = "friend_id_seq", sequenceName = "FRIEND_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "friend_id_seq")
+    @SequenceGenerator(name = "friend_id_seq", sequenceName = "FRIEND_SEQ", allocationSize = 1)
     @Column(name = "FT_ID")
     private int ftId;
 
@@ -60,7 +60,7 @@ public class Friendtype {
     public void setFtHobby(String ftHobby) { this.ftHobby = ftHobby; }
     public String getFtAddress() { return ftAddress; }
     public void setFtAddress(String ftAddress) { this.ftAddress = ftAddress; }
-	public boolean isFtSmoke() { return ftSmoke; }
-	public void setFtSmoke(boolean ftSmoke) { this.ftSmoke = ftSmoke; }
+    public boolean isFtSmoke() { return ftSmoke; }
+    public void setFtSmoke(boolean ftSmoke) { this.ftSmoke = ftSmoke; }
     
 }

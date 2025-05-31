@@ -1,11 +1,17 @@
 package com.somsoms.tikitaka.service;
 
+import org.springframework.stereotype.Service;
+
 import com.somsoms.tikitaka.domain.*;
 
+@Service
 public class FriendtypeService {
 	
-    Friendtype getFriendtype(Long userId);
+    Friendtype getFriendtype(Long userId) {
+        return null;
+    }
     
-    void updateFriendtype(FriendtypeCommand friendtypeCommand);
+    void updateFriendtype(Friendtype friendtypeCommand) {
+    }
     
 }

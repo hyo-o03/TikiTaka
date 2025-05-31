@@ -19,11 +19,11 @@ import jakarta.persistence.TemporalType;
 public class Matching {
 
     /* Private Fields */
-	
+    
     // db 자동 생성
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "match_id_seq")
-	@SequenceGenerator(name = "match_id_seq", sequenceName = "MATCH_SEQ", allocationSize = 1)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "match_id_seq")
+    @SequenceGenerator(name = "match_id_seq", sequenceName = "MATCH_SEQ", allocationSize = 1)
     @Column(name = "MATCH_ID")
     private int matchId;
 

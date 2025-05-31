@@ -72,7 +72,14 @@ public class User {
 
 	/* JavaBeans Properties */
 	
-	public int getUserId() { return userId; }
+	public User(String address, int age, String introduce, int userId) {
+        this.address = address;
+        this.age = age;
+        this.introduce = introduce;
+        this.userId = userId;
+    }
+
+    public int getUserId() { return userId; }
 	public void setUserId(int userId) { this.userId = userId; }
 	public String getFacialType() { return facialType; }
 	public void setFacialType(String facialType) { this.facialType = facialType; }

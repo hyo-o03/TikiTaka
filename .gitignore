@@ -1,1 +1,9 @@
 /.metadata/
+# Eclipse IDE
+.classpath
+.project
+.factorypath
+.settings/
+
+# Maven build output
+target/

@@ -15,11 +15,11 @@ import jakarta.persistence.Table;
 public class Idealtype {
 
     /* Private Fields */
-	
+    
     // db 자동 생성
     @Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ideal_id_seq")
-	@SequenceGenerator(name = "ideal_id_seq", sequenceName = "IDEAL_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ideal_id_seq")
+    @SequenceGenerator(name = "ideal_id_seq", sequenceName = "IDEAL_SEQ", allocationSize = 1)
     @Column(name = "IT_ID")
     private int itId;
 
@@ -71,11 +71,11 @@ public class Idealtype {
     public void setItAddress(String itAddress) { this.itAddress = itAddress; }
     public String getItFacialtype() { return itFacialtype; }
     public void setItFacialtype(String itFacialtype) { this.itFacialtype = itFacialtype; }
-	public String getItFashion() { return itFashion; }
-	public void setItFashion(String itFashion) { this.itFashion = itFashion; }
-	public boolean isItSmoke() { return itSmoke; }
-	public void setItSmoke(boolean itSmoke) { this.itSmoke = itSmoke; }
-	public String isItHobby() { return itHobby; }
-	public void setItHobby(String itHobby) { this.itHobby = itHobby; }
-	
+    public String getItFashion() { return itFashion; }
+    public void setItFashion(String itFashion) { this.itFashion = itFashion; }
+    public boolean isItSmoke() { return itSmoke; }
+    public void setItSmoke(boolean itSmoke) { this.itSmoke = itSmoke; }
+    public String isItHobby() { return itHobby; }
+    public void setItHobby(String itHobby) { this.itHobby = itHobby; }
+    
 }
