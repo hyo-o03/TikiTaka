@@ -28,6 +28,11 @@ public class MatchingController {
 		return "matchRequestDone";
 	}
 	
+	@GetMapping("/editFormMenu")
+	public String showEditFormMenu() {
+		return "editFormMenu";
+	}
+	
 //	@PostMapping("/match/request")
 //	public ResponseEntity<String> requestMatch(@RequestParam int userId) {}
 //	//매칭 요청
