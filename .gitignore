@@ -1,9 +1,28 @@
 /.metadata/
-# Eclipse IDE
+# 빌드 결과물
+/target/
+*.class
+
+# Eclipse
+.settings/
 .classpath
 .project
-.factorypath
-.settings/
 
-# Maven build output
-target/
+# IntelliJ
+.idea/
+*.iml
+
+# VSCode
+.vscode/
+
+# OS, 임시 파일
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# 민감 정보
+.env
+*.key
+*.pem
+credentials.json
