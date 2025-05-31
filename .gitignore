@@ -1,1 +1,23 @@
 /.metadata/
+
+# === Eclipse / IDE 관련 ===
+.classpath
+.project
+.factorypath
+.settings/
+
+# === 빌드 결과물 ===
+/target/
+bin/
+
+# === Maven 관련 임시 폴더 ===
+*.log
+*.tmp
+
+# === 기타 ===
+*.iml
+.idea/
+
+# === OS/기타 임시 파일 ===
+.DS_Store
+Thumbs.db
