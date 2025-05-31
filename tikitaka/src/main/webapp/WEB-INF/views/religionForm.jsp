@@ -11,13 +11,20 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/religionForm.css">
 
     <meta charset="UTF-8">
+    <script>
+		function exit() {
+		    if (confirm("설문 작성을 취소하시겠습니까?")) {
+		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		    }
+		}
+	</script>
 </head>
 
 <body>
     <div class="container">
         <div class="header">
-	        <img src="${pageContext.request.contextPath}/images/leftBtn.png">
-	        <img src="${pageContext.request.contextPath}/images/escBtn.png">
+	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
         </div>
         <form action="${pageContext.request.contextPath}/user/introduce" method="post" class="form-layout">
 	        <div class="content">
@@ -26,27 +33,27 @@
 	            <div class="option-box">
 	                <label class="option">
 	                  <span class="label-text">기독교</span>
-	                  <input type="radio" name="distance" value="near">
+	                  <input type="radio" name="religion" value="기독교">
 	                  <span class="circle"></span>
 	                </label>
 	                <label class="option">
 	                  <span class="label-text">천주교</span>
-	                  <input type="radio" name="distance" value="far">
+	                  <input type="radio" name="religion" value="천주교">
 	                  <span class="circle"></span>
 	                </label>
 	                <label class="option">
 	                    <span class="label-text">불교</span>
-	                    <input type="radio" name="distance" value="far">
+	                    <input type="radio" name="religion" value="불교">
 	                    <span class="circle"></span>
 	                </label>
 	                <label class="option">
 	                    <span class="label-text">힌디</span>
-	                    <input type="radio" name="distance" value="far">
+	                    <input type="radio" name="religion" value="힌디">
 	                    <span class="circle"></span>
 	                </label>
 	                <label class="option">
 	                    <span class="label-text">무교</span>
-	                    <input type="radio" name="distance" value="far">
+	                    <input type="radio" name="religion" value="무교">
 	                    <span class="circle"></span>
 	                </label>
 	            </div>

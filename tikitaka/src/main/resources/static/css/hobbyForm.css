@@ -28,3 +28,9 @@
 .interest-item:hover {
     background-color: #e4dbff;
 }
+
+.interest-item.selected {
+    background-color: #DFD8FE;
+    border-color: #9747FF;
+    font-weight: bold;
+}

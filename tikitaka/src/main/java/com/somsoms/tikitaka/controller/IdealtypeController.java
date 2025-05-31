@@ -1,5 +1,6 @@
 package com.somsoms.tikitaka.controller;
 
+import com.somsoms.tikitaka.dao.IdealtypeDao;
 import com.somsoms.tikitaka.domain.*;
 import com.somsoms.tikitaka.service.IdealtypeService;
 

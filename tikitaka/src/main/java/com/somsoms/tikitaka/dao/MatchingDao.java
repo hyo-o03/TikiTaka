@@ -1,6 +1,6 @@
 package com.somsoms.tikitaka.dao;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import com.somsoms.tikitaka.domain.*;
 
@@ -23,5 +23,4 @@ public class MatchingDao {
         return null;
     }
 	//유저별 매칭 결과 모두 가져오기
-	
 }

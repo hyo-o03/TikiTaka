@@ -6,14 +6,21 @@
 <head>
     <meta charset="UTF-8">
     <title>거주지</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/addressForm.css">
+    <script>
+		function exit() {
+		    if (confirm("설문 작성을 취소하시겠습니까?")) {
+		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		    }
+		}
+	</script>
 </head>
 <body>
 	<div class="container">
 	    <div class="header">
-	        <img src="${pageContext.request.contextPath}/images/leftBtn.png">
-	        <img src="${pageContext.request.contextPath}/images/escBtn.png">
+	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
 	    </div>
 	    <form action="${pageContext.request.contextPath}/user/hobby" method="post" class="form-layout">
 			<div class="content" style="align-items: center;">
@@ -22,16 +29,16 @@
 			
 			    <div class="region-input">
 			        <label for="userRegion">내 거주 지역</label>
-			        <input type="text" id="userRegion" name="userRegion" placeholder="예: 서울시 마포구">
+			        <input type="text" id="address" name="address" placeholder="예: 서울시 마포구">
 			    </div>
 			    
 			    <div class="preference-options">
 			        <label class="option">
-			            <input type="radio" name="distancePreference" value="close">
+			            <input type="radio" name="itAddressPref" value="close">
 			            가까웠으면 좋겠어요
 			        </label>
 			        <label class="option">
-			            <input type="radio" name="distancePreference" value="far">
+			            <input type="radio" name="itAddressPref" value="far">
 			            멀어도 괜찮아요
 			        </label>
 			    </div>

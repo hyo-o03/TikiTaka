@@ -11,10 +11,10 @@
 <body>
 <div class="container">
     <div class="header">
-        <div class="logo">Tiki-Taka</div>
+        <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
         <div class="icons">
-            <span class="myPage">👤</span>
-            <span class="alarm">🔔</span>
+            <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
+            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
         </div>
     </div>
 
@@ -29,10 +29,9 @@
         <div class="section">
             <h3>개인 정보</h3>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/mypage/editPassword">비밀번호 변경 <span class="arrow">›</span></a></li>
-                <li><a href="${pageContext.request.contextPath}/mypage/editFacePic">내 얼굴사진 변경 <span class="arrow">›</span></a></li>
-                <li><a href="${pageContext.request.contextPath}/mypage/editKakao">카카오톡 아이디 변경 <span class="arrow">›</span></a></li>
-            </ul>
+                <li><a href="${pageContext.request.contextPath}/user/editPassword">비밀번호 변경 <span class="arrow">›</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/user/editFacePic">내 얼굴사진 변경 <span class="arrow">›</span></a></li>
+				<li><a href="${pageContext.request.contextPath}/user/baseInfo">기본정보 변경 <span class="arrow">›</span></a></li>            </ul>
         </div>
         
         <hr>
@@ -40,15 +39,15 @@
         <div class="section">
             <h3>내 프로필</h3>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/mypage/editProfileInfo">매칭 정보 변경 <span class="arrow">›</span></a></li>
+				<li><a href="${pageContext.request.contextPath}/user/mypage/edit">매칭 정보 변경 <span class="arrow">›</span></a></li>
             </ul>
         </div>
 
         <div class="section">
             <h3>이상형 프로필</h3>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/mypage/editIdealType">동성친구 매칭 정보 변경 <span class="arrow">›</span></a></li>
-                <li><a href="${pageContext.request.contextPath}/mypage/editFriendType">이성친구 매칭 정보 변경 <span class="arrow">›</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/myPage/editIdealType">동성친구 매칭 정보 설정 <span class="arrow">›</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/myPage/editFriendType">이성친구 매칭 정보 설정 <span class="arrow">›</span></a></li>
             </ul>
         </div>
     </div>

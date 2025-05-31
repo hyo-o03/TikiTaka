@@ -17,15 +17,15 @@
     <div class="title">Tiki Taka</div>
     <div class="center content">
    	    <br>
-	    <div class="text" style="padding-left: 15%;">전화번호 또는 이메일로 가입해서<br>새로운 인연을 만들어요!</div>
+	    <div class="text" style="padding-left: 15%;">전화번호와 이메일로 가입해서<br>새로운 인연을 만들어요!</div>
 	    <br><br>
 	    <form action="${pageContext.request.contextPath}/signup/terms" method="post">
 		    <div class="input-wrapper">
-			    <input type="text" class="text-input" name="registerPhone" placeholder="전화번호로 가입">
+			    <input type="text" class="text-input" name="registerPhone" placeholder="전화번호">
 			</div>	
 			<br>
 			<div class="input-wrapper">
-				<input type="text" class="text-input" name="registerEmail" placeholder="이메일로 가입">
+				<input type="text" class="text-input" name="registerEmail" placeholder="이메일">
 		    </div>
 		    <div class="footer">
 		         <button type="submit" class="sibutton" name="registerPageButton">Sign In</button>

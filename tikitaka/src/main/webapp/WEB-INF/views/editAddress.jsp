@@ -20,12 +20,14 @@
 	    </div>
 		<div class="content">
 		    <div class="title">거주지 정보 수정</div>
-		
+			<form action="${pageContext.request.contextPath}/user/updateAddress" method="post">
+
 		    <div class="region-input">
 		        <label for="userRegion">내 거주 지역</label>
 		        <input type="text" id="userRegion" name="userRegion" placeholder="예: 서울시 마포구">
 		    </div>
-		    
+			
+
 		    <div class="preference-options">
 		        <label class="option">
 		            <input type="radio" name="distancePreference" value="close">
@@ -38,8 +40,9 @@
 		    </div>
 		</div>
 	    <div class="footer">
-	        <button type="submit" class="next-button">수정하기</button>
+			<button type="submit" value="수정" class="next-button">수정하기</button>
 	    </div>
 	</div>
+	</form>
 </body>
 </html>

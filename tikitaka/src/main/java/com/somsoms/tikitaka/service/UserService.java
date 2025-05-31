@@ -1,5 +1,6 @@
 package com.somsoms.tikitaka.service;
 
+import com.somsoms.tikitaka.domain.*;
 import com.somsoms.tikitaka.dao.UserDao;
 import com.somsoms.tikitaka.domain.User;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,6 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     private final UserDao userDao;
 
     public UserService(UserDao userDao) {
@@ -31,4 +31,7 @@ public class UserService {
     public void deleteUser(int id) {
         userDao.deleteById(id);
     }
+    
+    void registerUser(UserDao userCommand) {
+	}
 }

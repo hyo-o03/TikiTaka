@@ -8,12 +8,37 @@
     <title>MBTI</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mbtiForm.css">
+    <script>
+		function exit() {
+		    if (confirm("설문 작성을 취소하시겠습니까?")) {
+		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		    }
+		}
+		
+		window.onload = function () {
+	        const mbtiDropdown = document.getElementById("mbtiSelect");
+	        const unknownBtn = document.getElementById("unknownOption");
+
+	        // 몰라요 버튼 클릭 시
+	        unknownBtn.addEventListener("click", function () {
+	            mbtiDropdown.selectedIndex = 0; // "선택하기"로 초기화
+	            unknownBtn.classList.add("selected");
+	        });
+
+	        // 드롭다운에서 선택 시
+	        mbtiDropdown.addEventListener("change", function () {
+	            if (mbtiDropdown.value !== "") {
+	                unknownBtn.classList.remove("selected");
+	            }
+	        });
+	    };
+	</script>
 </head>
 <body>
 	<div class="container">
 	    <div class="header">
-	        <img src="${pageContext.request.contextPath}/images/leftBtn.png">
-	        <img src="${pageContext.request.contextPath}/images/escBtn.png">
+	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
 	    </div>
 	    <form action="${pageContext.request.contextPath}/user/sns" method="post" class="form-layout">
 		<div class="content">
@@ -21,7 +46,7 @@
 		    <div class="description">혹시 MBTI를 밝히기 싫거나 모르는 분들은 "몰라요"를 골라주세요</div>
 		
 		    <div class="mbti-select-wrapper">
-		        <select class="mbti-dropdown" name="mbti">
+		        <select class="mbti-dropdown" name="mbti" id="mbtiSelect">
 		            <option value="" disabled selected>선택하기</option>
 		            <option value="INTJ">INTJ</option>
 		            <option value="INTP">INTP</option>
@@ -41,7 +66,7 @@
 		            <option value="ESFP">ESFP</option>
 		        </select>
 		
-		        <div class="mbti-option">몰라요</div>
+		        <div class="mbti-option" id="unknownOption">몰라요</div>
 		    </div>
 		</div>
         <div class="footer">
