@@ -31,7 +31,7 @@
             <ul>
                 <li><a href="${pageContext.request.contextPath}/mypage/editPassword">비밀번호 변경 <span class="arrow">›</span></a></li>
                 <li><a href="${pageContext.request.contextPath}/mypage/editFacePic">내 얼굴사진 변경 <span class="arrow">›</span></a></li>
-                <li><a href="${pageContext.request.contextPath}/mypage/editKakao">기본정보 변경 <span class="arrow">›</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/mypage/editBaseInfo">기본정보 변경 <span class="arrow">›</span></a></li>
             </ul>
         </div>
         
@@ -47,8 +47,8 @@
         <div class="section">
             <h3>이상형 프로필</h3>
             <ul>
-                <li><a href="${pageContext.request.contextPath}/mypage/editIdealType">동성친구 매칭 정보 설정 <span class="arrow">›</span></a></li>
-                <li><a href="${pageContext.request.contextPath}/mypage/editFriendType">이성친구 매칭 정보 설정 <span class="arrow">›</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/friend/friendAge">동성친구 매칭 정보 설정 <span class="arrow">›</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/ideal/idealAnimalProfile">이성친구 매칭 정보 설정 <span class="arrow">›</span></a></li>
             </ul>
         </div>
     </div>

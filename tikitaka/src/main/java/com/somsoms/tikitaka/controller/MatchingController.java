@@ -23,9 +23,9 @@ public class MatchingController {
     @Autowired
     private MatchingService matchingService;
     
-	@GetMapping("/idealTypeLanking")
-	public String showIdealTypeLanking() {
-		return "idealTypeLanking";
+	@GetMapping("/prioritySelect")
+	public String showPrioritySelect() {
+		return "prioritySelect";
 	}
 	
 	@GetMapping("/matchingResultPage")
@@ -33,10 +33,7 @@ public class MatchingController {
 	    
 	    int userId = 4; //임시로 정해놈
 	    
-	    List<User> matchingList = matchingService.getMatchingResults(userId);
-
-        
-	    
+	    List<User> matchingList = matchingService.getMatchingResults(userId);	    
 	    model.addAttribute("matchingList", matchingList);
 	    
 		return "matchingResultPage";

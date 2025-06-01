@@ -69,7 +69,7 @@ public class User {
     @Column(name = "SMOKE")
     private String smoke;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", length = 20)
     private String password;
 
 	 /* ========== 추가된 컬럼들 ========== */

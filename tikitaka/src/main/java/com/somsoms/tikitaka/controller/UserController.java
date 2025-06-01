@@ -33,9 +33,9 @@ public class UserController {
     }
     
     // 프로필 정보 폼
-    @GetMapping("/profile")
+    @GetMapping("/animalProfile")
     public String showProfileForm() {
-        return "profileForm";
+        return "animalProfileForm";
     }
     
     // 마이페이지 정보 수정 (editMyProfile.jsp)
@@ -102,11 +102,6 @@ public class UserController {
 	    
 	@Autowired
 	private IdealtypeRepository idealtypeRepository;
-	
-	@GetMapping("/profile")
-	public String showProfile() {
-		return "profileForm";
-	}
 	
 	@PostMapping("/address")
 	public String showAddress(@RequestParam String facialType, HttpSession session) {
@@ -208,17 +203,6 @@ public class UserController {
 	@GetMapping("/home")
 	public String showHome() {
 		return "home";
-	}
-	
-    // 설문 완료
-    @GetMapping("/finishSurvey")
-    public String showFinishSurvey() {
-        return "finishSurvey";
-    }
-	
-	@GetMapping("/myPage")
-	public String showMypage() {
-		return "myPage";
 	}
 
 //    public ResponseEntity<String> registerUser(@RequestBody UserCommand userCommand);

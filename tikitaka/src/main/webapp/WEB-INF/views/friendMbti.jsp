@@ -37,16 +37,13 @@
 <body>
 	<div class="container">
 	    <div class="header">
-	        <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
-	        <div class="icons">
-	            <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
-	            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
-	        </div>
+	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
 	    </div>
-	    <form action="${pageContext.request.contextPath}/mypage/editFormMenu" method="post" class="form-layout">
+	    <form action="${pageContext.request.contextPath}/friend/friendSmoke" method="post" class="form-layout">
 		<div class="content">
-		    <div class="title">MBTI를 알려주세요</div>
-		    <div class="description">혹시 MBTI를 밝히기 싫거나 모르는 분들은 "몰라요"를 골라주세요</div>
+		    <div class="title">당신의 친구의 MBTI는 무엇이었으면 좋겠나요?</div>
+		    <div class="description">무엇이든 상관없다면 '상관없어요'를 눌러주세요</div>
 		
 		    <div class="mbti-select-wrapper">
 		        <select class="mbti-dropdown" name="mbti" id="mbtiSelect">
@@ -69,11 +66,11 @@
 		            <option value="ESFP">ESFP</option>
 		        </select>
 		
-		        <div class="mbti-option" id="unknownOption">몰라요</div>
+		        <div class="mbti-option" id="unknownOption">상관없어요</div>
 		    </div>
 		</div>
         <div class="footer">
-            <button type="submit" class="next-button">수정하기</button>
+            <button type="submit" class="next-button">다음단계</button>
         </div>
         </form>
 	</div>

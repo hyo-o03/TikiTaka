@@ -8,12 +8,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/baseInfo.css">
     <meta charset="UTF-8">
     <script>
-		function exit() {
-		    if (confirm("기본 정보 작성을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
-		    }
-		}
-    
         // 몸무게 비공개 체크박스 스타일 변경
         function toggleWeightPrivacy(checkbox) {
             const label = checkbox.parentElement;
@@ -68,11 +62,14 @@
 <body>
 <div class="container">
     <div class="header">
-        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
-        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
+        <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
+        <div class="icons">
+            <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
+            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
+        </div>
     </div>
 
-    <form class="form-layout" action="${pageContext.request.contextPath}/signup/signupSuccess" method="post">
+    <form class="form-layout" action="${pageContext.request.contextPath}/mypage/editFormMenu" method="post">
         <div class="content">
             <div class="input-wrapper">
                 <div class="title">기본정보를 입력해주세요</div>
@@ -122,7 +119,7 @@
         </div>
 
         <div class="footer">
-            <button type="submit" class="next-button">다음단계</button>
+            <button type="submit" class="next-button">수정하기</button>
         </div>
     </form>
 </div>

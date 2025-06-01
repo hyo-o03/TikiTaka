@@ -53,16 +53,13 @@
 <body>
 	<div class="container">
 	    <div class="header">
-	        <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
-	        <div class="icons">
-	            <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
-	            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
-	        </div>
+	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
 	    </div>
 	    <form action="${pageContext.request.contextPath}/mypage/editFormMenu" method="post" class="form-layout">
 		<div class="content">
-		    <div class="title">관심사는 무엇인가요?</div>
-		    <div class="description">당신의 관심사가 무엇인지 궁금해요! 2개 이상 필수로 골라주세요</div>
+		    <div class="title">당신의 이상형의 취미가 무엇이었으면 좋겠나요?</div>
+		    <div class="description">2개 이상 필수로 골라주세요</div>
 		
 		    <!-- 취미 선택 값 담을 hidden input -->
 			<input type="hidden" name="hobby" id="selectedHobby">	

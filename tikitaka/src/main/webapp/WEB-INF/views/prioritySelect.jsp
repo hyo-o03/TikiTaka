@@ -13,6 +13,20 @@
 		        window.location.href = "${pageContext.request.contextPath}/signup/start";
 		    }
 		}
+		
+	    function loadChoicePopup() {
+	        fetch('/idealTypeChoice') // Spring Controller에 매핑된 경로
+	            .then(response => response.text())
+	            .then(data => {
+	                document.getElementById('choicePopupContent').innerHTML = data;
+	                document.getElementById('choicePopup').style.display = 'block';
+	            });
+	    }
+
+	    function closePopup() {
+	        const popup = document.getElementById('choicePopup');
+	        popup.style.display = 'none';
+	    }
 	</script>
 </head>
 <body>
@@ -63,19 +77,3 @@
 </div>
 </body>
 </html>
-
-<script>
-    function loadChoicePopup() {
-        fetch('/idealTypeChoice') // Spring Controller에 매핑된 경로
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('choicePopupContent').innerHTML = data;
-                document.getElementById('choicePopup').style.display = 'block';
-            });
-    }
-
-    function closePopup() {
-        const popup = document.getElementById('choicePopup');
-        popup.style.display = 'none';
-    }
-</script>

@@ -41,16 +41,13 @@
 <body>
 <div class="container">
     <div class="header">
-        <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
-        <div class="icons">
-            <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
-            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
-        </div>
+        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
     </div>
    
-	<form action="${pageContext.request.contextPath}/mypage/editFormMenu" method="post" class="form-layout">
+	<form action="${pageContext.request.contextPath}/mypage/mypage" method="post" class="form-layout">
 	    <div class="content">
-			<div class="title">평소 사복 스타일이 궁금해요</div>
+			<div class="title">이상형의 패션 스타일은 어땠으면 좋겠나요?</div>
 			
 			<!-- 패션 선택 값 담을 hidden input -->
 			<input type="hidden" name="fashion" id="selectedFashionType">
@@ -65,7 +62,7 @@
 	          </div>
 	    </div>
         <div class="footer">
-            <button type="submit" class="next-button">수정하기</button>
+            <button type="submit" class="next-button">완료</button>
         </div>
     </form>
 </div>

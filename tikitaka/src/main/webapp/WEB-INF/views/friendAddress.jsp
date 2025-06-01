@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/addressForm.css">
     <script>
 		function exit() {
-		    if (confirm("수정을 취소하시겠습니까?")) {
+		    if (confirm("설문 작성을 취소하시겠습니까?")) {
 		        window.location.href = "${pageContext.request.contextPath}/signup/start";
 		    }
 		}
@@ -19,16 +19,13 @@
 <body>
 	<div class="container">
 	    <div class="header">
-	        <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
-	        <div class="icons">
-	            <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
-	            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
-	        </div>
+	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
 	    </div>
-	    <form action="${pageContext.request.contextPath}/mypage/editFormMenu" method="post" class="form-layout">
+	    <form action="${pageContext.request.contextPath}/friend/friendHobby" method="post" class="form-layout">
 			<div class="content" style="align-items: center;">
 			    <div class="title">거주지 선호도를 골라주세요</div>
-			    <div class="description">만나고 싶은 사람이 멀리 살고 있어도 괜찮나요?<br>매칭에 반영될 거주지 거리 선호도를 알려주세요</div>
+			    <div class="description">친구가 멀리 살고 있어도 괜찮나요?<br>매칭에 반영될 거주지 거리 선호도를 알려주세요</div>
 			
 			    <div class="region-input">
 			        <label for="userRegion">내 거주 지역</label>
@@ -47,7 +44,7 @@
 			    </div>
 			</div>
 	        <div class="footer">
-	            <button type="submit" class="next-button">수정하기</button>
+	            <button type="submit" class="next-button">다음단계</button>
 	        </div>
         </form>
 	</div>

@@ -13,6 +13,20 @@
 		        window.location.href = "${pageContext.request.contextPath}/signup/start";
 		    }
 		}
+		
+	    function loadPopup(address, age, introduce, userId) {
+	        fetch('${pageContext.request.contextPath}/match/idealTypeInfo?address=' + encodeURIComponent(address) + '&age=' + encodeURIComponent(age) + '&introduce='+ encodeURIComponent(introduce)+ '&userId='+encodeURIComponent(userId)) // Spring Controller에 매핑된 경로
+	            .then(response => response.text())
+	            .then(data => {
+	                document.getElementById('popupContent').innerHTML = data;
+	                document.getElementById('popupModal').style.display = 'block';
+	            });
+	    }
+
+	    function closePopup() {
+	        const popup = document.getElementById('popupModal');
+	        popup.style.display = 'none';
+	    }
 	</script>
 </head>
 <body>
@@ -52,19 +66,3 @@
     </div>
 </body>
 </html>
-
-<script>
-    function loadPopup(address, age, introduce, userId) {
-        fetch('${pageContext.request.contextPath}/match/idealTypeInfo?address=' + encodeURIComponent(address) + '&age=' + encodeURIComponent(age) + '&introduce='+ encodeURIComponent(introduce)+ '&userId='+encodeURIComponent(userId)) // Spring Controller에 매핑된 경로
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('popupContent').innerHTML = data;
-                document.getElementById('popupModal').style.display = 'block';
-            });
-    }
-
-    function closePopup() {
-        const popup = document.getElementById('popupModal');
-        popup.style.display = 'none';
-    }
-</script>

@@ -37,7 +37,7 @@
 		</div>
     </div>
     
-	<form action="${pageContext.request.contextPath}/user/profile" method="get">
+	<form action="${pageContext.request.contextPath}/user/animalProfile" method="get">
         <div class="footer">
             <button type="submit" class="next-button">설문 진행하기</button>
         </div>
