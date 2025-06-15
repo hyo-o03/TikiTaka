@@ -33,6 +33,16 @@ public class SignupController {
 		return "register";
 	}
 	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
+	
+	@GetMapping("/checkLogin")
+	public String checkLogin() {
+		return "checkLogin";
+	}
+	
 	@PostMapping("/agree")
 	public String showAgree() {
 		return "agree";

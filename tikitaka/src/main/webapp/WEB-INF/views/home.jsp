@@ -12,6 +12,21 @@
 		        window.location.href = "${pageContext.request.contextPath}/signup/start";
 		    }
 		}
+		
+        function toggleAlarmPopup() {
+            const popup = document.getElementById("alarmPopup");
+            popup.classList.toggle("hidden");
+        }
+
+        // 외부 클릭 시 알림창 닫기
+        document.addEventListener('click', function (e) {
+            const icon = document.querySelector('.alarm-icon');
+            const popup = document.getElementById('alarmPopup');
+
+            if (!icon.contains(e.target) && !popup.contains(e.target)) {
+                popup.classList.add('hidden');
+            }
+        });
 	</script>
 </head>
 <body>
@@ -20,7 +35,27 @@
         <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
         <div class="icons">
             <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
-            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
+            <div class="alarm-wrapper">
+                <div class="alarm-icon" onclick="toggleAlarmPopup()">🔔</div>
+
+                <!-- 알림 드롭다운 -->
+                <div id="alarmPopup" class="alarm-dropdown hidden">
+<%--                     <c:forEach var="msg" items="${alarms}">
+                        <div class="alarm-item">
+                            <span class="alarm-text">${msg}</span>
+                            <button class="alarm-confirm">확인</button>
+                        </div>
+                    </c:forEach> --%>
+                    <div class="alarm-item">
+				        <span class="alarm-text">오늘의 이상형 추천이 도착했습니다!</span>
+				        <button class="alarm-confirm">확인</button>
+				    </div>
+				    <div class="alarm-item">
+				        <span class="alarm-text">새로운 매칭 상대가 있어요!</span>
+				        <button class="alarm-confirm">확인</button>
+				    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="main">

@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>프로필</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profileForm.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/animalProfileForm.css">
     <script>
 		function exit() {
 		    if (confirm("설문 작성을 취소하시겠습니까?")) {

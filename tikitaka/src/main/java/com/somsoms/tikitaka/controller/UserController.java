@@ -33,7 +33,7 @@ public class UserController {
     }
     
     // 프로필 정보 폼
-    @GetMapping("/animalProfile")
+    @PostMapping("/animalProfile")
     public String showProfileForm() {
         return "animalProfileForm";
     }
@@ -105,7 +105,8 @@ public class UserController {
 	
 	@PostMapping("/address")
 	public String showAddress(@RequestParam String facialType, HttpSession session) {
-	    int userId = (Integer) session.getAttribute("userId");
+		Object idAttr = session.getAttribute("userId");
+		int userId = Integer.parseInt(idAttr.toString());
 	    User user = userRepository.findById(userId).orElseThrow();
 	    user.setFacialType(facialType);
 	    userRepository.save(user);
@@ -202,6 +203,11 @@ public class UserController {
 	
 	@GetMapping("/home")
 	public String showHome() {
+		return "home";
+	}
+	
+	@PostMapping("/home")
+	public String Home() {
 		return "home";
 	}
 

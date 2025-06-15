@@ -11,7 +11,7 @@
 	<div class="container">
 		<div class="title">Tiki Taka</div>
 		<div class="text">당신의 인연을 만들 수 있는<br>안전한 공간</div>
-		<form action="${pageContext.request.contextPath}/signup/register" method="get">
+		<form action="${pageContext.request.contextPath}/signup/checkLogin" method="get">
 			<div class="footer">
 				<button type="submit" class="start-button">start</button>
 			</div>
