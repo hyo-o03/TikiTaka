@@ -59,7 +59,7 @@
             }
         }
         
-     // 초기 이벤트 등록
+    	// 초기 이벤트 등록
         window.onload = function () {
             document.querySelector("form").addEventListener("submit", validateBaseInfo);
         };
@@ -72,10 +72,10 @@
         <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
     </div>
 
-    <form class="form-layout" action="${pageContext.request.contextPath}/signup/signupSuccess" method="post">
+    <form class="form-layout" action="${pageContext.request.contextPath}/user/updateBaseInfo" method="post">
         <div class="content">
             <div class="input-wrapper">
-                <div class="title">기본정보를 입력해주세요</div>
+                <div class="title">기본정보를 수정해주세요</div>
 
                 <div style="font-size: 16px; margin-top: 50px;">기본정보</div>
                 <input type="text" class="input-box" id="name" name="name" placeholder="이름을 입력해주세요">
@@ -94,6 +94,24 @@
                     </div>
                     <div class="input-half">
                         <input type="text" class="input-box" id="height" name="height" placeholder="키">
+                <input type="text" class="input-box" id="name" name="name" placeholder="이름을 입력해주세요" value="${user.name}">
+				
+                <div style="font-size: 16px; margin-top: 15px;">성별</div>
+				<div class="radio-wrapper gender-group">
+				    <label class="option-button gender-option ${user.gender == 'M' ? 'active' : ''}">
+				        남성<input type="radio" name="gender" value="M" ${user.gender == 'M' ? 'checked' : ''} onclick="togglePreference(this, 'gender-option')" hidden>
+				    </label>
+				    <label class="option-button gender-option ${user.gender == 'F' ? 'active' : ''}">
+				        여성<input type="radio" name="gender" value="F" ${user.gender == 'F' ? 'checked' : ''} onclick="togglePreference(this, 'gender-option')" hidden>
+				    </label>
+				</div>
+				
+                <div class="input-row">
+                    <div class="input-half">
+                        <input type="text" class="input-box" id="age" name="age" placeholder="나이" value="${user.age}">
+                    </div>
+                    <div class="input-half">
+                        <input type="text" class="input-box" id="height" name="height" placeholder="키" value="${user.height}">
                         <span class="suffix-text">cm</span>
                     </div>
                 </div>
@@ -106,6 +124,12 @@
                     <div class="input-half" style="display: flex; align-items: center;">
                         <label class="option-button weight-private" style="display: flex; align-items: center; gap: 10px;">
                             <input type="checkbox" id="weightPrivate name="weightPrivate" hidden onclick="toggleWeightPrivacy(this)">
+                        <input type="text" class="input-box" id="weight" name="weight" placeholder="몸무게" value="${user.weight}">
+                        <span class="suffix-text">kg</span>
+                    </div>
+                    <div class="input-half" style="display: flex; align-items: center;">
+                        <label class="option-button weight-private ${user.weightPrivate == 'Y' ? 'active' : ''}" style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" name="weightPrivate" value="Y" ${user.weightPrivate == 'Y' ? 'checked' : ''} hidden onclick="toggleWeightPrivacy(this)">
                             <span>몸무게 비공개</span>
                         </label>
                     </div>
@@ -117,12 +141,23 @@
                     <label class="option-button age-option">연상<input type="radio" id="agePreference" name="agePreference" value="OLDER" onclick="togglePreference(this, 'age-option')" hidden></label>
                     <label class="option-button age-option">동갑<input type="radio" id="agePreference" name="agePreference" value="SAME" onclick="togglePreference(this, 'age-option')" hidden></label>
                     <label class="option-button age-option">연하<input type="radio" id="agePreference" name="agePreference" value="YOUNGER" onclick="togglePreference(this, 'age-option')" hidden></label>
+                <input type="text" class="input-box" id="itAge" name="itAge" placeholder="나이 (예: 22-24)" value="${idealtype.itAge}">
+                <div class="radio-wrapper age-pref-group">
+                    <label class="option-button age-option ${idealtype.agePreference == 'OLDER' ? 'active' : ''}">
+                        연상<input type="radio" name="agePreference" value="OLDER" ${idealtype.agePreference == 'OLDER' ? 'checked' : ''} onclick="togglePreference(this, 'age-option')" hidden>
+                    </label>
+                    <label class="option-button age-option ${idealtype.agePreference == 'SAME' ? 'active' : ''}">
+                        동갑<input type="radio" name="agePreference" value="SAME" ${idealtype.agePreference == 'SAME' ? 'checked' : ''} onclick="togglePreference(this, 'age-option')" hidden>
+                    </label>
+                    <label class="option-button age-option ${idealtype.agePreference == 'YOUNGER' ? 'active' : ''}">
+                        연하<input type="radio" name="agePreference" value="YOUNGER" ${idealtype.agePreference == 'YOUNGER' ? 'checked' : ''} onclick="togglePreference(this, 'age-option')" hidden>
+                    </label>
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            <button type="submit" class="next-button">다음단계</button>
+            <button type="submit" class="next-button">수정완료</button>
         </div>
     </form>
 </div>

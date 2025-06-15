@@ -47,28 +47,40 @@
             <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
         </div>
     </div>
-   
-	<form action="${pageContext.request.contextPath}/mypage/editFormMenu" method="post" class="form-layout">
+	<form action="${pageContext.request.contextPath}/user/updateFashion" method="post" id="styleForm">
 	    <div class="content">
-			<div class="title">평소 사복 스타일이 궁금해요</div>
-			
-			<!-- 패션 선택 값 담을 hidden input -->
-			<input type="hidden" name="fashion" id="selectedFashionType">
-				
+	        <div class="title">평소 사복 스타일이 궁금해요</div>
+	        <input type="hidden" name="style" id="styleInput">
 	        <div class="style-grid">
-	            <button class="style-tag">캐주얼</button>
-	            <button class="style-tag">모던</button>
-	            <button class="style-tag">스트릿</button>
-	            <button class="style-tag">페미닌</button>
-	            <button class="style-tag">클래식</button>
-	            <button class="style-tag">빈티지</button>
-	          </div>
+	            <button type="button" class="style-tag" data-value="캐주얼">캐주얼</button>
+	            <button type="button" class="style-tag" data-value="모던">모던</button>
+	            <button type="button" class="style-tag" data-value="스트릿">스트릿</button>
+	            <button type="button" class="style-tag" data-value="페미닌">페미닌</button>
+	            <button type="button" class="style-tag" data-value="클래식">클래식</button>
+	            <button type="button" class="style-tag" data-value="빈티지">빈티지</button>
+	        </div>
 	    </div>
-        <div class="footer">
-            <button type="submit" class="next-button">수정하기</button>
-        </div>
-    </form>
-</div>
-  
+	    <div class="footer">
+	        <button type="submit" value="수정" class="next-button">수정하기</button>
+	    </div>
+	</form>
+	<script>
+	    const tags = document.querySelectorAll('.style-tag');
+	    const styleInput = document.getElementById('styleInput');
+	    tags.forEach(tag => {
+	        tag.addEventListener('click', function(e) {
+	            tags.forEach(t => t.classList.remove('selected'));
+	            tag.classList.add('selected');
+	            styleInput.value = tag.getAttribute('data-value');
+	        });
+	    });
+	    document.getElementById('styleForm').addEventListener('submit', function(e) {
+	        if (!styleInput.value) {
+	            alert('스타일을 하나 선택해주세요!');
+	            e.preventDefault();
+	        }
+	    });
+	</script>
+  </div>
 </body>
 </html>

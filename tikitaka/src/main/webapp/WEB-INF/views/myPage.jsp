@@ -49,7 +49,7 @@
             <ul>
                 <li><a href="${pageContext.request.contextPath}/friend/friendAge">동성친구 매칭 정보 설정 <span class="arrow">›</span></a></li>
                 <li><a href="${pageContext.request.contextPath}/ideal/idealAnimalProfile">이성친구 매칭 정보 설정 <span class="arrow">›</span></a></li>
-            </ul>
+			</ul>
         </div>
     </div>
 </div>

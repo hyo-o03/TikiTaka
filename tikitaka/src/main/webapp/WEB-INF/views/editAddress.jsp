@@ -25,7 +25,7 @@
 	            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
 	        </div>
 	    </div>
-	    <form action="${pageContext.request.contextPath}/mypage/editFormMenu" method="post" class="form-layout">
+	    <form action="${pageContext.request.contextPath}/user/updateAddress" method="post" class="form-layout">
 			<div class="content" style="align-items: center;">
 			    <div class="title">거주지 선호도를 골라주세요</div>
 			    <div class="description">만나고 싶은 사람이 멀리 살고 있어도 괜찮나요?<br>매칭에 반영될 거주지 거리 선호도를 알려주세요</div>
@@ -50,6 +50,6 @@
 	            <button type="submit" class="next-button">수정하기</button>
 	        </div>
         </form>
-	</div>
+     </div>
 </body>
 </html>

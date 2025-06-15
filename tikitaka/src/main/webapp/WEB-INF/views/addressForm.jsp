@@ -39,6 +39,7 @@
 			        </label>
 			        <label class="option">
 			            <input type="radio" name="itAddressPref" value="long">
+			            <input type="radio" name="itAddressPref" value="far">
 			            멀어도 괜찮아요
 			        </label>
 			    </div>

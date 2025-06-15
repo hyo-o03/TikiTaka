@@ -45,7 +45,7 @@ public class User {
     @Column(name = "EMAIL", nullable = false, length = 20)
     private String email;
 
-    @Column(name = "PHONE", length = 11)
+    @Column(name = "PHONE", nullable = false, length = 11)
     private String phone;
 
     @Column(name = "HOBBY", length = 10) // ⛳ 설문에서 입력 → nullable 허용
@@ -69,7 +69,7 @@ public class User {
     @Column(name = "SMOKE")
     private String smoke;
 
-    @Column(name = "PASSWORD", length = 20)
+    @Column(name = "PASSWORD")
     private String password;
 
 	 /* ========== 추가된 컬럼들 ========== */
@@ -99,7 +99,7 @@ public class User {
         this.introduce = introduce;
         this.userId = userId;
     }
-	
+    
 	/* Getter/Setter */
 	
 	public int getUserId() { return userId; }

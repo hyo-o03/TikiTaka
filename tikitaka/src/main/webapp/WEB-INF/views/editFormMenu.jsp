@@ -17,7 +17,6 @@
             <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
         </div>
     </div>
-
     <div class="menu">
         <div class="user-info">
             <img src="${pageContext.request.contextPath}/images/profile.png" class="avatar" />

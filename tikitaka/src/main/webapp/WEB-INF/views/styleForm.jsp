@@ -44,7 +44,6 @@
         <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
         <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
     </div>
-   
 	<form action="${pageContext.request.contextPath}/user/smoke" method="post" class="form-layout">
 	    <div class="content">
 			<div class="title">평소 사복 스타일이 궁금해요</div>
@@ -61,10 +60,30 @@
 	            <button class="style-tag">빈티지</button>
 	          </div>
 	    </div>
-        <div class="footer">
-            <button type="submit" class="next-button">다음단계</button>
-        </div>
-    </form>
+	    <div class="footer">
+	        <button type="submit" class="next-button">수정하기</button>
+	    </div>
+	</form>
+	<script>
+		const tags = document.querySelectorAll('.style-tag');
+		const fashionInput = document.getElementById('fashionInput');
+
+		tags.forEach(tag => {
+		    tag.addEventListener('click', function(e) {
+		        e.preventDefault(); // ★ 이 줄 추가! 페이지 이동 방지
+		        tags.forEach(t => t.classList.remove('selected'));
+		        tag.classList.add('selected');
+		        fashionInput.value = tag.getAttribute('data-value');
+		    });
+		});
+
+		document.getElementById('fashionForm').addEventListener('submit', function(e) {
+		    if (!fashionInput.value) {
+		        alert('스타일을 하나 선택해주세요!');
+		        e.preventDefault();
+		    }
+		});
+	</script>
 </div>
   
 </body>

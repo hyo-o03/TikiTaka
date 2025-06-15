@@ -13,7 +13,6 @@
 		        window.location.href = "${pageContext.request.contextPath}/signup/start";
 		    }
 		}
-		
 	    function loadChoicePopup() {
 	        fetch('/idealTypeChoice') // Spring Controller에 매핑된 경로
 	            .then(response => response.text())

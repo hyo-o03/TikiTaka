@@ -13,6 +13,7 @@
 		        window.location.href = "${pageContext.request.contextPath}/signup/start";
 		    }
 		}
+<<<<<<< HEAD
 		
 	    function loadPopup(address, age, introduce, userId) {
 	        fetch('${pageContext.request.contextPath}/match/idealTypeInfo?address=' + encodeURIComponent(address) + '&age=' + encodeURIComponent(age) + '&introduce='+ encodeURIComponent(introduce)+ '&userId='+encodeURIComponent(userId)) // Spring Controller에 매핑된 경로
@@ -27,6 +28,8 @@
 	        const popup = document.getElementById('popupModal');
 	        popup.style.display = 'none';
 	    }
+=======
+>>>>>>> 570a7ba2f9464c7b66cfc01a02f40d2e6a2f7f55
 	</script>
 </head>
 <body>

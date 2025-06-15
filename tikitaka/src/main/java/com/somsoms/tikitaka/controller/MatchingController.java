@@ -27,12 +27,16 @@ public class MatchingController {
 	public String showPrioritySelect() {
 		return "prioritySelect";
 	}
+		
+	@GetMapping("/idealTypeLanking")
+	public String showIdealTypeLanking() {
+		return "idealTypeLanking";
+	}
 	
 	@GetMapping("/matchingResultPage")
 	public String showMatchingResultPage(Model model) {
 	    
 	    int userId = 4; //임시로 정해놈
-	    
 	    List<User> matchingList = matchingService.getMatchingResults(userId);	    
 	    model.addAttribute("matchingList", matchingList);
 	    

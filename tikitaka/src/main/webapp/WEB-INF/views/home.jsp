@@ -12,6 +12,7 @@
 		        window.location.href = "${pageContext.request.contextPath}/signup/start";
 		    }
 		}
+<<<<<<< HEAD
 		
         function toggleAlarmPopup() {
             const popup = document.getElementById("alarmPopup");
@@ -27,6 +28,8 @@
                 popup.classList.add('hidden');
             }
         });
+=======
+>>>>>>> 570a7ba2f9464c7b66cfc01a02f40d2e6a2f7f55
 	</script>
 </head>
 <body>

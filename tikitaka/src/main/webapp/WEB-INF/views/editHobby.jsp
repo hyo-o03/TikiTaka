@@ -59,7 +59,7 @@
 	            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
 	        </div>
 	    </div>
-	    <form action="${pageContext.request.contextPath}/mypage/editFormMenu" method="post" class="form-layout">
+	    <form action="${pageContext.request.contextPath}/user/updateHobby" method="post" class="form-layout">
 		<div class="content">
 		    <div class="title">관심사는 무엇인가요?</div>
 		    <div class="description">당신의 관심사가 무엇인지 궁금해요! 2개 이상 필수로 골라주세요</div>
@@ -103,6 +103,37 @@
             <button type="submit" class="next-button">수정하기</button>
         </div>
         </form>
+        	<script>
+				const hobbyInput = document.getElementById('hobbyInput');
+				const items = document.querySelectorAll('.interest-item');
+
+				items.forEach(function(item) {
+				    item.addEventListener('click', function() {
+				        if (item.classList.contains('selected')) {
+				            // 이미 선택되어 있다면 해제
+				            item.classList.remove('selected');
+				        } else {
+				            // 최대 5개까지 선택
+				            const selectedCount = document.querySelectorAll('.interest-item.selected').length;
+				            if (selectedCount >= 5) {
+				                alert("최대 5개까지만 선택할 수 있습니다!");
+				                return;
+				            }
+				            item.classList.add('selected');
+				        }
+				    });
+				});
+
+				document.getElementById('hobbyForm').addEventListener('submit', function(e) {
+				    const selected = Array.from(document.querySelectorAll('.interest-item.selected')).map(item => item.getAttribute('data-value'));
+				    if (selected.length === 0) {
+				        alert('최소 1개의 관심사를 선택해주세요!');
+				        e.preventDefault();
+				        return;
+				    }
+				    hobbyInput.value = selected.join(',');
+				});
+			</script>
 	</div>
 </body>
 </html>

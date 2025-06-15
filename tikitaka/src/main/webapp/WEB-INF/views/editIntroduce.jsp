@@ -29,16 +29,16 @@
 	            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
 	        </div>
         </div>
-        <form action="${pageContext.request.contextPath}/mypage/editFormMenu" method="post" class="form-layout">
+        <form action="${pageContext.request.contextPath}/user/updateIntroduce" method="post" class="form-layout">
 	        <div class="content">
 	        	<div class="title">간단한 한 줄 소개를 해주세요</div>
 	        	<div class="description">매칭 시 상대에게 보여질 자기소개를 작성해주세요!</div>
-	            <div class="intro-box">
-	                <textarea class="intro-textarea" name="introduce" placeholder="자기소개를 입력해주세요 :)"></textarea>
-	            </div>
+				<div class="intro-box">
+					<textarea id="introduce"name="introduce" class="intro-textarea" placeholder="자기소개를 입력해주세요 :)">${user.introduce}</textarea>
+				</div>
 	        </div>
 	        <div class="footer">
-	            <button type="submit" class="next-button">수정하기</button>
+				<button type="submit" value="수정" class="next-button">수정하기</button>
 	        </div>
 		</form>
     </div>
