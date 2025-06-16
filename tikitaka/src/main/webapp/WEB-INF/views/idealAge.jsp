@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>MBTI</title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ageForm.css">
     <script>

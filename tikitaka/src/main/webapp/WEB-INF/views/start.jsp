@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>앱 시작</title>
+	<title>Tiki Taka</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/start.css">
 	<meta charset="UTF-8">
 </head>

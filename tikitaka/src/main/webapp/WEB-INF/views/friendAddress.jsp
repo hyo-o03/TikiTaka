@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>거주지</title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/addressForm.css">
     <script>

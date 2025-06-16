@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>이상형 조건 우선순위</title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/checkIdealForm.css">
     <meta charset="UTF-8">

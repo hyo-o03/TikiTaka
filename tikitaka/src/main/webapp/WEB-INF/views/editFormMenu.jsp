@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>마이페이지</title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/editFormMenu.css">
     <meta charset="UTF-8">
 </head>
@@ -14,7 +14,7 @@
         <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
         <div class="icons">
             <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
-            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
+            <jsp:include page="alarm.jsp" />
         </div>
     </div>
     <div class="menu">

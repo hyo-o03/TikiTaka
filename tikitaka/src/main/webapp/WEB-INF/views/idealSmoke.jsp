@@ -5,8 +5,7 @@
 <html>
 
 <head>
-    <title>설문-거주지
-    </title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/smokeForm.css">
 
@@ -45,7 +44,7 @@
 	                </label>
 	                
 	                <label class="option">
-	                  <span class="label-text">상관없어요</span>
+	                  <span class="label-text">🙅상관없어요</span>
 	                  <input type="radio" name="smoke" value="흡연">
 	                  <span class="circle"></span>
 	                </label>

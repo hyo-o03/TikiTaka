@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>MBTI</title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ageForm.css">
     <script>
@@ -45,7 +45,7 @@
 		    <div class="title">당신과 당신의 친구의 나이 차이는 어느 정도였으면 좋겠나요?</div>
 		    <div class="description">연상 혹은 연하를 고르신 분들은 그 아래 정확한 나이차이까지 골라주세요</div>
 		
-		    <div class="mbti-select-wrapper">
+		    <div class="age-select-wrapper">
 		        <select class="ageDif-dropdown" name="ageDif" id="ageDifSelect">
 		            <option value="" disabled selected>선택하기</option>
 		            <option value="up">연상</option>

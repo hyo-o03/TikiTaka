@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/matchBase.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/prioritySelect.css">
-    <title>Matching Result Page</title>
+    <title>Tiki Taka</title>
     <script>
 		function exit() {
 		    if (confirm("시작 페이지로 돌아가시겠습니까?")) {

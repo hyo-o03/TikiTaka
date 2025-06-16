@@ -6,15 +6,13 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/matchBase.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/matchingResultPage.css">
-    <title>Matching Result Page</title>
+    <title>Tiki Taka</title>
     <script>
 		function exit() {
 		    if (confirm("시작 페이지로 돌아가시겠습니까?")) {
 		        window.location.href = "${pageContext.request.contextPath}/signup/start";
 		    }
 		}
-<<<<<<< HEAD
-		
 	    function loadPopup(address, age, introduce, userId) {
 	        fetch('${pageContext.request.contextPath}/match/idealTypeInfo?address=' + encodeURIComponent(address) + '&age=' + encodeURIComponent(age) + '&introduce='+ encodeURIComponent(introduce)+ '&userId='+encodeURIComponent(userId)) // Spring Controller에 매핑된 경로
 	            .then(response => response.text())
@@ -28,8 +26,6 @@
 	        const popup = document.getElementById('popupModal');
 	        popup.style.display = 'none';
 	    }
-=======
->>>>>>> 570a7ba2f9464c7b66cfc01a02f40d2e6a2f7f55
 	</script>
 </head>
 <body>

@@ -3,34 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Matching Home</title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
     <meta charset="UTF-8">
-    <script>
-		function exit() {
-		    if (confirm("설문 작성을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
-		    }
-		}
-<<<<<<< HEAD
-		
-        function toggleAlarmPopup() {
-            const popup = document.getElementById("alarmPopup");
-            popup.classList.toggle("hidden");
-        }
-
-        // 외부 클릭 시 알림창 닫기
-        document.addEventListener('click', function (e) {
-            const icon = document.querySelector('.alarm-icon');
-            const popup = document.getElementById('alarmPopup');
-
-            if (!icon.contains(e.target) && !popup.contains(e.target)) {
-                popup.classList.add('hidden');
-            }
-        });
-=======
->>>>>>> 570a7ba2f9464c7b66cfc01a02f40d2e6a2f7f55
-	</script>
 </head>
 <body>
 <div class="container">
@@ -38,27 +13,8 @@
         <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
         <div class="icons">
             <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
-            <div class="alarm-wrapper">
-                <div class="alarm-icon" onclick="toggleAlarmPopup()">🔔</div>
-
-                <!-- 알림 드롭다운 -->
-                <div id="alarmPopup" class="alarm-dropdown hidden">
-<%--                     <c:forEach var="msg" items="${alarms}">
-                        <div class="alarm-item">
-                            <span class="alarm-text">${msg}</span>
-                            <button class="alarm-confirm">확인</button>
-                        </div>
-                    </c:forEach> --%>
-                    <div class="alarm-item">
-				        <span class="alarm-text">오늘의 이상형 추천이 도착했습니다!</span>
-				        <button class="alarm-confirm">확인</button>
-				    </div>
-				    <div class="alarm-item">
-				        <span class="alarm-text">새로운 매칭 상대가 있어요!</span>
-				        <button class="alarm-confirm">확인</button>
-				    </div>
-                </div>
-            </div>
+			<!-- 알림 드롭다운 include -->
+			<jsp:include page="alarm.jsp" />
         </div>
     </div>
     <div class="main">

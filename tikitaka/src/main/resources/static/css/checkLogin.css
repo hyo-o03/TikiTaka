@@ -1,3 +1,14 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -45,6 +56,10 @@ body {
     font-size: 18px;
     margin-left: 10px;
     cursor: pointer;
+}
+
+img {
+	cursor: pointer;
 }
 
 .center {
@@ -103,22 +118,33 @@ body {
 }
 
 .input-wrapper {
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
+}
+
+img {
+	cursor: pointer;
 }
 
 button {
-	width: 65%; /* 중앙 정렬 유지 */
-	border: 2px solid #5856D6; /* 모서리 색상 */
-	border-radius: 30px; /* 모서리 둥글게 */
-	outline: none;
-	font-size: 16px;
-	transition: border-color 0.3s;
-	padding: 20px;
+    width: 65%;
+    border: 2px solid #7A4FF7;
+    border-radius: 30px;
+    font-size: 16px;
+    padding: 15px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-/* 포커스 효과 (클릭시) */
+button:hover {
+    background: #7A4FF7;
+    color: white;
+    box-shadow: 0 4px 12px rgba(122, 79, 247, 0.3);
+}
+
 button:focus {
-	border-color: #6A0DAD;
-	box-shadow: 0 0 8px rgba(104, 96, 238, 0.3);
+    outline: none;
+    box-shadow: 0 0 8px rgba(122, 79, 247, 0.4);
 }

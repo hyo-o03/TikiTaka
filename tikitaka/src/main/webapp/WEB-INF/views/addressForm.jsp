@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>거주지</title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/addressForm.css">
     <script>
@@ -38,7 +38,6 @@
 			            가까웠으면 좋겠어요
 			        </label>
 			        <label class="option">
-			            <input type="radio" name="itAddressPref" value="long">
 			            <input type="radio" name="itAddressPref" value="far">
 			            멀어도 괜찮아요
 			        </label>

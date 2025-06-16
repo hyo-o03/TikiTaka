@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/matchRequestDone.css">
-    <title>Application Complete Page</title>
+    <title>Tiki Taka</title>
 </head>
 <body>
 <div class="container">

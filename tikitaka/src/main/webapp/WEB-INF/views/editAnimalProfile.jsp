@@ -5,27 +5,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>프로필</title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profileForm.css">
-    <script>
-		function exit() {
-		    if (confirm("수정을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
-		    }
-		}
-		
-		function selectAnimal(element) {
-			// 기존 선택 해제
-		    document.querySelectorAll('.animal-card').forEach(el => el.classList.remove('selected'));
-
-		    // 선택된 카드에 스타일 추가
-		    element.classList.add('selected');
-
-		    // hidden input에 값 넣기
-		    document.getElementById("selectedFacialType").value = element.getAttribute("data-value");
-	    }
-	</script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/animalProfileForm.css">
 </head>
 <body>
 	<div class="container">
@@ -33,17 +15,15 @@
 	        <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
 	        <div class="icons">
 	            <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
-	            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
+				<jsp:include page="alarm.jsp" />
 	        </div>
 	    </div>
-	    
-	    <form action="${pageContext.request.contextPath}/mypage/editFormMenu" method="post" class="form-layout" style="align-items: center;">
+	    <form action="${pageContext.request.contextPath}/user/updateFacialType" method="post" class="form-layout" style="align-items: center;">
 		    <div class="content">
 		        <div class="title">프로필에 쓰일 동물을 선택해주세요</div>
 		        
-		        <!-- 동물 선택 값 담을 hidden input -->
-				<input type="hidden" name="facialType" id="selectedFacialType">
-
+			    <input type="hidden" id="facialTypeInput" name="facialType" value="">
+			    
 		        <div class="animal-grid">
 		            <div class="animal-card" data-value="고양이" onclick="selectAnimal(this)" style="background-color: #fff9c4;">🐱</div>
 		            <div class="animal-card" data-value="강아지" onclick="selectAnimal(this)" style="background-color: #ffecb3;">🐶</div>
@@ -53,10 +33,28 @@
 		            <div class="animal-card" data-value="늑대" onclick="selectAnimal(this)" style="background-color: #cfd8dc;">🐺</div>
 		        </div>
 		    </div>
-	        <div class="footer">
-	            <button type="submit" class="next-button">수정하기</button>
-	        </div>
-        </form>
+	    	<div class="footer">
+			        <button type="submit" class="next-button">수정하기</button>
+			</div>
+	    </form>
 	</div>
+	<script>
+	    const cards = document.querySelectorAll('.animal-card');
+	    const input = document.getElementById('facialTypeInput');
+	    cards.forEach(function(card) {
+	        card.addEventListener('click', function() {
+	            cards.forEach(c => c.classList.remove('selected'));
+	            card.classList.add('selected');
+	            input.value = card.getAttribute('data-value');
+	        });
+	    });
+	    // 폼 제출 전 선택 안했으면 경고
+	    document.getElementById('facialTypeForm').addEventListener('submit', function(e) {
+	        if (!input.value) {
+	            alert('동물을 선택해주세요!');
+	            e.preventDefault();
+	        }
+	    });
+	</script>
 </body>
 </html>

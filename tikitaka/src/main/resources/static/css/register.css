@@ -47,6 +47,10 @@ body {
     cursor: pointer;
 }
 
+img {
+	cursor: pointer;
+}
+
 .center {
 	display: flex;
 	justify-content: center;

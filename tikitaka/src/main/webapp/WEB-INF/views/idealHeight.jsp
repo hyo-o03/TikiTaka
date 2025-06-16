@@ -4,8 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>설문-스타일
-    </title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleForm.css">
 

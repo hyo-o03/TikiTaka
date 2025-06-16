@@ -5,28 +5,18 @@
 <html>
 
 <head>
-    <title>설문-종교
-    </title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/religionForm.css">
-
     <meta charset="UTF-8">
-    <script>
-		function exit() {
-		    if (confirm("수정을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
-		    }
-		}
-	</script>
 </head>
-
 <body>
     <div class="container">
         <div class="header">
 	        <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
 	        <div class="icons">
 	            <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
-	            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
+	            <jsp:include page="alarm.jsp" />
 	        </div>
         </div>
 		<form action="${pageContext.request.contextPath}/user/updateReligion" method="post" class="form-layout" id="religionForm">
@@ -34,31 +24,31 @@
 		        <div class="title">종교는 무엇인가요?</div>
 		        <div class="description">상대와 만날 때 종교도 정말 중요해요<br>본인의 종교가 무엇인지 알려주세요</div>
 		        <div class="option-box">
-		            <label class="option">
-		                <input type="radio" name="religion" value="기독교">
-		                <span class="circle"></span>
-		                <span class="label-text">기독교</span>
-		            </label>
-		            <label class="option">
-		                <input type="radio" name="religion" value="천주교">
-		                <span class="circle"></span>
-		                <span class="label-text">천주교</span>
-		            </label>
-		            <label class="option">
-		                <input type="radio" name="religion" value="불교">
-		                <span class="circle"></span>
-		                <span class="label-text">불교</span>
-		            </label>
-		            <label class="option">
-		                <input type="radio" name="religion" value="힌디">
-		                <span class="circle"></span>
-		                <span class="label-text">힌디</span>
-		            </label>
-		            <label class="option">
-		                <input type="radio" name="religion" value="무교">
-		                <span class="circle"></span>
-		                <span class="label-text">무교</span>
-		            </label>
+	                <label class="option">
+	                  <span class="label-text">기독교</span>
+	                  <input type="radio" name="religion" value="기독교">
+	                  <span class="circle"></span>
+	                </label>
+	                <label class="option">
+	                  <span class="label-text">천주교</span>
+	                  <input type="radio" name="religion" value="천주교">
+	                  <span class="circle"></span>
+	                </label>
+	                <label class="option">
+	                    <span class="label-text">불교</span>
+	                    <input type="radio" name="religion" value="불교">
+	                    <span class="circle"></span>
+	                </label>
+	                <label class="option">
+	                    <span class="label-text">힌디</span>
+	                    <input type="radio" name="religion" value="힌디">
+	                    <span class="circle"></span>
+	                </label>
+	                <label class="option">
+	                    <span class="label-text">무교</span>
+	                    <input type="radio" name="religion" value="무교">
+	                    <span class="circle"></span>
+	                </label>
 		        </div>
 		    </div>
 		    <div class="footer">

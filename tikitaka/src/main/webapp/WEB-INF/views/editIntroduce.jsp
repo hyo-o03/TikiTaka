@@ -5,19 +5,10 @@
 <html>
 
 <head>
-    <title>설문-자기소개
-    </title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/introduceForm.css">
-
     <meta charset="UTF-8">
-    <script>
-		function exit() {
-		    if (confirm("수정을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
-		    }
-		}
-	</script>
 </head>
 
 <body>
@@ -26,7 +17,7 @@
 	        <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
 	        <div class="icons">
 	            <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
-	            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
+	            <jsp:include page="alarm.jsp" />
 	        </div>
         </div>
         <form action="${pageContext.request.contextPath}/user/updateIntroduce" method="post" class="form-layout">

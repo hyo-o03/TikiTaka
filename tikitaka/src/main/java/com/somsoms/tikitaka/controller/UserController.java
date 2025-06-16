@@ -37,6 +37,11 @@ public class UserController {
     public String showProfileForm() {
         return "animalProfileForm";
     }
+    
+    @GetMapping("/religion")
+    public String ProfileForm() {
+        return "religionForm";
+    }
 	
 //	private UserService userService;
 	
@@ -154,8 +159,8 @@ public class UserController {
         user.setIntroduce(introduce);
         userRepository.save(user);
         
-        return "redirect:/user/mypage/edit";    
-        }
+        return "editIntroduce";    
+    }
     
     @PostMapping("/updateFacialType")
     public String updateFacialType(@RequestParam("facialType") String facialType,
@@ -164,7 +169,7 @@ public class UserController {
         User user = userRepository.findById(userId).orElseThrow();
         user.setFacialType(facialType);
         userRepository.save(user);
-        return "redirect:/user/mypage/edit";
+        return "editProfile";
     }
     
     @PostMapping("/updateAddress")
@@ -174,7 +179,7 @@ public class UserController {
         User user = userRepository.findById(userId).orElseThrow();
         user.setAddress(address);
         userRepository.save(user);
-        return "redirect:/user/mypage/edit";
+        return "editAddress";
     }
     
     @PostMapping("/updateHobby")
@@ -184,7 +189,7 @@ public class UserController {
         User user = userRepository.findById(userId).orElseThrow();
         user.setHobby(hobby); // 쉼표로 구분된 문자열
         userRepository.save(user);
-        return "redirect:/user/mypage/edit";
+        return "editHobby";
     }
     
     @PostMapping("/updateMbti")
@@ -198,7 +203,7 @@ public class UserController {
             user.setMbti(mbti);
         }
         userRepository.save(user);
-        return "redirect:/user/mypage/edit";
+        return "editMbti";
     }
     
     @PostMapping("/updateSns")
@@ -215,17 +220,17 @@ public class UserController {
             user.setSnsId(snsId.trim());
         }
         userRepository.save(user);
-        return "redirect:/user/mypage/edit"; 
+        return "editSns"; 
     }
     
     @PostMapping("/updateFashion")
-    public String updateFashion(@RequestParam("fashion") String fashion,
+    public String updateFashion(@RequestParam("style") String fashion,
                                 HttpSession session) {
         int userId = 1; // 
         User user = userRepository.findById(userId).orElseThrow();
         user.setFashion(fashion);
         userRepository.save(user);
-        return "redirect:/user/mypage/edit";
+        return "editStyle";
     }
     
     @PostMapping("/updateSmoke")
@@ -235,7 +240,7 @@ public class UserController {
         User user = userRepository.findById(userId).orElseThrow();
         user.setSmoke(smoke);
         userRepository.save(user);
-        return "redirect:/user/mypage/edit";
+        return "editSmoke";
     }
     
     @PostMapping("/updateReligion")
@@ -245,7 +250,7 @@ public class UserController {
         User user = userRepository.findById(userId).orElseThrow();
         user.setReligion(religion);
         userRepository.save(user);
-        return "redirect:/user/mypage/edit";
+        return "editReligion";
     }
     
  // 기본정보 수정 페이지 (기존 사용자 정보 로드)
@@ -296,7 +301,7 @@ public class UserController {
         
         userRepository.save(user);
         
-        return "redirect:/user/myPage";
+        return "editBaseInfo";
     }
     
 	@GetMapping("/home")

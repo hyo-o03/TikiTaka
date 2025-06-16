@@ -5,19 +5,10 @@
 <html>
 
 <head>
-    <title>설문-종료
-    </title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/finishSurvey.css">
-
     <meta charset="UTF-8">
-    <script>
-		function exit() {
-		    if (confirm("시작 페이지로 돌아가시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
-		    }
-		}
-	</script>
 </head>
 
 <body>

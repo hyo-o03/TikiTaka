@@ -4,20 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>설문-스타일
-    </title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleForm.css">
-
     <meta charset="UTF-8">
     <script>
-		function exit() {
-		    if (confirm("수정을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
-		    }
-		}
-		
-		window.addEventListener("DOMContentLoaded", function () {
+/* 		window.addEventListener("DOMContentLoaded", function () {
             const buttons = document.querySelectorAll('.style-tag');
             const hiddenInput = document.getElementById("selectedFashionType");
 
@@ -35,7 +27,7 @@
                     hiddenInput.value = this.innerText.trim();
                 });
             });
-        });
+        }); */
 	</script>
 </head>
 <body>

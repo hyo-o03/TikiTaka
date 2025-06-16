@@ -45,7 +45,7 @@ public class User {
     @Column(name = "EMAIL", nullable = false, length = 20)
     private String email;
 
-    @Column(name = "PHONE", nullable = false, length = 11)
+    @Column(name = "PHONE", length = 11)
     private String phone;
 
     @Column(name = "HOBBY", length = 10) // ⛳ 설문에서 입력 → nullable 허용

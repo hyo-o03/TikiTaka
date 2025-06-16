@@ -5,16 +5,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>관심사</title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/hobbyForm.css">
     <script>
-		function exit() {
-		    if (confirm("수정을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
-		    }
-		}
-		
 		const maxSelection = 5;
 		const minSelection = 2;
 	    const selected = new Set();
@@ -56,7 +50,7 @@
 	        <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
 	        <div class="icons">
 	            <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
-	            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
+	            <jsp:include page="alarm.jsp" />
 	        </div>
 	    </div>
 	    <form action="${pageContext.request.contextPath}/user/updateHobby" method="post" class="form-layout">
