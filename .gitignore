@@ -1,0 +1,53 @@
+/.metadata/
+<<<<<<< HEAD
+# 빌드 결과물
+/target/
+*.class
+
+# Eclipse
+.settings/
+.classpath
+.project
+
+# IntelliJ
+.idea/
+*.iml
+
+# VSCode
+.vscode/
+
+# OS, 임시 파일
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# 민감 정보
+.env
+*.key
+*.pem
+credentials.json
+=======
+
+# === Eclipse / IDE 관련 ===
+.classpath
+.project
+.factorypath
+.settings/
+
+# === 빌드 결과물 ===
+/target/
+bin/
+
+# === Maven 관련 임시 폴더 ===
+*.log
+*.tmp
+
+# === 기타 ===
+*.iml
+.idea/
+
+# === OS/기타 임시 파일 ===
+.DS_Store
+Thumbs.db
+>>>>>>> e76595c80cf530aef2fb2aa721d7d7e34fd05f8f
