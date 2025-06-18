@@ -42,10 +42,26 @@ public class MatchingController {
 		return "matchingResultPage";
 	}
 	
+	@GetMapping("/FrienMatchingResultPage")
+    public String showFriendMatchingResultPage(Model model) {
+        
+        int userId = 1; //임시로 정해놈
+        
+        List<User> matchingList = matchingService.getMatchingResults(userId);
+
+        
+        
+        model.addAttribute("matchingList", matchingList);
+        
+        return "matchingResultPage";
+    }
+	
 	@PostMapping("/matchRequestDone")
 	public String showMatchRequestDone() {
 		return "matchRequestDone";
 	}
+	
+	
 	
 	@GetMapping("/idealTypeInfo")
     public String showIdealTypeInfo(@RequestParam("address") String address, @RequestParam("age") int age, @RequestParam("introduce") String introduce, @RequestParam("userId") int userId, Model model) {

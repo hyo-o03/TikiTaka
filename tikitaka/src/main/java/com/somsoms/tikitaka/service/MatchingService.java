@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.somsoms.tikitaka.domain.*;
+import com.somsoms.tikitaka.repository.FriendtypeRepository;
 import com.somsoms.tikitaka.repository.MatchingRepository;
 import com.somsoms.tikitaka.repository.MatchingresultRepository;
 import com.somsoms.tikitaka.repository.UserRepository;
@@ -64,6 +65,12 @@ public class MatchingService {
         }
         matchingRepository.saveAll(matchList);
     }
+	
+	
+	
+	
+	
+	
 	  // findAllResultByUserId로 매칭 전체 결과 받아오기
 
 	void deleteMatchingResult() {}
