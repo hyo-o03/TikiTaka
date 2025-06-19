@@ -25,7 +25,7 @@
             <img class="completeImg" src="/images/applicationComplete.png">
         </div>
         <div class="footer">
-            <button class="okBtn">확인</button>
+            <button class="okBtn" onclick="location.href='${pageContext.request.contextPath}/user/home'">확인</button>
         </div>
     </div>
 </div>

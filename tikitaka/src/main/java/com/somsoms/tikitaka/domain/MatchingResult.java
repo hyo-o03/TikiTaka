@@ -40,7 +40,7 @@ public class MatchingResult {
 
     /* Constructors */
     
-    MatchingResult() {}
+    public MatchingResult() {}
 
     /* JavaBeans Properties */
     

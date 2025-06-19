@@ -47,7 +47,7 @@ public class Matching {
 
     /* Constructors */
     
-    Matching() {}
+    public Matching() {}
 
     /* JavaBeans Properties */
     

@@ -23,18 +23,17 @@ public class IdealtypeService {
     public void processMatching(int userId, String priority1, String priority2, String priority3) {
         Idealtype idealtype =idealtypeRepository.findByUser_UserId(userId);
 
+        String value1 = extractValueByPriority(idealtype, priority1);
+        String value2 = extractValueByPriority(idealtype, priority2);
+        String value3 = extractValueByPriority(idealtype, priority3);
 
-            String value1 = extractValueByPriority(idealtype, priority1);
-            String value2 = extractValueByPriority(idealtype, priority2);
-            String value3 = extractValueByPriority(idealtype, priority3);
-
-            // 예시: 출력
-            System.out.println("1순위 : " + priority1);
-            System.out.println("2순위 : " + priority2);
-            System.out.println("3순위 : " + priority3);
-            
-            // 여기서 이 값들을 기반으로 매칭 처리 수행
-            // (예: 다른 유저랑 비교, 매칭 알고리즘 적용 등)
+        // 예시: 출력
+        System.out.println("1순위 : " + priority1);
+        System.out.println("2순위 : " + priority2);
+        System.out.println("3순위 : " + priority3);
+        
+        // 여기서 이 값들을 기반으로 매칭 처리 수행
+        // (예: 다른 유저랑 비교, 매칭 알고리즘 적용 등)
 
     }
     
