@@ -5,19 +5,17 @@
 <html>
 
 <head>
-    <title>설문-종료
-    </title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/finishSurvey.css">
-
     <meta charset="UTF-8">
 </head>
 
 <body>
     <div class="container">
 	    <div class="header">
-	        <img src="${pageContext.request.contextPath}/images/leftBtn.png">
-	        <img src="${pageContext.request.contextPath}/images/escBtn.png">
+	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
 	    </div>
         <div class="complete-container">
             <h2 class="complete-title">드디어 모든 절차가 끝났어요</h2>

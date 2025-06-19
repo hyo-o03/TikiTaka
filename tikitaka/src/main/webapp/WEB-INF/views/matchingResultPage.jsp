@@ -4,23 +4,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/matchingCss.css">
-    <title>Matching Result Page</title>
-    <style>
-	    .container {
-		    background-image:
-		            radial-gradient(circle 500px at top right, #FFDAED 0%, #FFDAED 30%, transparent 100%),
-		            radial-gradient(circle 500px at bottom left, #D5DCED 0%, #D5DCED 30%, transparent 100%);
-		    background-repeat: no-repeat;
-		    background-size: 100% 100%;
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/matchBase.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/matchingResultPage.css">
+    <title>Tiki Taka</title>
+    <script>
+		function exit() {
+		    if (confirm("시작 페이지로 돌아가시겠습니까?")) {
+		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		    }
 		}
-    </style>
+	    function loadPopup(address, age, introduce, userId) {
+	        fetch('${pageContext.request.contextPath}/match/idealTypeInfo?address=' + encodeURIComponent(address) + '&age=' + encodeURIComponent(age) + '&introduce='+ encodeURIComponent(introduce)+ '&userId='+encodeURIComponent(userId)) // Spring Controller에 매핑된 경로
+	            .then(response => response.text())
+	            .then(data => {
+	                document.getElementById('popupContent').innerHTML = data;
+	                document.getElementById('popupModal').style.display = 'block';
+	            });
+	    }
+
+	    function closePopup() {
+	        const popup = document.getElementById('popupModal');
+	        popup.style.display = 'none';
+	    }
+	</script>
 </head>
 <body>
     <div class="container" >
         <div class="header">
-            <img src="${pageContext.request.contextPath}/images/leftBtn.png">
-            <img src="${pageContext.request.contextPath}/images/escBtn.png">
+	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
         </div>
         <div class="content">
             <div class="title">소개팅으로 매칭할 상대를 선택해주세요</div>
@@ -69,3 +81,4 @@
         popup.style.display = 'none';
     }
 </script>
+

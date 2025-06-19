@@ -20,3 +20,10 @@
 .animal-card:hover {
     transform: scale(1.1);
 }
+
+.animal-card.selected {
+    transform: scale(1.05) !important;
+    background-color: #DFD8FE !important;
+    color: #7656D6 !important;
+    border: 1px solid #7656D6 !important;
+}

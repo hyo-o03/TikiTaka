@@ -5,55 +5,55 @@
 <html>
 
 <head>
-    <title>설문-종교
-    </title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/religionForm.css">
-
     <meta charset="UTF-8">
 </head>
-
 <body>
     <div class="container">
         <div class="header">
-	        <img src="${pageContext.request.contextPath}/images/leftBtn.png">
-	        <img src="${pageContext.request.contextPath}/images/escBtn.png">
+	        <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
+	        <div class="icons">
+	            <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
+	            <jsp:include page="alarm.jsp" />
+	        </div>
         </div>
-        <form action="${pageContext.request.contextPath}/user/introduce" method="post" class="form-layout">
-	        <div class="content">
-	        	<div class="title">종교는 무엇인가요?</div>
-	        	<div class="description">상대와 만날 때 종교도 정말 중요해요<br>본인의 종교가 무엇인지 알려주세요</div>
-	            <div class="option-box">
+		<form action="${pageContext.request.contextPath}/user/updateReligion" method="post" class="form-layout" id="religionForm">
+		    <div class="content">
+		        <div class="title">종교는 무엇인가요?</div>
+		        <div class="description">상대와 만날 때 종교도 정말 중요해요<br>본인의 종교가 무엇인지 알려주세요</div>
+		        <div class="option-box">
 	                <label class="option">
 	                  <span class="label-text">기독교</span>
-	                  <input type="radio" name="distance" value="near">
+	                  <input type="radio" name="religion" value="기독교">
 	                  <span class="circle"></span>
 	                </label>
 	                <label class="option">
 	                  <span class="label-text">천주교</span>
-	                  <input type="radio" name="distance" value="far">
+	                  <input type="radio" name="religion" value="천주교">
 	                  <span class="circle"></span>
 	                </label>
 	                <label class="option">
 	                    <span class="label-text">불교</span>
-	                    <input type="radio" name="distance" value="far">
+	                    <input type="radio" name="religion" value="불교">
 	                    <span class="circle"></span>
 	                </label>
 	                <label class="option">
 	                    <span class="label-text">힌디</span>
-	                    <input type="radio" name="distance" value="far">
+	                    <input type="radio" name="religion" value="힌디">
 	                    <span class="circle"></span>
 	                </label>
 	                <label class="option">
 	                    <span class="label-text">무교</span>
-	                    <input type="radio" name="distance" value="far">
+	                    <input type="radio" name="religion" value="무교">
 	                    <span class="circle"></span>
 	                </label>
-	            </div>
-	        </div>
-	        <div class="footer">
-	            <button type="submit" class="next-button">다음단계</button>
-	        </div>
+		        </div>
+		    </div>
+		    <div class="footer">
+		        <button type="submit" class="next-button">수정하기</button>
+		    </div>
 		</form>
     </div>
 

@@ -3,9 +3,11 @@ package com.somsoms.tikitaka.controller;
 import java.util.ArrayList;
 import java.util.List;
 import com.somsoms.tikitaka.domain.*;
+import com.somsoms.tikitaka.service.IdealtypeService;
 import com.somsoms.tikitaka.service.MatchingService;
 
-
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,19 @@ public class MatchingController {
     @Autowired
     private MatchingService matchingService;
     
+    @Autowired
+    private IdealtypeService idealtypeService;
+    
+    @PostConstruct
+    public void checkInit() {
+        System.out.println("💡 IdealtypeService 주입 여부: " + idealtypeService);
+    }
+
+	@GetMapping("/prioritySelect")
+	public String showPrioritySelect() {
+		return "prioritySelect";
+	}
+
 	@GetMapping("/idealTypeLanking")
 	public String showIdealTypeLanking() {
 		return "idealTypeLanking";
@@ -32,11 +47,9 @@ public class MatchingController {
 	public String showMatchingResultPage(Model model) {
 	    
 	    int userId = 4; //임시로 정해놈
-	    
+
 	    List<User> matchingList = matchingService.getMatchingResults(userId);
 
-        
-	    
 	    model.addAttribute("matchingList", matchingList);
 	    
 		return "matchingResultPage";
@@ -56,13 +69,12 @@ public class MatchingController {
         return "matchingResultPage";
     }
 	
-	@PostMapping("/matchRequestDone")
-	public String showMatchRequestDone() {
-		return "matchRequestDone";
-	}
+//	@PostMapping("/matchRequestDone")
+//	public String showMatchRequestDone() {
+//		return "matchRequestDone";
+//	}
 	
-	
-	
+
 	@GetMapping("/idealTypeInfo")
     public String showIdealTypeInfo(@RequestParam("address") String address, @RequestParam("age") int age, @RequestParam("introduce") String introduce, @RequestParam("userId") int userId, Model model) {
         // 디버깅용 로그 추가
@@ -75,19 +87,41 @@ public class MatchingController {
         return "idealTypeInfo";
     }
 	
-	@GetMapping("/matchRequestDone")
-	public String handleMatchRequest(@RequestParam("type") String type, int idealId) {
-//	    User loginUser = (User) session.getAttribute("loginUser"); // 세션에서 로그인 사용자 가져오기
+//	@GetMapping("/matchRequestDone")
+//	public String handleMatchRequest(@RequestParam("type") String type, int idealId) {
+////	    User loginUser = (User) session.getAttribute("loginUser"); // 세션에서 로그인 사용자 가져오기
+////
+////	    if (loginUser == null) {
+////	        return "redirect:/login"; // 로그인 안 되어 있으면 로그인 페이지로
+////	    }
 //
-//	    if (loginUser == null) {
-//	        return "redirect:/login"; // 로그인 안 되어 있으면 로그인 페이지로
-//	    }
+//	    int userId = 4; // 로그인 유저 ID
+//	    matchingService.acceptMatchesByUserId(userId, type, idealId); // 상태 변경 서비스 호출
+//
+//	    return "matchRequestDone"; // 결과 페이지로 이동
+//	}
+	
+//	@RequestParam("type") String type, HttpSession session,
+	@PostMapping("/matchRequestDone")
+    public String handleMatchRequest2(
+            @RequestParam String priority1,
+            @RequestParam String priority2,
+            @RequestParam String priority3,
+            Model model) {
+//      User loginUser = (User) session.getAttribute("loginUser"); // 세션에서 로그인 사용자 가져오기
+//      
+//      if (loginUser == null) {
+//          return "redirect:/login"; // 로그인 안 되어 있으면 로그인 페이지로
+//      }
+//      
+//      int userId = loginUser.getUserId();
+      
+      System.out.println(priority1);
 
-	    int userId = 4; // 로그인 유저 ID
-	    matchingService.acceptMatchesByUserId(userId, type, idealId); // 상태 변경 서비스 호출
+      idealtypeService.processMatching(1040, priority1, priority2, priority3);
 
-	    return "matchRequestDone"; // 결과 페이지로 이동
-	}
+        return "matchRequestDone"; // 결과 페이지로 이동
+    }
 	
 //	@PostMapping("/match/request")
 //	public ResponseEntity<String> requestMatch(@RequestParam int userId) {}

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>가입완료</title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/signupSuccess.css">
     <meta charset="UTF-8">
@@ -37,7 +37,7 @@
 		</div>
     </div>
     
-	<form action="${pageContext.request.contextPath}/user/profile" method="get">
+	<form action="${pageContext.request.contextPath}/user/animalProfile" method="post">
         <div class="footer">
             <button type="submit" class="next-button">설문 진행하기</button>
         </div>

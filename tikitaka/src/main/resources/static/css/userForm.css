@@ -35,6 +35,26 @@ form.form-layout {
     border-bottom: 1px solid #ddd;
 }
 
+.logo {
+    font-weight: bold;
+    font-size: 18px;
+    color: #444;
+}
+
+.icons .icon {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+img {
+	cursor: pointer;
+}
+
+a {
+	text-decoration: none;
+	color: inherit; /* 부모 요소 글자 색 따라가기 */
+}
+
 .content {
     flex: 1;
     overflow-y: auto;

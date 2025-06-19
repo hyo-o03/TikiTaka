@@ -35,9 +35,17 @@ body {
     color: #444;
 }
 
+a {
+	text-decoration: none;
+	color: inherit; /* 부모 요소 글자 색 따라가기 */
+}
+
 .icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-left: 10px;
-    cursor: pointer;
+    position: relative; /* 추가! */
 }
 
 .icons img {

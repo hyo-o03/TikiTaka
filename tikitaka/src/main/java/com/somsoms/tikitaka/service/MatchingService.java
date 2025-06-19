@@ -33,6 +33,7 @@ public class MatchingService {
 	void respondToMatching(int matchId, String status) {}
 	  // updateMatchStatus로 결과 업데이트
 
+
 	Matching getMatchingResult(int matchId) {
         return null;}
 	  // findResultByMatchId로 매칭 하나의 결과 받아오기
@@ -65,13 +66,6 @@ public class MatchingService {
         }
         matchingRepository.saveAll(matchList);
     }
-	
-	
-	
-	
-	
-	
-	  // findAllResultByUserId로 매칭 전체 결과 받아오기
 
 	void deleteMatchingResult() {}
 	  // MatchingResult의 모든 유저의 요청 시간과 현재 시간을 비교

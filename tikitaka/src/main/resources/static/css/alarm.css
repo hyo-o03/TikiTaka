@@ -1,0 +1,65 @@
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 10px;
+    position: relative; /* 추가! */
+}
+
+/* 알림 아이콘 위치 */
+.alarm-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+/* 팝업 박스 */
+.alarm-dropdown {
+    position: absolute;
+    top: 40px; /* 아이콘 아래로 */
+    right: 0;
+    width: 250px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 10px 12px;
+    z-index: 999;
+}
+
+.alarm-icon {
+    cursor: pointer;
+}
+
+/* 숨김용 클래스 */
+.hidden {
+    display: none;
+}
+
+/* 알림 아이템 */
+.alarm-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f4f6ff;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+/* 텍스트 */
+.alarm-text {
+    font-size: 14px;
+    color: #333;
+    flex: 1;
+    margin-right: 8px;
+}
+
+/* 버튼 */
+.alarm-confirm {
+    font-size: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}

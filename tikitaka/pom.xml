@@ -89,13 +89,9 @@
             <artifactId>querydsl-jpa</artifactId>
             <version>${querydsl.version}</version>
             <classifier>jakarta</classifier>
-        </dependency>
-        
-  
+        </dependency> 
     </dependencies>
     
-    
-
     <!-- ✅ 빌드 플러그인 -->
     <build>
         <plugins>
@@ -105,5 +101,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

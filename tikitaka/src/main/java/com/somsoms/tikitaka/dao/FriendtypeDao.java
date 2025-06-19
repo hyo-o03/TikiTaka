@@ -17,5 +17,4 @@ public class FriendtypeDao {
     
     void deleteFriendtype(Long userId) {
     }
-	
 }

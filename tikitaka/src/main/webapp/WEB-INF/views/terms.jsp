@@ -3,35 +3,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>이용약관 동의</title>
+    <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/terms.css">
     <meta charset="UTF-8">
 	<script>
-		function toggleCheck(checkbox, inputId) {
-			const active = checkbox.classList.toggle("active");
-			document.getElementById(inputId).value = active ? "Y" : "N";
-		}
+	
+	    // 체크 여부에 따라 hidden input의 값을 Y 또는 N으로 설정
+	    function updateHidden(name, isChecked) {
+	        document.getElementById(name).value = isChecked ? "Y" : "N";
+	    }
+    
+	 	// 개별 약관 체크 시 동작
+	    function toggleIndividual(checkbox) {
+	        const name = checkbox.name;
+	        const isChecked = checkbox.checked;
+	        updateHidden(name, isChecked); // hidden input 업데이트
+
+	        // 하나라도 해제되면 "전체 동의" 체크 해제
+	        if (!isChecked) {
+	        	document.getElementById("agreeAll_check").checked = false;
+	        }
+
+	        // 4개 모두 체크되면 "전체 동의"도 체크
+	        const allChecked = ["agree1", "agree2", "agree3", "agree4"].every(id =>
+	            document.getElementById(id + "_check").checked
+	        );
+	        if (allChecked) {
+	            document.getElementById("agreeAll_check").checked = true;
+	        }
+	    }
+
+	    // 필수 약관(agree1~3)이 모두 체크되지 않으면 제출 막기
+	    function validateTerms(event) {
+	        const required = ["agree1", "agree2", "agree3"];
+	        for (let name of required) {
+	            if (document.getElementById(name).value !== "Y") {
+	                alert("필수 약관(만 18세 이상, 서비스 이용약관, 개인정보 수집 동의)에 모두 동의해야 합니다.");
+	                event.preventDefault(); // form 제출 막기
+	                return false;
+	            }
+	        }
+	    }
 		
-		function toggleAll(el) {
-			const isActive = el.classList.contains("active");
-			const allCheckboxes = document.querySelectorAll(".custom-checkbox");
-			const agreeInputs = document.querySelectorAll("input[type=hidden]");
+	    function toggleAll(masterCheckbox) {
+	        const isChecked = masterCheckbox.checked;
+
+	        const checkboxNames = ["agree1", "agree2", "agree3", "agree4"];
+	        checkboxNames.forEach(name => {
+	        	const cb = document.getElementById(name + "_check");
+	            cb.checked = isChecked;
+	            updateHidden(name, isChecked);
+	        });
+	    }
 		
-			allCheckboxes.forEach((box, idx) => {
-				if (idx === 0) return; // "모두 동의" 제외
-				if (!isActive) {
-					box.classList.add("active");
-					agreeInputs[idx - 1].value = "Y";
-				} else {
-					box.classList.remove("active");
-					agreeInputs[idx - 1].value = "N";
-				}
-			});
-		
-			// toggle "모두 동의" 상태
-			el.classList.toggle("active");
-		}
+		// 페이지 로딩 시 이벤트 리스너 연결
+	    window.onload = () => {
+	    	document.getElementById("agreeAll_check").addEventListener("change", function () {
+	            toggleAll(this);
+	        });
+
+	        ["agree1", "agree2", "agree3", "agree4"].forEach(name => {
+	            document.getElementById(name + "_check").addEventListener("change", function () {
+	                toggleIndividual(this);
+	            });
+	        });
+
+	        document.querySelector("form").addEventListener("submit", validateTerms);
+	    };
 	</script>
 </head>
 <body>
@@ -53,29 +92,29 @@
             <div class="checkbox-container">
             		<!-- ✅ 모두 동의 -->
 				<label class="custom-checkbox">
-					<input type="checkbox" name="agreeAll" onclick="toggleAll(this)">
+					<input type="checkbox" id="agreeAll_check" name="agreeAll" onclick="toggleAll(this)">
 					<span class="checkbox-text">전체 동의</span>
 				</label>
 				
 				<hr>
 	
 				<label class="custom-checkbox">
-					<input type="checkbox" name="agree1" class="custom-checkbox">
+					<input type="checkbox" id="agree1_check" name="agree1">
 					<span class="checkbox-text">만 18세 이상입니다</span>
 				</label>
 		
 				<label class="custom-checkbox">
-					<input type="checkbox" name="agree2" class="custom-checkbox">
+					<input type="checkbox" id="agree2_check" name="agree2">
 					<span class="checkbox-text">서비스 이용약관 동의</span>
 				</label>
 		
 				<label class="custom-checkbox">
-					<input type="checkbox" name="agree3" class="custom-checkbox">
+					<input type="checkbox" id="agree3_check" name="agree3">
 					<span class="checkbox-text">개인정보 수집 및 이용 동의</span>
 				</label>
 		
 				<label class="custom-checkbox optional">
-					<input type="checkbox" name="agree4" class="custom-checkbox">
+					<input type="checkbox" id="agree4_check" name="agree4">
 					<span class="checkbox-text">알림 또는 이벤트 정보 수신 동의 (선택)</span>
 				</label>
             </div>

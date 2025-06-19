@@ -11,4 +11,5 @@ import com.somsoms.tikitaka.domain.Matching;
 @Repository
 public interface FriendtypeRepository extends JpaRepository<Friendtype, Integer> {
 
+
 }

@@ -46,14 +46,20 @@ public class Idealtype {
     private String itFashion;
 
     @Column(name = "IT_SMOKE")
-    private boolean itSmoke;
+    private String itSmoke;
 
     @Column(name = "IT_HOBBY", length = 10)
     private String itHobby;
+    
+    @Column(name = "IT_DISTANCE_PREF", length = 10)
+    private String itDistancepref; // ✅ 새로 추가됨
+    
+    @Column(name = "IT_AGE_PREFERENCE", length = 10)
+    private String itAgepreference; // ✅ 새로 추가됨
 
     /* Constructors */
     
-    Idealtype() {}
+    public Idealtype() {}
 
     /* JavaBeans Properties */
     
@@ -71,11 +77,16 @@ public class Idealtype {
     public void setItAddress(String itAddress) { this.itAddress = itAddress; }
     public String getItFacialtype() { return itFacialtype; }
     public void setItFacialtype(String itFacialtype) { this.itFacialtype = itFacialtype; }
-    public String getItFashion() { return itFashion; }
-    public void setItFashion(String itFashion) { this.itFashion = itFashion; }
-    public boolean isItSmoke() { return itSmoke; }
-    public void setItSmoke(boolean itSmoke) { this.itSmoke = itSmoke; }
-    public String isItHobby() { return itHobby; }
-    public void setItHobby(String itHobby) { this.itHobby = itHobby; }
-    
+
+	public String getItFashion() { return itFashion; }
+	public void setItFashion(String itFashion) { this.itFashion = itFashion; }
+	public String isItSmoke() { return itSmoke; }
+	public void setItSmoke(String itSmoke) { this.itSmoke = itSmoke; }
+	public String getItHobby() { return itHobby; }
+	public void setItHobby(String itHobby) { this.itHobby = itHobby; }
+	public String getItAgePreference() { return itAgepreference; } // ✅ 추가
+    public void setItAgePreference(String itAgepreference) { this.itAgepreference = itAgepreference; }
+    public String getItDistancepref() { return itDistancepref; } // ✅ 추가
+    public void setItDistancepref(String itDistancepref) { this.itDistancepref = itDistancepref; }
+
 }
