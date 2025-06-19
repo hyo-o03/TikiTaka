@@ -34,7 +34,8 @@ public class MatchingController {
     }
 
 	@GetMapping("/prioritySelect")
-	public String showPrioritySelect() {
+	public String showPrioritySelect(@RequestParam("requestType") String requestType, Model model) {
+	    model.addAttribute("requestType", requestType);
 		return "prioritySelect";
 	}
 
@@ -46,7 +47,7 @@ public class MatchingController {
 	@GetMapping("/matchingResultPage")
 	public String showMatchingResultPage(Model model) {
 	    
-	    int userId = 4; //임시로 정해놈
+	    int userId = 1047; //임시로 정해놈
 
 	    List<User> matchingList = matchingService.getMatchingResults(userId);
 
@@ -55,10 +56,10 @@ public class MatchingController {
 		return "matchingResultPage";
 	}
 	
-	@GetMapping("/FrienMatchingResultPage")
+	@GetMapping("/friendMatchingResultPage")
     public String showFriendMatchingResultPage(Model model) {
         
-        int userId = 1; //임시로 정해놈
+        int userId = 1046; //임시로 정해놈
         
         List<User> matchingList = matchingService.getMatchingResults(userId);
 
@@ -107,6 +108,7 @@ public class MatchingController {
             @RequestParam String priority1,
             @RequestParam String priority2,
             @RequestParam String priority3,
+            @RequestParam("requestType") String requestType,
             Model model) {
 //      User loginUser = (User) session.getAttribute("loginUser"); // 세션에서 로그인 사용자 가져오기
 //      
@@ -116,9 +118,9 @@ public class MatchingController {
 //      
 //      int userId = loginUser.getUserId();
       
-      System.out.println(priority1);
+      System.out.println(requestType);
 
-      idealtypeService.processMatching(1040, priority1, priority2, priority3);
+      idealtypeService.processMatching(1064, priority1, priority2, priority3);
 
         return "matchRequestDone"; // 결과 페이지로 이동
     }

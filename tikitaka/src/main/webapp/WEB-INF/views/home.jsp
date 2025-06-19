@@ -21,13 +21,13 @@
         <p class="todayMatching">오늘의 매칭</p>
         <div class="matchings">
             <div class="friendMatching">
-                <a href="${pageContext.request.contextPath}/match/prioritySelect" style="text-decoration: none; color: inherit;">
+                <a href="${pageContext.request.contextPath}/match/prioritySelect?requestType=F" style="text-decoration: none; color: inherit;">
                     <p class="matchingMent">오늘의 친구를<br>만나러 가요</p>
                     <img src="${pageContext.request.contextPath}/images/friendHeart.png">
                 </a>
             </div>
             <div class="loverMatching">
-                <a href="${pageContext.request.contextPath}/match/prioritySelect" style="text-decoration: none; color: inherit;">
+                <a href="${pageContext.request.contextPath}/match/prioritySelect?requestType=I" style="text-decoration: none; color: inherit;">
                     <p class="matchingMent">오늘의 인연을<br>만나러 가요</p>
                     <img src="${pageContext.request.contextPath}/images/loverHeart.png">
                 </a>
@@ -47,7 +47,7 @@
                 <p class="mRSubText">오늘의 매칭 알림</p>
                 <p class="mRText">오늘 매칭된 친구 상대 확인하기</p>
             </div>
-            <a href="${pageContext.request.contextPath}/match/matchingResultPage" style="text-decoration: none;"><img class="mRBtn" src="${pageContext.request.contextPath}/images/mRBtn.png"></a>
+            <a href="${pageContext.request.contextPath}/match/friendMatchingResultPage" style="text-decoration: none;"><img class="mRBtn" src="${pageContext.request.contextPath}/images/mRBtn.png"></a>
         </div>
     </div>
 </div>
