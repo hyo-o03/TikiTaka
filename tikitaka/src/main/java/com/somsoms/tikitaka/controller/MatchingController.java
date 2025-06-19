@@ -61,10 +61,7 @@ public class MatchingController {
         
         int userId = 1046; //임시로 정해놈
         
-        List<User> matchingList = matchingService.getMatchingResults(userId);
-
-        
-        
+        List<User> matchingList = matchingService.getMatchingResults(userId);        
         model.addAttribute("matchingList", matchingList);
         
         return "matchingResultPage";
@@ -118,9 +115,12 @@ public class MatchingController {
 //      
 //      int userId = loginUser.getUserId();
       
+
       System.out.println(requestType);
 
-      idealtypeService.processMatching(1064, priority1, priority2, priority3);
+		int userId = 1064;
+
+        matchingService.requestMatching(userId, priority1, priority2, priority3, requestType);
 
         return "matchRequestDone"; // 결과 페이지로 이동
     }
