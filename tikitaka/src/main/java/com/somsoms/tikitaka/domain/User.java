@@ -147,4 +147,5 @@ public class User {
     public String getSnsId() { return snsId; }
     public void setSnsId(String snsId) { this.snsId = snsId; }
 
+	
 }

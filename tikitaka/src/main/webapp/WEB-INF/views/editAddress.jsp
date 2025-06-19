@@ -18,14 +18,14 @@
 				<jsp:include page="alarm.jsp" />
 	        </div>
 	    </div>
-	    <form action="${pageContext.request.contextPath}/user/updateAddress" method="post" class="form-layout">
+	    <form id="addressForm" action="${pageContext.request.contextPath}/mypage/updateAddress" method="post" class="form-layout">
 			<div class="content" style="align-items: center;">
 			    <div class="title">거주지 선호도를 골라주세요</div>
 			    <div class="description">만나고 싶은 사람이 멀리 살고 있어도 괜찮나요?<br>매칭에 반영될 거주지 거리 선호도를 알려주세요</div>
 			
 			    <div class="region-input">
 			        <label for="userRegion">내 거주 지역</label>
-			        <input type="text" id="address" name="address" placeholder="예: 서울시 마포구">
+			        <input type="text" id="address" name="address" placeholder="예: 서울시 마포구" value="${user.address}">
 			    </div>
 			    
 			    <div class="preference-options">
@@ -44,5 +44,19 @@
 	        </div>
         </form>
      </div>
+     <script>
+         window.addEventListener('DOMContentLoaded', function() {
+             const form = document.getElementById('addressForm');
+             const addressInput = document.getElementById('address');
+             
+             // 폼 제출 전 주소 입력 검증
+             form.addEventListener('submit', function(e) {
+                 if (!addressInput.value.trim()) {
+                     alert('거주 지역을 입력해주세요!');
+                     e.preventDefault();
+                 }
+             });
+         });
+     </script>
 </body>
 </html>

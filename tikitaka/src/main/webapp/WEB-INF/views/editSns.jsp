@@ -10,30 +10,59 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/snsForm.css">
     <meta charset="UTF-8">
     <script>
+        function initializeSnsData() {
+            const kakaoInput = document.getElementById("kakaoIdInput");
+            const extraInput = document.getElementById("extraSnsInput");
+            const noSnsBtn = document.getElementById("noSnsBtn");
+            
+            // 서버에서 전달받은 기존 데이터
+            const existingKakaoId = "${user.kakaoId}";
+            const existingSnsId = "${user.snsId}";
+            
+            // 카카오 ID 설정
+            if (existingKakaoId && existingKakaoId.trim() !== "" && existingKakaoId !== "null") {
+                kakaoInput.value = existingKakaoId;
+            }
+            
+            // SNS ID 설정
+            if (existingSnsId && existingSnsId.trim() !== "" && existingSnsId !== "null") {
+                extraInput.value = existingSnsId;
+                extraInput.disabled = false;
+                noSnsBtn.classList.remove("selected");
+            } else {
+                extraInput.value = "";
+                extraInput.disabled = true;
+                noSnsBtn.classList.add("selected");
+            }
+        }
+
 		window.onload = function () {
-	        const snsInput = document.getElementById("snsId");
-	        const unknownBtn = document.getElementById("noSnsBtn");
+	        const extraInput = document.getElementById("extraSnsInput");
+	        const noSnsBtn = document.getElementById("noSnsBtn");
+
+            // 기존 SNS 데이터 초기화
+            initializeSnsData();
 
 	        // 없어요 버튼 클릭 시
-	        unknownBtn.addEventListener("click", function (e) {
+	        noSnsBtn.addEventListener("click", function (e) {
 	        	e.preventDefault(); // form submit 막음
 	        	
-	        	if (snsInput.disabled) {
+	        	if (extraInput.disabled) {
 	                // 다시 입력 가능하게
-	                snsInput.disabled = false;
-	                snsInput.value = "";
+	                extraInput.disabled = false;
+	                extraInput.value = "";
 	                noSnsBtn.classList.remove("selected");
 	            } else {
 	                // 비활성화 및 초기화
-	                snsInput.disabled = true;
-	                snsInput.value = "";
+	                extraInput.disabled = true;
+	                extraInput.value = "";
 	                noSnsBtn.classList.add("selected");
 	            }
 	        });
 
 	        // 추가입력시
-	        snsInput.addEventListener("input", function () {
-	        	if (!snsInput.disabled && snsInput.value.trim() !== "") {
+	        extraInput.addEventListener("input", function () {
+	        	if (!extraInput.disabled && extraInput.value.trim() !== "") {
 	                noSnsBtn.classList.remove("selected");
 	            }
 	        });
@@ -49,7 +78,7 @@
 	            <jsp:include page="alarm.jsp" />
 	        </div>
         </div>
-		<form action="${pageContext.request.contextPath}/user/updateSns" method="post" class="form-layout" id="snsForm">
+		<form action="${pageContext.request.contextPath}/mypage/updateSns" method="post" class="form-layout" id="snsForm">
 		    <div class="content">
 		        <div class="title">공개할 sns를 알려주세요</div>
 		        <div class="description">카카오톡 아이디는 매칭후 연락수단으로 필수 입력입니다.</div>
@@ -71,21 +100,6 @@
 		    const extraInput = document.getElementById('extraSnsInput');
 		    const snsForm = document.getElementById('snsForm');
 		    const kakaoInput = document.getElementById('kakaoIdInput');
-
-		    // "sns가 없어요" 버튼 클릭시 처리
-		    noSnsBtn.addEventListener('click', (e) => {
-		        e.preventDefault();
-		        const isDisabled = extraInput.disabled;
-		        if (isDisabled) {
-		            extraInput.disabled = false;
-		            extraInput.value = "";
-		            noSnsBtn.classList.remove('selected');
-		        } else {
-		            extraInput.disabled = true;
-		            extraInput.value = "";
-		            noSnsBtn.classList.add('selected');
-		        }
-		    });
 
 		    // 폼 제출 전 체크
 		    snsForm.addEventListener('submit', function(e) {
