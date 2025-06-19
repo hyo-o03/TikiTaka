@@ -12,7 +12,7 @@
     <script>
 		function exit() {
 		    if (confirm("수정을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		        window.location.href = "${pageContext.request.contextPath}/mypage/mypage";
 		    }
 		}
 		
@@ -44,20 +44,20 @@
         <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
     </div>
    
-	<form action="${pageContext.request.contextPath}/mypage/mypage" method="post" class="form-layout">
+	<form action="${pageContext.request.contextPath}/ideal/checkIdealForm" method="post" class="form-layout">
 	    <div class="content">
 			<div class="title">이상형의 패션 스타일은 어땠으면 좋겠나요?</div>
 			
 			<!-- 패션 선택 값 담을 hidden input -->
-			<input type="hidden" name="fashion" id="selectedFashionType">
+			<input type="hidden" name="fashion" id="selectedFashionType" value="${ideal.itFashion}">
 				
 	        <div class="style-grid">
-	            <button class="style-tag">캐주얼</button>
-	            <button class="style-tag">모던</button>
-	            <button class="style-tag">스트릿</button>
-	            <button class="style-tag">페미닌</button>
-	            <button class="style-tag">클래식</button>
-	            <button class="style-tag">빈티지</button>
+	            <button class="style-tag ${ideal.itFashion == '캐주얼' ? 'selected' : ''}">캐주얼</button>
+	            <button class="style-tag ${ideal.itFashion == '모던' ? 'selected' : ''}">모던</button>
+	            <button class="style-tag ${ideal.itFashion == '스트릿' ? 'selected' : ''}">스트릿</button>
+	            <button class="style-tag ${ideal.itFashion == '페미닌' ? 'selected' : ''}">페미닌</button>
+	            <button class="style-tag ${ideal.itFashion == '클래식' ? 'selected' : ''}">클래식</button>
+	            <button class="style-tag ${ideal.itFashion == '빈티지' ? 'selected' : ''}">빈티지</button>
 	          </div>
 	    </div>
         <div class="footer">

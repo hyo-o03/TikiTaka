@@ -51,29 +51,20 @@ public class UserController {
 	@Autowired
 	private IdealtypeRepository idealtypeRepository;
 	
+	/*
 	@PostMapping("/address")
-	public String showAddress(@RequestParam String facialType, HttpSession session) {
+	public String showAddress() {
+		return "addressForm";
+	}
+	*/
+	
+	@PostMapping("/hobby")
+	public String showHobby(@RequestParam String facialType, HttpSession session) {
 		Object idAttr = session.getAttribute("userId");
 		int userId = Integer.parseInt(idAttr.toString());
 	    User user = userRepository.findById(userId).orElseThrow();
 	    user.setFacialType(facialType);
 	    userRepository.save(user);
-		return "addressForm";
-	}
-	
-	@PostMapping("/hobby")
-	public String showHobby(@RequestParam String address,
-					          @RequestParam String itAddressPref,
-					          HttpSession session) {
-		int userId = (Integer) session.getAttribute("userId");
-		User user = userRepository.findById(userId).orElseThrow();
-		Idealtype ideal = idealtypeRepository.findByUser_UserId(userId);
-		
-		user.setAddress(address);
-		ideal.setItDistancepref(itAddressPref);
-		
-		userRepository.save(user);
-		idealtypeRepository.save(ideal);
 		return "hobbyForm";
 	}
 	
@@ -88,11 +79,17 @@ public class UserController {
     }
 	
     @PostMapping("/sns")
-    public String showSns(@RequestParam String mbti,
+    public String showSns(@RequestParam(value = "mbti", required = false) String mbti,
                            HttpSession session, Model model) {
         int userId = (Integer) session.getAttribute("userId");
         User user = userRepository.findById(userId).orElseThrow();
-        user.setMbti(mbti);
+        
+        if (mbti == null || mbti.isBlank()) {
+            user.setMbti(null); // 몰라요 → null 저장
+        } else {
+            user.setMbti(mbti);
+        }
+        
         userRepository.save(user);
         return "snsForm";
     }
@@ -104,7 +101,14 @@ public class UserController {
         int userId = (Integer) session.getAttribute("userId");
         User user = userRepository.findById(userId).orElseThrow();
         user.setKakaoId(kakaoId);
-        user.setSnsId(snsId);
+        
+        // ✅ "sns가 없어요" → null 저장
+        if (snsId == null || snsId.trim().isEmpty()) {
+            user.setSnsId(null);
+        } else {
+            user.setSnsId(snsId.trim());
+        }
+        
         userRepository.save(user);
         return "styleForm";
     }
@@ -305,7 +309,14 @@ public class UserController {
     }
     
 	@GetMapping("/home")
-	public String showHome() {
+	public String showHome(HttpSession session, Model model) {
+		Integer userId = (Integer) session.getAttribute("userId");
+	    if (userId == null) {
+	        return "redirect:/signup/login"; // 로그인 안 되어있으면 로그인으로
+	    }
+
+	    User user = userRepository.findById(userId).orElse(null);
+	    model.addAttribute("user", user);
 		return "home";
 	}
 	

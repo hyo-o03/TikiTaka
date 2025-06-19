@@ -6,19 +6,19 @@
 <head>
     <title>Tiki Taka</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleForm.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/heightForm.css">
 
     <meta charset="UTF-8">
     <script>
 		function exit() {
 		    if (confirm("수정을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		        window.location.href = "${pageContext.request.contextPath}/mypage/mypage";
 		    }
 		}
 		
 		window.addEventListener("DOMContentLoaded", function () {
-            const buttons = document.querySelectorAll('.style-tag');
-            const hiddenInput = document.getElementById("selectedFashionType");
+            const buttons = document.querySelectorAll('.height-tag');
+            const hiddenInput = document.getElementById("selectedHeightType");
 
             buttons.forEach(button => {
                 button.addEventListener("click", function (e) {
@@ -31,7 +31,21 @@
                     this.classList.add("selected");
 
                     // 값 저장
-                    hiddenInput.value = this.innerText.trim();
+                 // 값 저장: 키 값으로 매핑
+                    const text = this.innerText.trim();
+                    let height = 0.0;
+
+                    if (text === "상관없음") {
+                        height = 100;
+                    } else if (text === "170 - 175") {
+                        height = 170;
+                    } else if (text === "175 - 180") {
+                        height = 175;
+                    } else if (text === "180 이상") {
+                        height = 180;
+                    }
+
+                    hiddenInput.value = height;
                 });
             });
         });
@@ -44,17 +58,17 @@
         <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
     </div>
    
-	<form action="${pageContext.request.contextPath}/ideal/idealMbti" method="post" class="form-layout">
+	<form action="${pageContext.request.contextPath}/ideal/idealAddress" method="post" class="form-layout">
 	    <div class="content">
 			<div class="title">선호하는 이상형의 키를 골라주세요</div>
 			
-			<input type="hidden" name="fashion" id="selectedFashionType">
+			<input id="selectedHeightType" name="height" type="hidden" value="${ideal.itHeight}"/>
 				
-	        <div class="style-grid">
-	            <button class="style-tag">상관없음</button>
-	            <button class="style-tag">170 - 175</button>
-	            <button class="style-tag">175 - 180</button>
-	            <button class="style-tag">180 이상</button>
+	        <div class="heigth-grid">
+	            <button class="height-tag ${ideal.itHeight == 100 ? 'selected' : ''}">상관없음</button>
+	            <button class="height-tag ${ideal.itHeight == 170 ? 'selected' : ''}">170 - 175</button>
+	            <button class="height-tag ${ideal.itHeight == 175 ? 'selected' : ''}">175 - 180</button>
+	            <button class="height-tag ${ideal.itHeight == 180 ? 'selected' : ''}">180 이상</button>
 	          </div>
 	    </div>
         <div class="footer">

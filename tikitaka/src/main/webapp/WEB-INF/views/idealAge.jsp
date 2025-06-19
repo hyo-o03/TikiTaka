@@ -11,7 +11,7 @@
     <script>
 		function exit() {
 		    if (confirm("수정을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		        window.location.href = "${pageContext.request.contextPath}/mypage/mypage";
 		    }
 		}
 		
@@ -47,24 +47,22 @@
 		
 		    <div class="age-select-wrapper">
 		        <select class="ageDif-dropdown" name="ageDif" id="ageDifSelect">
-		            <option value="" disabled selected>선택하기</option>
-		            <option value="up">연상</option>
-		            <option value="down">연하</option>
-		            <option value="same">동갑</option>
-		            <option value="both">상관없음</option>
+		            <option ${ideal.itAgePreference == 'up' ? 'selected' : ''} value="up">연상</option>
+					<option ${ideal.itAgePreference == 'down' ? 'selected' : ''} value="down">연하</option>
+					<option ${ideal.itAgePreference == 'same' ? 'selected' : ''} value="same">동갑</option>
+					<option ${(empty ideal.itAgePreference || ideal.itAgePreference == 'both') ? 'selected' : ''} value="both">상관없음</option>
 		        </select>
 		
 				<select class="age-dropdown" name="age" id="ageSelect">
-		            <option value="" disabled selected>선택하기</option>
-		            <option value="1">1살</option>
-		            <option value="2">2살</option>
-		            <option value="3">3살</option>
-		            <option value="4">4살</option>
-		            <option value="5">5살</option>
-		            <option value="6">6살</option>
-		            <option value="7">7살 이상</option>
-		            <option value="dontCare">상관없음</option>
-		        </select>
+					<option value="1" ${ideal.itAge == '1' ? 'selected' : ''}>1살</option>
+					<option value="2" ${ideal.itAge == '2' ? 'selected' : ''}>2살</option>
+					<option value="3" ${ideal.itAge == '3' ? 'selected' : ''}>3살</option>
+					<option value="4" ${ideal.itAge == '4' ? 'selected' : ''}>4살</option>
+					<option value="5" ${ideal.itAge == '5' ? 'selected' : ''}>5살</option>
+					<option value="6" ${ideal.itAge == '6' ? 'selected' : ''}>6살</option>
+					<option value="7" ${ideal.itAge == '7' ? 'selected' : ''}>7살 이상</option>
+					<option value="0" ${ideal.itAge == '0' ? 'selected' : ''}>상관없음</option>
+				</select>
 		    </div>
 		</div>
         <div class="footer">

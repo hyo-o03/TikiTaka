@@ -22,7 +22,7 @@
         <div class="user-info">
             <img src="${pageContext.request.contextPath}/images/profile.png" class="avatar" />
             <div class="userid">
-                <c:out value="${loginUser.userId}" />
+                <c:out value="${loginUser.name}" />
             </div>
         </div>
 

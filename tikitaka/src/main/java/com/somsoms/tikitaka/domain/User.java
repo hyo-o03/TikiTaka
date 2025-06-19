@@ -42,7 +42,7 @@ public class User {
     @Column(name = "KAKAO_ID", length = 20) // ⛳ 설문에서 입력 → nullable 허용
     private String kakaoId;
 
-    @Column(name = "EMAIL", nullable = false, length = 20)
+    @Column(name = "EMAIL", length = 20)
     private String email;
 
     @Column(name = "PHONE", length = 11)
@@ -51,7 +51,7 @@ public class User {
     @Column(name = "HOBBY", length = 10) // ⛳ 설문에서 입력 → nullable 허용
     private String hobby;
 
-    @Column(name = "ADDRESS", length = 10) // ⛳ 설문에서 입력 → nullable 허용
+    @Column(name = "ADDRESS", length = 10)
     private String address;
 
     @Column(name = "INTRODUCE", columnDefinition = "CLOB")
@@ -134,7 +134,7 @@ public class User {
 	public void setFashion(String fashion) { this.fashion = fashion; }
 	public String getReligion() { return religion; }
 	public void setReligion(String religion) { this.religion = religion; }
-	public String isSmoke() { return smoke; }
+	public String getSmoke() { return smoke; }
 	public void setSmoke(String smoke) { this.smoke = smoke; }
 	public Idealtype getIdealtype() { return idealtype; }
     public void setIdealtype(Idealtype idealtype) { this.idealtype = idealtype; }
@@ -146,5 +146,7 @@ public class User {
     public void setAlarmAgree(String alarmAgree) { this.alarmAgree = alarmAgree; }
     public String getSnsId() { return snsId; }
     public void setSnsId(String snsId) { this.snsId = snsId; }
+
+
 
 }

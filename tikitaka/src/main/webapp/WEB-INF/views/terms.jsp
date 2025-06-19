@@ -16,9 +16,9 @@
     
 	 	// 개별 약관 체크 시 동작
 	    function toggleIndividual(checkbox) {
-	        const name = checkbox.name;
+	    	const hiddenName = checkbox.id.replace("_check", ""); // ex. agree4_check → agree4
 	        const isChecked = checkbox.checked;
-	        updateHidden(name, isChecked); // hidden input 업데이트
+	        updateHidden(hiddenName, isChecked); // hidden input 업데이트
 
 	        // 하나라도 해제되면 "전체 동의" 체크 해제
 	        if (!isChecked) {
@@ -99,22 +99,22 @@
 				<hr>
 	
 				<label class="custom-checkbox">
-					<input type="checkbox" id="agree1_check" name="agree1">
+					<input type="checkbox" id="agree1_check" name="agree1_check">
 					<span class="checkbox-text">만 18세 이상입니다</span>
 				</label>
 		
 				<label class="custom-checkbox">
-					<input type="checkbox" id="agree2_check" name="agree2">
+					<input type="checkbox" id="agree2_check" name="agree2_check">
 					<span class="checkbox-text">서비스 이용약관 동의</span>
 				</label>
 		
 				<label class="custom-checkbox">
-					<input type="checkbox" id="agree3_check" name="agree3">
+					<input type="checkbox" id="agree3_check" name="agree3_check">
 					<span class="checkbox-text">개인정보 수집 및 이용 동의</span>
 				</label>
 		
 				<label class="custom-checkbox optional">
-					<input type="checkbox" id="agree4_check" name="agree4">
+					<input type="checkbox" id="agree4_check" name="agree4_check">
 					<span class="checkbox-text">알림 또는 이벤트 정보 수신 동의 (선택)</span>
 				</label>
             </div>

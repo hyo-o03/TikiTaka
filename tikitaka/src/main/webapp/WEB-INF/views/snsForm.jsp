@@ -45,6 +45,31 @@
 	            }
 	        });
 	    };
+	    
+	 // ✅ 카카오 ID 유효성 검사
+		function validateSnsForm() {
+		    const kakaoId = document.getElementById("kakaoId").value.trim();
+		    const snsInput = document.getElementById("snsId");
+		    const snsId = snsInput.value.trim(); // ← DOM 접근 보장
+		    const noSnsBtn = document.getElementById("noSnsBtn");
+		    
+		    if (kakaoId === "") {
+		        alert("카카오톡 아이디는 필수입니다.");
+		        return false;
+		    }
+		    
+		 	// 기타 SNS 입력 또는 'sns가 없어요' 선택 여부 확인
+		    const isSnsIdEmpty = snsId === "";
+		    const isNoSnsSelected = noSnsBtn.classList.contains("selected");
+
+		    if (isSnsIdEmpty && !isNoSnsSelected) {
+		        alert("기타 SNS를 입력하거나 'sns가 없어요'를 선택해주세요.");
+		        return false;
+		    }
+		    
+		    return true;
+		}
+
 	</script>
 </head>
 
@@ -54,7 +79,7 @@
 	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
 	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
         </div>
-        <form action="${pageContext.request.contextPath}/user/style" method="post" class="form-layout">
+        <form action="${pageContext.request.contextPath}/user/style" method="post" class="form-layout" onsubmit="return validateSnsForm();">
 	        <div class="content">
 	        	<div class="title">공개할 sns를 알려주세요</div>
 	        	<div class="description">카카오톡 아이디는 매칭후 연락수단으로 필수 입력입니다.</div>

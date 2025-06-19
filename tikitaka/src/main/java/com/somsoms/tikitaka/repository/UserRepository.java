@@ -6,6 +6,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
+
+	User findByEmail(String email);
     // 필요한 경우 커스텀 메서드 작성 가능
+
+	User findByPhone(String phone);
+	
+	boolean existsByEmail(String email);
+    boolean existsByPhone(String phone);
 
 }

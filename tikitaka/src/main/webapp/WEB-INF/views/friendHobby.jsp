@@ -11,13 +11,15 @@
     <script>
 		function exit() {
 		    if (confirm("수정을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		        window.location.href = "${pageContext.request.contextPath}/mypage/mypage";
 		    }
 		}
 		
 		const maxSelection = 5;
 		const minSelection = 2;
 	    const selected = new Set();
+	    
+	    const initialSelectedHobbies = "${friend.ftHobby != null ? friend.ftHobby : ''}".split(",");
 
 	    function toggleHobby(label) {
 	        const hobbyName = label.textContent.trim().replace(/^[^\s]+\s*/, ""); // 이모지 제거
@@ -33,12 +35,12 @@
 	            label.classList.add("selected");
 	            selected.add(hobbyName);
 	        }
-
-	        // 선택한 취미들을 쉼표로 연결하여 hidden input에 저장
+	        
+	     	// 선택한 취미들을 쉼표로 연결하여 hidden input에 저장
 	        document.getElementById("selectedHobby").value = Array.from(selected).join(",");
 	    }
-	    
-	    // 폼 제출 전 최소 선택 수 확인
+
+	 // 폼 제출 전 최소 선택 수 확인
 	    window.onload = function () {
 	        const form = document.querySelector("form");
 	        form.addEventListener("submit", function (event) {
@@ -47,6 +49,19 @@
 	                event.preventDefault(); // 제출 막기
 	            }
 	        });
+	        
+	     // 1. 기존 선택 상태 세팅
+	        const labels = document.querySelectorAll(".interest-item");
+	        labels.forEach(label => {
+	            const hobbyName = label.textContent.trim().replace(/^[^\s]+\s*/, "");
+	            if (initialSelectedHobbies.includes(hobbyName)) {
+	                label.classList.add("selected");
+	                selected.add(hobbyName);
+	            }
+	        });
+
+	        // 2. hidden input에 초기값 반영
+	        document.getElementById("selectedHobby").value = Array.from(selected).join(",");
 	    };
 	</script>
 </head>
