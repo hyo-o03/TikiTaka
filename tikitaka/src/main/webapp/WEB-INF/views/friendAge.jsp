@@ -61,7 +61,7 @@
 					<option value="5" ${friend.ftAge == '5' ? 'selected' : ''}>5살</option>
 					<option value="6" ${friend.ftAge == '6' ? 'selected' : ''}>6살</option>
 					<option value="7" ${friend.ftAge == '7' ? 'selected' : ''}>7살 이상</option>
-					<option value="0" ${friend.ftAge == '0' ? 'selected' : ''}>상관없음</option>
+					<option value="0" ${(empty friend.ftAge || friend.ftAge == '0') ? 'selected' : ''}>상관없음</option>
 				</select>
 		    </div>
 		</div>

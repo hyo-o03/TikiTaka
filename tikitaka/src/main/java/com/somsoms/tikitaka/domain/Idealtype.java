@@ -67,7 +67,7 @@ public class Idealtype {
     public void setItId(int itId) { this.itId = itId; }
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
-    public int getItAge() { return itAge; }
+    public Integer getItAge() { return itAge; }
     public void setItAge(Integer itAge) { this.itAge = itAge; }
     public double getItHeight() { return itHeight; }
     public void setItHeight(double itHeight) { this.itHeight = itHeight; }

@@ -77,14 +77,18 @@ public class FriendtypeController {
     }
     
     @PostMapping("/friendHobby")
-    public String friendHobby(@RequestParam String ftDistancePref,
+    public String friendHobby(@RequestParam(name = "ftDistancePref", required = false) String ftDistancePref,
 				    		HttpSession session,
 				            Model model) {
     	int userId = (int) session.getAttribute("userId");
     	Friendtype friend = friendtypeService.getFriendtypeByUserId(userId);
 		
 		if (friend != null) {
-			friend.setFtDistancePref(ftDistancePref);
+			if (ftDistancePref == null || ftDistancePref.trim().isEmpty()) {
+				friend.setFtDistancePref(null);  // FT_DISTANCE_PREF에 null
+	        } else {
+	        	friend.setFtDistancePref(ftDistancePref);  // close / far
+	        }
 			friendtypeService.updateFriendtype(friend);
 		}
 		return "friendHobby";

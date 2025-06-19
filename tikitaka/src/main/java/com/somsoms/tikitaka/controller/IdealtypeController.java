@@ -96,14 +96,18 @@ public class IdealtypeController {
     
     
     @PostMapping("/idealHobby")
-    public String idealHobby(@RequestParam String itDistancePref,
+    public String idealHobby(@RequestParam(name = "itDistancePref", required = false) String itDistancePref,
 				    		HttpSession session,
 				            Model model) {
     	int userId = (int) session.getAttribute("userId");
 		Idealtype ideal = idealtypeService.getIdealtypeByUserId(userId);
 		
 		if (ideal != null) {
-			ideal.setItDistancePref(itDistancePref);
+			if (itDistancePref == null || itDistancePref.trim().isEmpty()) {
+		        ideal.setItDistancePref(null); // 선택 안 하면 null로 저장
+		    } else {
+		        ideal.setItDistancePref(itDistancePref);
+		    }
 			idealtypeService.updateIdealtype(ideal);
 		}
 		return "idealHobby";

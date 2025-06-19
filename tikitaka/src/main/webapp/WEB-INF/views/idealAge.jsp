@@ -61,7 +61,7 @@
 					<option value="5" ${ideal.itAge == '5' ? 'selected' : ''}>5살</option>
 					<option value="6" ${ideal.itAge == '6' ? 'selected' : ''}>6살</option>
 					<option value="7" ${ideal.itAge == '7' ? 'selected' : ''}>7살 이상</option>
-					<option value="0" ${ideal.itAge == '0' ? 'selected' : ''}>상관없음</option>
+					<option value="0" ${(empty ideal.itAge || ideal.itAge == '0') ? 'selected' : ''}>상관없음</option>
 				</select>
 		    </div>
 		</div>
