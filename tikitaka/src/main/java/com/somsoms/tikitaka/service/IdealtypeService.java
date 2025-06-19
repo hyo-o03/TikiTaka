@@ -27,7 +27,7 @@ public class IdealtypeService {
             String value1 = extractValueByPriority(idealtype, priority1);
             String value2 = extractValueByPriority(idealtype, priority2);
             String value3 = extractValueByPriority(idealtype, priority3);
-
+            
             // 예시: 출력
             System.out.println("1순위 : " + priority1);
             System.out.println("2순위 : " + priority2);
