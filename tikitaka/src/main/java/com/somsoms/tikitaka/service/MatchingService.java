@@ -75,9 +75,11 @@ public class MatchingService {
 	  // findResultByMatchId로 매칭 하나의 결과 받아오기
 	  // 이 결과로 매칭된 유저 프로필도 가져올 수 있음
 
-	public List<User> getMatchingResults(int userId) {
-	    List<Matching> matchings = matchingRepository.findByUser_UserId(userId);
+	public List<User> getMatchingResults(int userId, String requestType) {
 	    
+	    List<Integer> matchingResultId = matchingResultRepository.findResultIdsByUserIdAndRequestType(userId, requestType);
+	    
+	    List<Matching> matchings = matchingRepository.findByMatchingResult_ResultIdIn(matchingResultId);
 	    List<Integer> matchedUserIds = new ArrayList<>();
 	    for (Matching m : matchings) {
 	        matchedUserIds.add(m.getMatchedUserId());

@@ -29,6 +29,7 @@
 		    let url = "";
 		    if (requestType === 'F') {
 		        url = "${pageContext.request.contextPath}/ideal/friendIdealTypeChoice";
+		        System.out.println(requestType);
 		    } else if (requestType === 'I') {
 		        url = "${pageContext.request.contextPath}/ideal/idealTypeChoice";
 		    }

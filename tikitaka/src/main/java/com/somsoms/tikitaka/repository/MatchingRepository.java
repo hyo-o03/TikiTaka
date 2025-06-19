@@ -16,8 +16,11 @@ import java.util.List;
 @Repository
 public interface MatchingRepository extends JpaRepository<Matching, Integer> {
     List<Matching> findByUser_UserId(int userId);
+
     
     List<Matching> findByMatchingResultResultId(int matchingResultId);
+    
+    List<Matching> findByMatchingResult_ResultIdIn(List<Integer> resultIds);
     
     @Modifying
     @Transactional
