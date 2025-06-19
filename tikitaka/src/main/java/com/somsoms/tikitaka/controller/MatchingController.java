@@ -33,10 +33,11 @@ public class MatchingController {
         System.out.println("💡 IdealtypeService 주입 여부: " + idealtypeService);
     }
 
-	@GetMapping("/prioritySelect")
-	public String showPrioritySelect() {
-		return "prioritySelect";
-	}
+    @GetMapping("/prioritySelect")
+    public String showPrioritySelect(@RequestParam("requestType") String requestType, Model model) {
+        model.addAttribute("requestType", requestType); // <-- 이게 있어야 JSP에서 ${requestType} 가능
+        return "prioritySelect"; // prioritySelect.jsp로 이동
+    }
 
 	@GetMapping("/idealTypeLanking")
 	public String showIdealTypeLanking() {
@@ -46,7 +47,7 @@ public class MatchingController {
 	@GetMapping("/matchingResultPage")
 	public String showMatchingResultPage(Model model) {
 	    
-	    int userId = 4; //임시로 정해놈
+	    int userId = 1065; //임시로 정해놈
 
 	    List<User> matchingList = matchingService.getMatchingResults(userId);
 
@@ -58,7 +59,7 @@ public class MatchingController {
 	@GetMapping("/FrienMatchingResultPage")
     public String showFriendMatchingResultPage(Model model) {
         
-        int userId = 1; //임시로 정해놈
+        int userId = 1065; //임시로 정해놈
         
         List<User> matchingList = matchingService.getMatchingResults(userId);        
         model.addAttribute("matchingList", matchingList);
@@ -73,14 +74,15 @@ public class MatchingController {
 	
 
 	@GetMapping("/idealTypeInfo")
-    public String showIdealTypeInfo(@RequestParam("address") String address, @RequestParam("age") int age, @RequestParam("introduce") String introduce, @RequestParam("userId") int userId, Model model) {
+    public String showIdealTypeInfo(@RequestParam("address") String address, @RequestParam("age") int age, @RequestParam("introduce") String introduce, @RequestParam("userId") int userId, @RequestParam("facialType") String facialType, Model model) {
         // 디버깅용 로그 추가
 //        System.out.println("IdealType Data: " + place + ", " + age + ", " + introduce + ", " + imageUrl);
 
         // 모델에 데이터를 담아서 뷰로 전달
-        User userInfo = new User(address, age, introduce, userId);
-        System.out.println("User Data: " + address + ", " + age + ", " + introduce +", "+userId);
+        User userInfo = new User(address, age, introduce, userId, facialType);
+        System.out.println("User Data: " + address + ", " + age + ", " + introduce +", " + userId + "," + facialType);
         model.addAttribute("userInfo", userInfo);
+        
         return "idealTypeInfo";
     }
 	
@@ -104,6 +106,7 @@ public class MatchingController {
             @RequestParam String priority1,
             @RequestParam String priority2,
             @RequestParam String priority3,
+            @RequestParam("requestType") String requestType,
             Model model) {
 //      User loginUser = (User) session.getAttribute("loginUser"); // 세션에서 로그인 사용자 가져오기
 //      
@@ -113,9 +116,9 @@ public class MatchingController {
 //      
 //      int userId = loginUser.getUserId();
       
-		int userId = 1064;
+		int userId = 1065;
 
-        matchingService.requestMatching(userId, priority1, priority2, priority3);
+        matchingService.requestMatching(userId, priority1, priority2, priority3, requestType);
 
         return "matchRequestDone"; // 결과 페이지로 이동
     }

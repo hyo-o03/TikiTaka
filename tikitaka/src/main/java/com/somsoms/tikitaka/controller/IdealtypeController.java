@@ -36,6 +36,11 @@ public class IdealtypeController {
     public String idealTypeChoice() {
         return "idealTypeChoice";
     }
+    
+    @GetMapping("/friendIdealTypeChoice")
+    public String friendIdealTypeChoice() {
+        return "friendIdealTypeChoice";
+    }
 	
     @GetMapping("/checkIdealForm")
     public String checkIdealForm() {

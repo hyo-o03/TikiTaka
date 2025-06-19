@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/prioritySelect.css">
     <title>Tiki Taka</title>
     <script>
-    
 		function exit() {
 		    if (confirm("시작 페이지로 돌아가시겠습니까?")) {
 		        window.location.href = "${pageContext.request.contextPath}/signup/start";
 		    }
 		}
+		
 		let currentRank = 0;
-
+		let requestType = "${requestType}";
 		
 		function selectItemFromPopup(value) {
             document.getElementById('choiceResult' + currentRank).innerText = value;
@@ -26,24 +26,27 @@
 		function loadChoicePopup(rank) {
 		    currentRank = rank;
 
-		    fetch('${pageContext.request.contextPath}/ideal/idealTypeChoice')
+		    let url = "";
+		    if (requestType === 'F') {
+		        url = "${pageContext.request.contextPath}/ideal/friendIdealTypeChoice";
+		    } else {
+		        url = "${pageContext.request.contextPath}/ideal/idealTypeChoice";
+		    }
+
+		    fetch(url)
 		        .then(response => response.text())
 		        .then(data => {
 		            document.getElementById('choicePopupContent').innerHTML = data;
 		            document.getElementById('choicePopup').style.display = 'block';
 
-		            // 이벤트 바인딩은 fetch 이후에 반드시 수행
 		            document.querySelectorAll('#choicePopupContent .idealTypeDetail').forEach(item => {
 		                item.addEventListener('click', () => {
 		                    const value = item.getAttribute('data-value');
 		                    selectItemFromPopup(value);
 		                });
 		            });
-
-		            
 		        });
 		}
-
 
 		function closePopup() {
 		    document.getElementById('choicePopup').style.display = 'none';
@@ -74,6 +77,7 @@
 	        <div class="title">이상형 조건 우선순위를 정해주세요</div>
 	        <div class="description">매칭 받을 때 참고할 이상형 우선순위 3가지를 알려주세요</div>
 	        <div class="choices">
+	               <input type="hidden" name="requestType" value="${requestType}">
 	            <div class="choice" onclick="loadChoicePopup(1)">
 	                <div class="lank">1순위</div>
 	                <div class="choiceResult" id="choiceResult1">선택하러 가기</div>

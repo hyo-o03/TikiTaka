@@ -23,7 +23,7 @@ public class Matching {
     // db 자동 생성
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "match_id_seq")
-    @SequenceGenerator(name = "match_id_seq", sequenceName = "MATCH_SEQ", allocationSize = 1)
+    @SequenceGenerator(name = "match_id_seq", sequenceName = "MATCHING_SEQ", allocationSize = 1)
     @Column(name = "MATCH_ID")
     private int matchId;
 
