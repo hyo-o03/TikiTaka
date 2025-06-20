@@ -34,4 +34,21 @@ public class UserService {
     
     void registerUser(UserDao userCommand) {
 	}
+    
+    public boolean updatePassword(int userId, String currentPassword, String newPassword) {
+        User user = getUserById(userId);
+        if (user == null) {
+            return false;
+        }
+        
+        // 현재 비밀번호 확인
+        if (!currentPassword.equals(user.getPassword())) {
+            return false;
+        }
+        
+        // 새 비밀번호로 업데이트
+        user.setPassword(newPassword);
+        updateUser(user);
+        return true;
+    }
 }

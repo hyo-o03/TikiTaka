@@ -56,6 +56,9 @@ public class Idealtype {
     
     @Column(name = "IT_AGE_PREFERENCE", length = 10)
     private String itAgePreference; // ✅ 새로 추가됨
+    
+    @Column(name = "IT_RELIGION", length = 10)
+    private String itReligion;
 
     /* Constructors */
     
@@ -87,4 +90,6 @@ public class Idealtype {
     public void setItAgePreference(String itAgePreference) { this.itAgePreference = itAgePreference; }
     public String getItDistancePref() { return itDistancePref; } // ✅ 추가
     public void setItDistancePref(String itDistancePref) { this.itDistancePref = itDistancePref; }
+    public String getItReligion( ) {return itReligion;}
+    public void setItReligion(String itReligion) {this.itReligion = itReligion;}
 }

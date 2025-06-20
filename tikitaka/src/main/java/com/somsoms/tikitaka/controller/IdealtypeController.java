@@ -25,13 +25,13 @@ public class IdealtypeController {
     private IdealtypeService idealtypeService;
 	
     @PostMapping("/checkIdealForm")
-    public String checkIdealForm(@RequestParam String fashion,
+    public String checkIdealForm(@RequestParam(name = "religion", required = false) String religion,
     							HttpSession session) {
     	int userId = (int) session.getAttribute("userId");
         Idealtype ideal = idealtypeService.getIdealtypeByUserId(userId);
 
         if (ideal != null) {
-        	ideal.setItFashion(fashion);
+        	ideal.setItReligion(religion);
             idealtypeService.updateIdealtype(ideal);
         }		
 
@@ -168,6 +168,19 @@ public class IdealtypeController {
         }
         
         return "idealStyle";
+    }
+    
+    @PostMapping("/idealReligion")
+    public String idealReligion(@RequestParam String fashion,
+    							HttpSession session) {
+    	int userId = (int) session.getAttribute("userId");
+        Idealtype ideal = idealtypeService.getIdealtypeByUserId(userId);
+
+        if (ideal != null) {
+        	ideal.setItFashion(fashion);
+            idealtypeService.updateIdealtype(ideal);
+        }		
+        return "idealReligion";
     }
 
     public ResponseEntity<Idealtype> getIdealtype(@PathVariable Long userId) {

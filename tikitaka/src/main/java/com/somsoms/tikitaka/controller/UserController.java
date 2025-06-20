@@ -1,11 +1,6 @@
 package com.somsoms.tikitaka.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import com.somsoms.tikitaka.domain.*;
-import com.somsoms.tikitaka.repository.IdealtypeRepository;
-import com.somsoms.tikitaka.repository.UserRepository;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.somsoms.tikitaka.domain.User;
+import com.somsoms.tikitaka.repository.IdealtypeRepository;
+import com.somsoms.tikitaka.repository.UserRepository;
 import com.somsoms.tikitaka.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
@@ -25,22 +24,22 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    
-    // 마이페이지 홈
+ // 마이페이지 홈
     @GetMapping("/myPage")
     public String showMyPage() {
         return "myPage";
     }
-    
     // 프로필 정보 폼
-    @PostMapping("/animalProfile")
+    @GetMapping("/profile")
     public String showProfileForm() {
-        return "animalProfileForm";
+        return "profileForm";
     }
-    
-    @GetMapping("/religion")
-    public String ProfileForm() {
-        return "religionForm";
+ // 마이페이지 정보 수정 (editMyProfile.jsp)
+    @GetMapping("/mypage/edit")
+    public String showEditMyProfile(Model model) {
+        User user = userService.getUserById(1066); // 임시 ID
+        model.addAttribute("user", user);
+        return "editMyProfile";
     }
 	
 //	private UserService userService;
@@ -65,9 +64,24 @@ public class UserController {
 	    User user = userRepository.findById(userId).orElseThrow();
 	    user.setFacialType(facialType);
 	    userRepository.save(user);
-		return "hobbyForm";
+		return "animalProfileForm";
 	}
-	
+
+ // 자기소개 수정
+    @GetMapping("/editIntroduce")
+    public String showEditIntroduce() {
+        return "editIntroduce";
+    }
+ // 프로필 동물 수정
+    @GetMapping("/editProfile")
+    public String showEditProfile() {
+        return "editProfile";
+    }
+	@GetMapping("/address")
+	public String showAddress() {
+		return "addressForm";
+	}
+
 	@PostMapping("/mbti")
     public String showMbti(@RequestParam String hobby,
                             HttpSession session, Model model) {
@@ -197,7 +211,7 @@ public class UserController {
     }
     
     @PostMapping("/updateMbti")
-    public String updateMbti(@RequestParam(value = "mbti", required = false) String mbti,
+    public void updateMbti(@RequestParam(value = "mbti", required = false) String mbti,
                              HttpSession session) {
         int userId = 1; // 
         User user = userRepository.findById(userId).orElseThrow();
@@ -207,107 +221,39 @@ public class UserController {
             user.setMbti(mbti);
         }
         userRepository.save(user);
-        return "editMbti";
-    }
-    
-    @PostMapping("/updateSns")
-    public String updateSns(@RequestParam("kakaoId") String kakaoId,
-                            @RequestParam(value = "snsId", required = false) String snsId,
-                            HttpSession session) {
-        int userId = 1; //
-        User user = userRepository.findById(userId).orElseThrow();
-        
-        user.setKakaoId(kakaoId);
-        if (snsId == null || snsId.trim().isEmpty()) {
-            user.setSnsId(null);
-        } else {
-            user.setSnsId(snsId.trim());
-        }
-        userRepository.save(user);
-        return "editSns"; 
-    }
-    
-    @PostMapping("/updateFashion")
-    public String updateFashion(@RequestParam("style") String fashion,
-                                HttpSession session) {
-        int userId = 1; // 
-        User user = userRepository.findById(userId).orElseThrow();
-        user.setFashion(fashion);
-        userRepository.save(user);
-        return "editStyle";
-    }
-    
-    @PostMapping("/updateSmoke")
-    public String updateSmoke(@RequestParam("smoke") String smoke,
-                              HttpSession session) {
-        int userId = 1; // 
-        User user = userRepository.findById(userId).orElseThrow();
-        user.setSmoke(smoke);
-        userRepository.save(user);
-        return "editSmoke";
-    }
-    
-    @PostMapping("/updateReligion")
-    public String updateReligion(@RequestParam("religion") String religion,
-                                 HttpSession session) {
-        int userId = 1; // 
-        User user = userRepository.findById(userId).orElseThrow();
-        user.setReligion(religion);
-        userRepository.save(user);
-        return "editReligion";
-    }
-    
- // 기본정보 수정 페이지 (기존 사용자 정보 로드)
-    @GetMapping("/baseInfo")
-    public String baseInfoPage(Model model, HttpSession session) {
-        // int userId = (Integer) session.getAttribute("userId");
-        int userId = 1; // 임시 ID
-        User user = userRepository.findById(userId).orElseThrow();
-        Idealtype idealtype = idealtypeRepository.findByUser_UserId(userId);
-        
-        model.addAttribute("user", user);
-        model.addAttribute("idealtype", idealtype);
-        return "baseInfo";
+      
     }
 
-    // 기본정보 업데이트 처리
-    @PostMapping("/updateBaseInfo")
-    public String updateBaseInfo(@RequestParam("name") String name,
-                                @RequestParam("gender") String gender,
-                                @RequestParam("age") int age,
-                                @RequestParam("height") double height,
-                                @RequestParam(value = "weight", required = false) Double weight,
-                                @RequestParam(value = "weightPrivate", required = false) String weightPrivate,
-                                @RequestParam("itAge") String itAge,
-                                @RequestParam("agePreference") String agePreference,
-                                HttpSession session) {
-        // int userId = (Integer) session.getAttribute("userId");
-        int userId = 1; // 임시 ID
-        
-        User user = userRepository.findById(userId).orElseThrow();
-        Idealtype idealtype = idealtypeRepository.findByUser_UserId(userId);
-        
-        // 사용자 기본정보 업데이트
-        user.setName(name);
-        user.setGender(gender);
-        user.setAge(age);
-        user.setHeight(height);
-        user.setWeight(weight);
-        user.setWeightPrivate(weightPrivate != null ? "Y" : "N");
-        
-        // 이상형 정보 업데이트
-        if (idealtype != null) {
-//            idealtype.setItAge(itAge);
-//            idealtype.setAgePreference(agePreference);
-        	//이상형 데이터쪽 건드려도 될까요..?
-            idealtypeRepository.save(idealtype);
-        }
-        
-        userRepository.save(user);
-        
-        return "editBaseInfo";
+	// MBTI 수정
+    @GetMapping("/editMbti")
+    public String showEditMbti() {
+
+        return "editMbti";
     }
-    
+
+
+	@GetMapping("/sns")
+	public String showSns() {
+		return "snsForm";
+	}
+	
+	@GetMapping("/style")
+	public String showStyle() {
+		return "styleForm";
+	}
+	
+	@GetMapping("/smoke")
+	public String showSmoke() {
+		return "smokeForm";
+	}
+	
+	// 종교 수정
+    @GetMapping("/editReligion")
+    public String showEditReligion() {
+        return "editReligion";
+    }
+	
+	
 	@GetMapping("/home")
 	public String showHome(HttpSession session, Model model) {
 		Integer userId = (Integer) session.getAttribute("userId");
@@ -320,10 +266,20 @@ public class UserController {
 		return "home";
 	}
 	
-	@PostMapping("/home")
-	public String Home() {
-		return "home";
+	@PostMapping("/mypage/edit")
+	public String updateMyProfile(User user) {
+	    user.setUserId(1066); // 임시로 userId 고정 (세션 처리 전용)
+	    userService.updateUser(user);
+	    return "redirect:/user/myPage"; // 수정 후 마이페이지로 이동
 	}
+	
+	
+    // 설문 완료
+    @GetMapping("/finishSurvey")
+    public String showFinishSurvey() {
+        return "finishSurvey";
+    }
+	
 
 //    public ResponseEntity<String> registerUser(@RequestBody UserCommand userCommand);
 //    

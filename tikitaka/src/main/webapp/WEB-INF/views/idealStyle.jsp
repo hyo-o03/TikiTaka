@@ -44,7 +44,7 @@
         <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
     </div>
    
-	<form action="${pageContext.request.contextPath}/ideal/checkIdealForm" method="post" class="form-layout">
+	<form action="${pageContext.request.contextPath}/ideal/idealReligion" method="post" class="form-layout">
 	    <div class="content">
 			<div class="title">이상형의 패션 스타일은 어땠으면 좋겠나요?</div>
 			
