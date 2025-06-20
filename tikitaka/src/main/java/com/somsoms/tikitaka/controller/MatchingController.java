@@ -1,6 +1,5 @@
 package com.somsoms.tikitaka.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.somsoms.tikitaka.domain.*;
 import com.somsoms.tikitaka.repository.MatchingRepository;
@@ -11,7 +10,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -103,10 +101,6 @@ public class MatchingController {
         return "matchingResultPage";
     }
 	
-//	@PostMapping("/matchRequestDone")
-//	public String showMatchRequestDone() {
-//		return "matchRequestDone";
-//	}
 	
 
 	@GetMapping("/idealTypeInfo")
@@ -122,21 +116,7 @@ public class MatchingController {
         return "idealTypeInfo";
     }
 	
-//	@GetMapping("/matchRequestDone")
-//	public String handleMatchRequest(@RequestParam("type") String type, int idealId) {
-//	    User loginUser = (User) session.getAttribute("loginUser"); // 세션에서 로그인 사용자 가져오기
-//
-//	    if (loginUser == null) {
-//	        return "redirect:/login"; // 로그인 안 되어 있으면 로그인 페이지로
-//	    }
-//
-//	    int userId = 4; // 로그인 유저 ID
-//	    matchingService.acceptMatchesByUserId(userId, type, idealId); // 상태 변경 서비스 호출
-//
-//	    return "matchRequestDone"; // 결과 페이지로 이동
-//	}
 	
-//	@RequestParam("type") String type, HttpSession session,
 	@PostMapping("/matchRequestDone")
     public String handleMatchRequest2(
             @RequestParam String priority1,
@@ -145,15 +125,7 @@ public class MatchingController {
             @RequestParam("requestType") String requestType,
             HttpSession session,
             Model model) {
-//      User loginUser = (User) session.getAttribute("loginUser"); // 세션에서 로그인 사용자 가져오기
-//      
-//      if (loginUser == null) {
-//          return "redirect:/login"; // 로그인 안 되어 있으면 로그인 페이지로
-//      }
-//      
-//      int userId = loginUser.getUserId();
-      
-
+     
 	    Integer userId = (Integer) session.getAttribute("userId"); // 세션에서 userId 꺼내기
 
 	    if (userId == null) {  // 세션 만료 또는 로그인 안 된 상태
@@ -165,22 +137,5 @@ public class MatchingController {
         return "matchRequestDone"; // 결과 페이지로 이동
     }
 	
-//	@PostMapping("/match/request")
-//	public ResponseEntity<String> requestMatch(@RequestParam int userId) {}
-//	//매칭 요청
-//
-//	@GetMapping("/match/result/all")
-//	public ResponseEntity<List<Matching>> getMatchResults(@RequestParam int userId) {}
-//	//매칭 모든 결과값
-//
-//	@GetMapping("/match/result/one")
-//	public ResponseEntity<Matching> getMatchResult(@RequestParam int matchId) {}
-//	//매칭 하나의 결과값
-//
-//	@PostMapping("/match/respond")
-//	public ResponseEntity<String> respondToMatching(
-//	    @RequestParam int matchId,
-//	    @RequestParam String status // "ACCEPTED" or "REJECTED"
-//	) {}
 
 }

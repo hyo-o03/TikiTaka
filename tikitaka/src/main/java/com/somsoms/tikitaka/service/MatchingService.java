@@ -149,9 +149,6 @@ public class MatchingService {
         for (Integer id : matchingResultId) {
             System.out.println("  -> " + id);
         }
-//        List<Matching> matchings = matchingRepository.findByMatchingResult_ResultIdIn(matchingResultId);
-//        List<Integer> matchedUserIds = new ArrayList<>();
-     // matchingResultId가 비어있으면 true 반환
         if (matchingResultId == null || matchingResultId.isEmpty()) {
             return true;
         }
