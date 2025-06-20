@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.somsoms.tikitaka.domain.*;
 import com.somsoms.tikitaka.repository.AlarmRepository;
-import com.somsoms.tikitaka.repository.IdealtypeRepository;
 import com.somsoms.tikitaka.repository.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
@@ -55,9 +54,6 @@ public class UserController {
 	
 	@Autowired
 	private UserRepository userRepository;
-	    
-	@Autowired
-	private IdealtypeRepository idealtypeRepository;
 	
     @Autowired
     private AlarmRepository alarmRepository;
@@ -77,11 +73,13 @@ public class UserController {
     public String showEditIntroduce() {
         return "editIntroduce";
     }
+    
  // 프로필 동물 수정
     @GetMapping("/editProfile")
     public String showEditProfile() {
         return "editProfile";
     }
+    
 	@GetMapping("/address")
 	public String showAddress() {
 		return "addressForm";

@@ -72,33 +72,37 @@
 	    <div class="alarm-icon" onclick="toggleAlarmPopup()">🔔</div>
 	
 	    <!-- 알림 드롭다운 -->
-	    <div id="alarmPopup" class="alarm-dropdown hidden">
-	        <c:forEach var="alarm" items="${alarmList}">
-	            <div class="alarm-box">
-	                <p>${alarm.content}</p>
-	                <a href="javascript:void(0);"
-					   onclick="openProfilePopup(
-					       '${alarm.sender.address}',
-					       '${alarm.sender.age}',
-					       '${alarm.sender.hobby}',
-					       '${alarm.sender.religion}',
-					       '${alarm.sender.smoke}',
-					       '${alarm.sender.introduce}',
-					       '${alarm.sender.userId}',
-					       '${alarm.sender.facialType}',
-					       '${alarm.sender.kakaoId}',
-					       '${alarm.matching.matchId}',
-					       '${alarm.matching.status}',
-					       '${alarm.alarmId}',
-					       this
-					   )">확인</a>
-					
-			        <c:if test="${alarm.isChecked eq 'Y'}">
-			            <span class="read-label">읽음</span>
-			        </c:if>
-	            </div>
-	        </c:forEach>
-	    </div>
+		<div id="alarmPopup" class="alarm-dropdown hidden">
+		    <c:if test="${empty alarmList}">
+		        <p>📭 받은 알림이 없습니다 📭</p>
+		    </c:if>
+		
+		    <c:forEach var="alarm" items="${alarmList}">
+		        <div class="alarm-box">
+		            <p>${alarm.content}</p>
+		            <a href="javascript:void(0);"
+		               onclick="openProfilePopup(
+		                   '${alarm.sender.address}',
+		                   '${alarm.sender.age}',
+		                   '${alarm.sender.hobby}',
+		                   '${alarm.sender.religion}',
+		                   '${alarm.sender.smoke}',
+		                   '${alarm.sender.introduce}',
+		                   '${alarm.sender.userId}',
+		                   '${alarm.sender.facialType}',
+		                   '${alarm.sender.kakaoId}',
+		                   '${alarm.matching.matchId}',
+		                   '${alarm.matching.status}',
+		                   '${alarm.alarmId}',
+		                   this
+		               )">확인</a>
+		
+		            <c:if test="${alarm.isChecked eq 'Y'}">
+		                <span class="read-label">읽음</span>
+		            </c:if>
+		        </div>
+		    </c:forEach>
+		</div>
 	</div>
 </body>
 </html>

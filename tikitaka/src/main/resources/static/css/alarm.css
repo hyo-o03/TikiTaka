@@ -178,7 +178,6 @@
 }
 
 .accepted-emoji {
-    font-size: 18px;
     font-weight: bold;
     color: #333;
     margin: 0;
@@ -215,9 +214,7 @@
 }
 
 .rejected {
-    font-size: 18px;
     font-weight: bold;
-    margin: 0;
 }
 
 .read-label {

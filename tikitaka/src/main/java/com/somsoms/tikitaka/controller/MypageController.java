@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.somsoms.tikitaka.domain.Idealtype;
 import com.somsoms.tikitaka.domain.User;
 import com.somsoms.tikitaka.service.UserService;
 

@@ -1,8 +1,6 @@
 package com.somsoms.tikitaka.controller;
 
 import com.somsoms.tikitaka.domain.*;
-import com.somsoms.tikitaka.repository.IdealtypeRepository;
-import com.somsoms.tikitaka.repository.UserRepository;
 import com.somsoms.tikitaka.service.IdealtypeService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;

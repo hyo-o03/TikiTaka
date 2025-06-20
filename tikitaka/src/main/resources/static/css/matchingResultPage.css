@@ -179,7 +179,6 @@
 }
 
 .accepted-emoji {
-    font-size: 18px;
     font-weight: bold;
     color: #333;
     margin: 0;
@@ -215,10 +214,8 @@
     padding: 10px 12px;
 }
 
-.rejected {
-    font-size: 18px;
+.rejected, .pending {
     font-weight: bold;
-    margin: 0;
 }
 
 /* 🔽 no matching 상태 전용 */

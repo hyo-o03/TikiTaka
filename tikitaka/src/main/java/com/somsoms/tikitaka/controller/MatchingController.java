@@ -69,7 +69,7 @@ public class MatchingController {
 		 
 		matchingRepository.acceptMatching(matchedUserId);
 		
-		return "matchingResultPage";
+		return "redirect:/match/matchingResultPage";
 	}
 	
 	@GetMapping("/matchingResultPage")
@@ -177,7 +177,7 @@ public class MatchingController {
 
         matchingService.requestMatching(userId, priority1, priority2, priority3, requestType);
 
-        return "matchRequestDone"; // 결과 페이지로 이동
+        return "redirect:/match/matchRequestDone"; // 결과 페이지로 이동
     }
 	
 	@PostMapping("/sendRequest")
@@ -185,8 +185,8 @@ public class MatchingController {
 			@RequestParam("matchedUserId") int matchedUserId, 
 			@RequestParam("matchId") int matchId,
 			HttpSession session) {
-//	    User sender = (User) session.getAttribute("loginUser");
-	    matchingService.sendMatchRequest(1066, matchedUserId);
+	    int userId = (Integer)session.getAttribute("userId");
+	    matchingService.sendMatchRequest(userId, matchedUserId);
 	    
 	    // ✅ 세션에 응답 여부 기록
 	    Set<Integer> respondedMatchIds = (Set<Integer>) session.getAttribute("respondedMatches");
@@ -196,7 +196,7 @@ public class MatchingController {
 	    respondedMatchIds.add(matchId);
 	    session.setAttribute("respondedMatches", respondedMatchIds);
 	    
-	    return "matchingResultPage"; // 또는 매칭 완료 페이지
+	    return "redirect:/match/matchingResultPage"; // 또는 매칭 완료 페이지
 	}
 	
 	@PostMapping("/sendRejected")
@@ -204,21 +204,21 @@ public class MatchingController {
 //	    User sender = (User) session.getAttribute("loginUser");
 		matchingService.rejectMatch(matchId);
 	    
-	    return "matchingResultPage"; // 또는 매칭 완료 페이지
+	    return "redirect:/match/matchingResultPage"; // 또는 매칭 완료 페이지
 	}
 	
 	@PostMapping("/accept")
 	public String acceptMatch(@RequestParam("matchId") int matchId) {
 	    matchingService.acceptMatch(matchId);
 	    
-	    return "home";
+	    return "redirect:/user/home";
 	}
 	
 	@PostMapping("/reject")
 	public String rejectMatch(@RequestParam("matchId") int matchId) {
 	    matchingService.rejectMatch(matchId);
 	    
-	    return "home";
+	    return "redirect:/user/home";
 	}
 	
 	@GetMapping("/matchingPopup")
