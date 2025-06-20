@@ -59,7 +59,7 @@ public class MatchingController {
 	@GetMapping("/friendMatchingResultPage")
     public String showFriendMatchingResultPage(Model model) {
         
-        int userId = 1064; //임시로 정해놈
+        int userId = 1065; //임시로 정해놈
         
         List<User> matchingList = matchingService.getMatchingResults(userId, "F");        
         model.addAttribute("matchingList", matchingList);
