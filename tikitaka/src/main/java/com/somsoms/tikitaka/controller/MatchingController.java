@@ -3,6 +3,7 @@ package com.somsoms.tikitaka.controller;
 import java.util.ArrayList;
 import java.util.List;
 import com.somsoms.tikitaka.domain.*;
+import com.somsoms.tikitaka.repository.MatchingRepository;
 import com.somsoms.tikitaka.service.IdealtypeService;
 import com.somsoms.tikitaka.service.MatchingService;
 
@@ -28,6 +29,9 @@ public class MatchingController {
     @Autowired
     private IdealtypeService idealtypeService;
     
+    @Autowired
+    private MatchingRepository matchingRepository;
+    
     @PostConstruct
     public void checkInit() {
         System.out.println("💡 IdealtypeService 주입 여부: " + idealtypeService);
@@ -42,6 +46,15 @@ public class MatchingController {
 	@GetMapping("/idealTypeLanking")
 	public String showIdealTypeLanking() {
 		return "idealTypeLanking";
+	}
+	
+	@GetMapping("/isMatchingResultPage")
+	public String isMatchingResultPage(@RequestParam("matchedUserId") int matchedUserId, Model model) {
+		model.addAttribute("matchedUserId", matchedUserId);
+		 
+		matchingRepository.acceptMatching(matchedUserId);
+		
+		return "matchingResultPage";
 	}
 	
 	@GetMapping("/matchingResultPage")

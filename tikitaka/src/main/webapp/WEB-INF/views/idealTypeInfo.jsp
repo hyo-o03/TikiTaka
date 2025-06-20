@@ -7,7 +7,6 @@
 </div>
 
 <div class="mProfileImg">
-    <!-- <img src="${userInfo.facialType}" alt="profile image">  -->
 </div>
 <div class="profileInfo">
     <div class="infoFacial">
@@ -36,7 +35,7 @@
     <p class="infoIntroduce">${userInfo.introduce}</p>
 </div>
 <div class="matchingBtn">
-    <a href="${pageContext.request.contextPath}/match/matchRequestDone?type=I&idealId=${userInfo.userId}">
+    <a href="${pageContext.request.contextPath}/match/isMatchingResultPage?userId=${type.userId}&matchedUserId=${userInfo.userId}">
         <button>매칭하기</button>
     </a>
 </div>

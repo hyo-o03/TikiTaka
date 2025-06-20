@@ -145,6 +145,7 @@ button {
     background: #7656D6;
     color: #FFFFFF;
     font-size: 16px;
+    cursor: pointer;
 }
 
 /* 🔽 no matching 상태 전용 */
