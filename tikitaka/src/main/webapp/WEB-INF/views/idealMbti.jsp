@@ -32,6 +32,8 @@
 	            if (mbtiDropdown.value !== "") {
 	                unknownBtn.classList.remove("selected");
 	                hiddenInput.value = mbtiDropdown.value;
+	            }else {
+	                hiddenInput.value = ""; // 드롭다운 초기화 시 명시적 처리
 	            }
 	        });
 	    };

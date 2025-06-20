@@ -126,3 +126,16 @@ input.text-input:focus {
 	border-color: #6A0DAD;
 	box-shadow: 0 0 8px rgba(104, 96, 238, 0.3);
 }
+
+.toggle-password {
+    position: absolute;
+    right: 20%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #666;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10;
+    padding: 2px;
+}

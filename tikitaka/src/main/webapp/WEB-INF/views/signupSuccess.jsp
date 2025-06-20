@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/signupSuccess.css">
     <meta charset="UTF-8">
+    <script>
+	    function exit() {
+		    if (confirm("설문 작성을 취소하시겠습니까?")) {
+		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		    }
+		}
+    </script>
     <style>
 	    .container {
 			position: relative;
@@ -22,8 +29,8 @@
 <body>
 <div class="container">
 	<div class="header">
-        <img src="${pageContext.request.contextPath}/images/leftBtn.png">
-        <img src="${pageContext.request.contextPath}/images/escBtn.png">
+        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
+	    <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
     </div>
     <div class="textCog">가입을 완료했어요!</div><br>
     <div class="content">

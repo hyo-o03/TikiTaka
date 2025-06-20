@@ -135,13 +135,11 @@ public class IdealtypeController {
         Idealtype ideal = idealtypeService.getIdealtypeByUserId(userId);
         
         if (ideal != null) {
-        	if (mbti == null) {
-                ideal.setItMbti(null); // null이면 그대로 null
-            } else if (mbti.trim().isEmpty()) {
-                ideal.setItMbti("상관없음"); // 빈 문자열이면 상관없음
-            } else {
-                ideal.setItMbti(mbti); // 정상 값
-            }
+        	if (mbti == null || mbti.trim().isEmpty()) {
+        	    ideal.setItMbti(null); // 선택 안 했을 때
+        	} else {
+        	    ideal.setItMbti(mbti); // "상관없음" 포함, 선택한 값 그대로
+        	}
         	idealtypeService.updateIdealtype(ideal);
         }
         
