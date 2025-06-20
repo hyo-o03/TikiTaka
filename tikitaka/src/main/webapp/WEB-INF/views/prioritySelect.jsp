@@ -29,7 +29,7 @@
 		    let url = "";
 		    if (requestType === 'F') {
 		        url = "${pageContext.request.contextPath}/ideal/friendIdealTypeChoice";
-		    } else {
+		    } else if (requestType === 'I') {
 		        url = "${pageContext.request.contextPath}/ideal/idealTypeChoice";
 		    }
 
@@ -47,7 +47,7 @@
 		            });
 		        });
 		}
-
+		
 		function closePopup() {
 		    document.getElementById('choicePopup').style.display = 'none';
 		}

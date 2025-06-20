@@ -5,10 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.somsoms.tikitaka.domain.Friendtype;
-import com.somsoms.tikitaka.domain.Matching;
+import com.somsoms.tikitaka.domain.Alarm;
 
 @Repository
-public interface FriendtypeRepository extends JpaRepository<Friendtype, Integer> {
-
+public interface AlarmRepository extends JpaRepository<Alarm, Integer>{
+	List<Alarm> findByReceiver_UserId(int userId);
 }

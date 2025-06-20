@@ -35,6 +35,10 @@ public class Matching {
     @JoinColumn(name = "ID", nullable = false)  // 실제 User 테이블의 PK 컬럼명과 맞게
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "MATCHED_USER_ID", insertable = false, updatable = false)
+    private User matchedUser;
+    
     @Column(name = "MATCHED_USER_ID", nullable = false)
     private int matchedUserId;
 
@@ -59,6 +63,8 @@ public class Matching {
     public void setUser(User user) { this.user = user; }
     public int getMatchedUserId() { return matchedUserId; }
     public void setMatchedUserId(int matchedUserId) { this.matchedUserId = matchedUserId; }
+    public User getMatchedUser() { return matchedUser; }
+    public void setMatchedUser(User matchedUser) { this.matchedUser = matchedUser; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
     public Date getRespondTime() { return respondTime; }

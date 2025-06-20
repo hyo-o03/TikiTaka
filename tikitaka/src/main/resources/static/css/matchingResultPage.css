@@ -81,6 +81,7 @@
     padding: 20px;
     z-index: 9999;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
 }
 
 #popupModal {
@@ -131,21 +132,93 @@
     padding-top: 0;
 }
 
-.matchingBtn {
-    width: 100%;
-    text-align: center;
+.button-group {
+    display: flex;
+    justify-content: space-between;
     margin-top: 50px;
-    margin-bottom: 0;
+    padding: 0 10px;
 }
 
-button {
+.button-group form {
+    flex: 1;
+    text-align: center;
+}
+
+.button-group form:first-child {
+    margin-right: 10px;
+}
+
+.button-group button {
+    width: 80%;
+    padding: 10px 0;
     border: none;
-    padding: 8px 50px;
     border-radius: 25px;
-    background: #7656D6;
-    color: #FFFFFF;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
+}
+
+.match-btn {
+    background-color: #7656D6;
+    color: white;
+}
+
+.reject-btn {
+    background-color: #CCCCCC;
+    color: black;
+}
+
+.accepted-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 12px;
+}
+
+.accepted-top {
+    margin-bottom: 12px;
+}
+
+.accepted-emoji {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.kakao-box {
+    background: #ffffff;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.kakao-label {
+    font-size: 15px;
+    color: #7A5BEF;
+    margin: 0; /* ← 여기가 핵심 */
+    margin-bottom: 5px;
+}
+
+.kakao-id {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+}
+
+.matching-result-message {
+    margin-top: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 12px;
+}
+
+.rejected {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
 }
 
 /* 🔽 no matching 상태 전용 */

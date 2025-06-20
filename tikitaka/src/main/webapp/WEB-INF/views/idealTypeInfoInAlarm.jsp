@@ -38,29 +38,18 @@
 </div>
 <c:choose>
     <c:when test="${status eq 'REQUESTED'}">
-        <c:choose>
-            <%-- 이미 응답한 매칭이면 메시지 출력 --%>
-            <c:when test="${responded}">
-                <div class="matching-result-message">
-                    <p class="pending">⏳ 매칭 신청 중입니다 ⏳</p>
-                </div>
-            </c:when>
-            <%-- 아직 응답하지 않은 경우 버튼 출력 --%>
-            <c:otherwise>
-                <div class="button-group">
-                    <form action="${pageContext.request.contextPath}/match/sendRequest" method="post">
-                        <input type="hidden" name="matchedUserId" value="${userInfo.userId}" />
-                        <input type="hidden" name="matchId" value="${matchId}" />
-                        <button type="submit" class="match-btn">매칭하기</button>
-                    </form>
-
-                    <form action="${pageContext.request.contextPath}/match/sendRejected" method="post">
-                        <input type="hidden" name="matchId" value="${matchId}" />
-                        <button type="submit" class="reject-btn">거절하기</button>
-                    </form>
-                </div>
-            </c:otherwise>
-        </c:choose>
+        <div class="button-group">
+            <form action="${pageContext.request.contextPath}/match/accept" method="post">
+                <input type="hidden" name="matchedUserId" value="${userInfo.userId}" />
+                <input type="hidden" name="matchId" value="${matchId}" />
+                <button type="submit" class="match-btn">매칭하기</button>
+            </form>
+            
+            <form action="${pageContext.request.contextPath}/match/reject" method="post">
+                <input type="hidden" name="matchId" value="${matchId}" />
+                <button type="submit" class="reject-btn">거절하기</button>
+            </form>
+        </div>
     </c:when>
     <c:otherwise>
         <div class="matching-result-message">

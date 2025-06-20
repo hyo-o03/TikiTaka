@@ -35,20 +35,32 @@
 	                <div class="idealTypes">
 	                    <c:forEach var="type" items="${matchingList}">
 	                        <div class="idealType"
-	                             onclick="loadPopup('${type.address}', '${type.age}', '${type.introduce}' , '${type.userId}', '${type.facialType}')">
+                                onclick="loadPopup(
+						             '${type.matchedUser.address}',
+						             '${type.matchedUser.age}',
+						             '${type.matchedUser.hobby}',
+						             '${type.matchedUser.religion}',
+						             '${type.matchedUser.smoke}',
+						             '${type.matchedUser.introduce}',
+						             '${type.matchedUser.userId}',
+						             '${type.matchedUser.facialType}',
+						             '${type.matchedUser.kakaoId}',
+						             '${type.matchId}', // ✅ matchId 전달!
+						             '${type.status}'
+						         )">
 	                            <div class="profileImg">
 									<c:choose>
-									    <c:when test="${type.facialType eq '고양이'}"><p>🐱</p></c:when>
-									    <c:when test="${type.facialType eq '강아지'}"><p>🐶</p></c:when>
-									    <c:when test="${type.facialType eq '햄스터'}"><p>🐹</p></c:when>
-									    <c:when test="${type.facialType eq '토끼'}"><p>🐰</p></c:when>
-									    <c:when test="${type.facialType eq '곰'}"><p>🐻</p></c:when>
-									    <c:when test="${type.facialType eq '늑대'}"><p>🐺</p></c:when>
+									    <c:when test="${type.matchedUser.facialType eq '고양이'}"><p>🐱</p></c:when>
+									    <c:when test="${type.matchedUser.facialType eq '강아지'}"><p>🐶</p></c:when>
+									    <c:when test="${type.matchedUser.facialType eq '햄스터'}"><p>🐹</p></c:when>
+									    <c:when test="${type.matchedUser.facialType eq '토끼'}"><p>🐰</p></c:when>
+									    <c:when test="${type.matchedUser.facialType eq '곰'}"><p>🐻</p></c:when>
+									    <c:when test="${type.matchedUser.facialType eq '늑대'}"><p>🐺</p></c:when>
 									</c:choose>
 								</div>
 	                            <div class="else">
-	                                <p>${type.address}</p>
-	                                <p>${type.age}살</p>
+	                                <p>${type.matchedUser.address}</p>
+	                                <p>${type.matchedUser.age}살</p>
 	                            </div>
 	                            <div class="rightBtn">
 	                                <img src="${pageContext.request.contextPath}/images/rightBtn.png">
@@ -71,12 +83,18 @@
 	        }
 	    }
 	
-	    function loadPopup(address, age, introduce, userId, facialType) {
+	    function loadPopup(address, age, hobby, religion, smoke, introduce, userId, facialType, kakaoId, matchId, status) {
 	        fetch('${pageContext.request.contextPath}/match/idealTypeInfo?address=' + encodeURIComponent(address) +
 	            '&age=' + encodeURIComponent(age) +
+	            '&hobby=' + encodeURIComponent(hobby) +
+	            '&religion=' + encodeURIComponent(religion) +
+	            '&smoke=' + encodeURIComponent(smoke) +
 	            '&introduce=' + encodeURIComponent(introduce) +
 	            '&userId=' + encodeURIComponent(userId) +
-	            '&facialType=' + encodeURIComponent(facialType))
+	            '&facialType=' + encodeURIComponent(facialType) +
+	            '&kakaoId=' + encodeURIComponent(kakaoId) +
+	            '&matchId=' + encodeURIComponent(matchId) +
+	            '&status=' + encodeURIComponent(status))
 	            .then(response => response.text())
 	            .then(data => {
 	                document.getElementById('popupContent').innerHTML = data;

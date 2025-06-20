@@ -93,12 +93,16 @@ public class User {
 	
 	public User() {}
 	
-    public User(String address, int age, String introduce, int userId, String facialType) {
+    public User(String address, int age, String hobby, String religion, String smoke, String introduce, int userId, String facialType, String kakaoId) {
         this.address = address;
         this.age = age;
+        this.hobby = hobby;
+        this.religion = religion;
+        this.smoke = smoke;
         this.introduce = introduce;
         this.userId = userId;
         this.facialType = facialType;
+        this.kakaoId = kakaoId;
     }
     
 	/* Getter/Setter */
@@ -134,7 +138,7 @@ public class User {
 	public void setFashion(String fashion) { this.fashion = fashion; }
 	public String getReligion() { return religion; }
 	public void setReligion(String religion) { this.religion = religion; }
-	public String isSmoke() { return smoke; }
+	public String getSmoke() { return smoke; }
 	public void setSmoke(String smoke) { this.smoke = smoke; }
 	public Idealtype getIdealtype() { return idealtype; }
     public void setIdealtype(Idealtype idealtype) { this.idealtype = idealtype; }

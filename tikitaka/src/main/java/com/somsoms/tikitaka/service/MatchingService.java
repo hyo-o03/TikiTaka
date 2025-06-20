@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -11,11 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.somsoms.tikitaka.domain.*;
-import com.somsoms.tikitaka.repository.FriendtypeRepository;
-import com.somsoms.tikitaka.repository.IdealtypeRepository;
-import com.somsoms.tikitaka.repository.MatchingRepository;
-import com.somsoms.tikitaka.repository.MatchingResultRepository;
-import com.somsoms.tikitaka.repository.UserRepository;
+import com.somsoms.tikitaka.repository.*;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -38,6 +35,9 @@ public class MatchingService {
     
     @Autowired
     private IdealtypeRepository idealtypeRepository;
+    
+    @Autowired
+    private AlarmRepository alarmRepository;
     
     @PersistenceContext
     private EntityManager entityManager;
@@ -126,15 +126,21 @@ public class MatchingService {
 	  // findResultByMatchId로 매칭 하나의 결과 받아오기
 	  // 이 결과로 매칭된 유저 프로필도 가져올 수 있음
 
-	public List<User> getMatchingResults(int userId) {
-	    List<Matching> matchings = matchingRepository.findByUser_UserId(userId);
+	public List<Matching> getMatchingResults(int userId, String requestType) {
 	    
-	    List<Integer> matchedUserIds = new ArrayList<>();
-	    for (Matching m : matchings) {
-	        matchedUserIds.add(m.getMatchedUserId());
-	    }
+//	    List<Integer> matchingResultId = matchingResultRepository.findResultIdsByUserIdAndRequestType(userId, requestType);
+//	    
+//	    List<Matching> matchings = matchingRepository.findByMatchingResult_ResultIdIn(matchingResultId);
+//	    List<Integer> matchedUserIds = new ArrayList<>();
+//	    for (Matching m : matchings) {
+//	        matchedUserIds.add(m.getMatchedUserId());
+//	    }
+//	    
+//	    return userRepository.findAllById(matchedUserIds);
+		
+	    List<Integer> matchingResultId = matchingResultRepository.findResultIdsByUserIdAndRequestType(userId, requestType);
 	    
-	    return userRepository.findAllById(matchedUserIds);
+	    return matchingRepository.findByMatchingResult_ResultIdIn(matchingResultId);
     }
 	
 	public void acceptMatchesByUserId(int userId, String type, int idealId) {
@@ -145,7 +151,7 @@ public class MatchingService {
         List<Matching> matchList = matchingRepository.findByMatchingResultResultId(result.getResultId());
         
         for (Matching match : matchList) {
-            System.out.println(match.getMatchedUserId()+","+idealId);
+            System.out.println(match.getMatchedUserId() + "," + idealId);
             if(match.getMatchedUserId() == idealId)
                 match.setStatus("ACCEPTED");
             else
@@ -188,5 +194,38 @@ public class MatchingService {
 	public void deleteMatchingResult() {
 		matchingRepository.deleteNotToday();
         matchingResultRepository.deleteNotToday();
+	}
+	
+	//알람 전송
+	@Transactional
+	public void sendMatchRequest(int senderId, int receiverId) {
+	    User sender = userRepository.findById(senderId).orElseThrow();
+	    User receiver = userRepository.findById(receiverId).orElseThrow();
+
+	    Optional<Matching> existingMatch = matchingRepository
+	    	    .findByUser_UserIdAndMatchedUserId(sender.getUserId(), receiver.getUserId());
+	    Matching match = existingMatch.get();
+	    
+	    Alarm alarm = new Alarm();
+	    alarm.setSender(sender);
+	    alarm.setReceiver(receiver);
+	    alarm.setContent("새로운 매칭 요청이 도착했습니다!");
+	    alarm.setIsChecked("N");
+	    alarm.setMatching(match);
+	    alarmRepository.save(alarm);
+	}
+	
+	@Transactional
+	public void acceptMatch(int matchId) {
+	    Matching match = matchingRepository.findById(matchId).orElseThrow();
+	    match.setStatus("ACCEPTED");
+	    match.setRespondTime(new Date());
+	}
+	
+	@Transactional
+	public void rejectMatch(int matchId) {
+	    Matching match = matchingRepository.findById(matchId).orElseThrow();
+	    match.setStatus("REJECTED");
+	    match.setRespondTime(new Date());
 	}
 }

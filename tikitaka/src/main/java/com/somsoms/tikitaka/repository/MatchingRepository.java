@@ -13,12 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MatchingRepository extends JpaRepository<Matching, Integer> {
     List<Matching> findByUser_UserId(int userId);
-    
+
     List<Matching> findByMatchingResultResultId(int matchingResultId);
+    
+    List<Matching> findByMatchingResult_ResultIdIn(List<Integer> resultIds);
+    
+    Optional<Matching> findByUser_UserIdAndMatchedUserId(int userId, int matchedUserId);
     
     @Modifying
     @Transactional

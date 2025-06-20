@@ -1,7 +1,10 @@
 package com.somsoms.tikitaka.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import com.somsoms.tikitaka.domain.*;
+import com.somsoms.tikitaka.repository.AlarmRepository;
 import com.somsoms.tikitaka.repository.IdealtypeRepository;
 import com.somsoms.tikitaka.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
@@ -13,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.somsoms.tikitaka.domain.User;
 import com.somsoms.tikitaka.service.UserService;
 
 @Controller
@@ -50,6 +52,9 @@ public class UserController {
 	    
 	@Autowired
 	private IdealtypeRepository idealtypeRepository;
+	
+    @Autowired
+    private AlarmRepository alarmRepository;
 	
 	@PostMapping("/address")
 	public String showAddress(@RequestParam String facialType, HttpSession session) {
@@ -305,7 +310,16 @@ public class UserController {
     }
     
 	@GetMapping("/home")
-	public String showHome() {
+	public String showHome(Model model, HttpSession session) {
+		
+//	    User loginUser = (User) session.getAttribute("loginUser");
+//	    if (loginUser == null) {
+//	        return "redirect:/login";
+//	    }
+
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(1067);
+	    model.addAttribute("alarmList", alarmList);
+
 		return "home";
 	}
 	

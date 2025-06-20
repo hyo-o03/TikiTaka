@@ -27,6 +27,7 @@ public class IdealtypeService {
         String value2 = extractValueByPriority(idealtype, priority2);
         String value3 = extractValueByPriority(idealtype, priority3);
 
+
         // 예시: 출력
         System.out.println("1순위 : " + priority1);
         System.out.println("2순위 : " + priority2);
@@ -34,6 +35,7 @@ public class IdealtypeService {
         
         // 여기서 이 값들을 기반으로 매칭 처리 수행
         // (예: 다른 유저랑 비교, 매칭 알고리즘 적용 등)
+
 
     }
     

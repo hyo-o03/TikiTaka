@@ -21,6 +21,50 @@
                 popup.classList.add('hidden');
             }
         });
+        
+        function openProfilePopup(address, age, hobby, religion, smoke, introduce, userId, facialType, kakaoId, matchId, status, alarmId, element) {
+            // 알람 isChecked 업데이트
+			fetch('/alarm/markAsRead?alarmId=' + alarmId)
+			    .then(() => {
+			        const alarmBox = element?.closest('.alarm-box');
+			        if (alarmBox && !alarmBox.querySelector('.read-label')) {
+			            const readMark = document.createElement('span');
+			            readMark.className = 'read-label';
+			            readMark.textContent = '읽음';
+			            readMark.style.fontSize = '12px';
+			            readMark.style.color = '#999';
+			            readMark.style.marginLeft = '8px';
+			            alarmBox.appendChild(readMark);
+			        }
+			    });
+
+            const url = '/match/idealTypeInfoInAlarm?' +
+                'address=' + encodeURIComponent(address) +
+                '&age=' + encodeURIComponent(age) +
+                '&hobby=' + encodeURIComponent(hobby) +
+                '&religion=' + encodeURIComponent(religion) +
+                '&smoke=' + encodeURIComponent(smoke) +
+                '&introduce=' + encodeURIComponent(introduce) +
+                '&userId=' + encodeURIComponent(userId) +
+                '&facialType=' + encodeURIComponent(facialType) +
+                '&kakaoId=' + encodeURIComponent(kakaoId) +
+                '&matchId=' + encodeURIComponent(matchId) +
+                '&status=' + encodeURIComponent(status);
+
+            fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    const modal = document.createElement('div');
+                    modal.classList.add('modal-overlay');
+                    modal.innerHTML = html;
+                    document.body.appendChild(modal);
+                });
+        }
+
+        function closePopup() {
+            const modal = document.querySelector('.modal-overlay');
+            if (modal) modal.remove();
+        }
 	</script>
 </head>
 <body>
@@ -29,22 +73,31 @@
 	
 	    <!-- 알림 드롭다운 -->
 	    <div id="alarmPopup" class="alarm-dropdown hidden">
-	        <%-- 
-	        <c:forEach var="msg" items="${alarms}">
-	            <div class="alarm-item">
-	                <span class="alarm-text">${msg}</span>
-	                <button class="alarm-confirm">확인</button>
+	        <c:forEach var="alarm" items="${alarmList}">
+	            <div class="alarm-box">
+	                <p>${alarm.content}</p>
+	                <a href="javascript:void(0);"
+					   onclick="openProfilePopup(
+					       '${alarm.sender.address}',
+					       '${alarm.sender.age}',
+					       '${alarm.sender.hobby}',
+					       '${alarm.sender.religion}',
+					       '${alarm.sender.smoke}',
+					       '${alarm.sender.introduce}',
+					       '${alarm.sender.userId}',
+					       '${alarm.sender.facialType}',
+					       '${alarm.sender.kakaoId}',
+					       '${alarm.matching.matchId}',
+					       '${alarm.matching.status}',
+					       '${alarm.alarmId}',
+					       this
+					   )">확인</a>
+					
+			        <c:if test="${alarm.isChecked eq 'Y'}">
+			            <span class="read-label">읽음</span>
+			        </c:if>
 	            </div>
-	        </c:forEach> 
-	        --%>
-	        <div class="alarm-item">
-	            <span class="alarm-text">오늘의 이상형 추천이 도착했습니다!</span>
-	            <button class="alarm-confirm">확인</button>
-	        </div>
-	        <div class="alarm-item">
-	            <span class="alarm-text">새로운 매칭 상대가 있어요!</span>
-	            <button class="alarm-confirm">확인</button>
-	        </div>
+	        </c:forEach>
 	    </div>
 	</div>
 </body>
