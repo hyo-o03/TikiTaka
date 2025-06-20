@@ -16,6 +16,7 @@
 		
 		let currentRank = 0;
 		let requestType = "${requestType}";
+		let matchingStatus = ${status};
 		
 		function selectItemFromPopup(value) {
             document.getElementById('choiceResult' + currentRank).innerText = value;
@@ -24,7 +25,11 @@
         }
 		
 		function loadChoicePopup(rank) {
-		    currentRank = rank;
+			if (!matchingStatus) {
+                alert("이미 매칭이 진행중입니다.");
+                return;
+            }
+            currentRank = rank;
 
 		    let url = "";
 		    if (requestType === 'F') {
@@ -33,12 +38,11 @@
 		        url = "${pageContext.request.contextPath}/ideal/idealTypeChoice";
 		    }
 
-		    fetch(url)
-		        .then(response => response.text())
-		        .then(data => {
-		            document.getElementById('choicePopupContent').innerHTML = data;
-		            document.getElementById('choicePopup').style.display = 'block';
-
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('choicePopupContent').innerHTML = data;
+                    document.getElementById('choicePopup').style.display = 'block';
 		            document.querySelectorAll('#choicePopupContent .idealTypeDetail').forEach(item => {
 		                item.addEventListener('click', () => {
 		                    const value = item.getAttribute('data-value');
@@ -47,12 +51,16 @@
 		            });
 		        });
 		}
-		
+        
 		function closePopup() {
 		    document.getElementById('choicePopup').style.display = 'none';
 		}
 		
 		function validatePriorities() {
+			if (!matchingStatus) {
+		        alert("이미 매칭이 진행중입니다.");
+		        return false;
+		    }
 		    for (let i = 1; i <= 3; i++) {
 		        const val = document.getElementById('priority' + i).value;
 		        if (!val) {
@@ -62,8 +70,6 @@
 		    }
 		    return true; // 제출 허용
 		}
-
-		
 	</script>
 </head>
 <body>

@@ -42,7 +42,7 @@ public class User {
     @Column(name = "KAKAO_ID", length = 20) // ⛳ 설문에서 입력 → nullable 허용
     private String kakaoId;
 
-    @Column(name = "EMAIL", nullable = false, length = 20)
+    @Column(name = "EMAIL", length = 20)
     private String email;
 
     @Column(name = "PHONE", length = 11)
@@ -51,7 +51,7 @@ public class User {
     @Column(name = "HOBBY", length = 10) // ⛳ 설문에서 입력 → nullable 허용
     private String hobby;
 
-    @Column(name = "ADDRESS", length = 10) // ⛳ 설문에서 입력 → nullable 허용
+    @Column(name = "ADDRESS", length = 10)
     private String address;
 
     @Column(name = "INTRODUCE", columnDefinition = "CLOB")

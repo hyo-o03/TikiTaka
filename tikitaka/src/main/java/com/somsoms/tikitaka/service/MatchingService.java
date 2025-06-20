@@ -107,7 +107,7 @@ public class MatchingService {
             case "거주지" -> predicates.add(cb.equal(user.get("address"), ideal.getItAddress()));
             case "MBTI" -> predicates.add(cb.equal(user.get("mbti"), ideal.getItMbti()));
             case "관심사" -> predicates.add(cb.equal(user.get("hobby"), ideal.getItHobby()));
-            case "흡연유무" -> predicates.add(cb.equal(user.get("smoke"), ideal.isItSmoke()));
+            case "흡연유무" -> predicates.add(cb.equal(user.get("smoke"), ideal.getItSmoke()));
             case "종교" -> predicates.add(cb.equal(user.get("facialType"), ideal.getItFacialtype()));
         }
 
@@ -120,6 +120,8 @@ public class MatchingService {
 	void respondToMatching(int matchId, String status) {}
 	  // updateMatchStatus로 결과 업데이트
 
+	
+	
 
 	Matching getMatchingResult(int matchId) {
         return null;}
@@ -141,6 +143,22 @@ public class MatchingService {
 	    List<Integer> matchingResultId = matchingResultRepository.findResultIdsByUserIdAndRequestType(userId, requestType);
 	    
 	    return matchingRepository.findByMatchingResult_ResultIdIn(matchingResultId);
+    }
+	
+	public boolean getMatchingStatus(int userId, String requestType) {
+        
+        List<Integer> matchingResultId = matchingResultRepository.findResultIdsByUserIdAndRequestType(userId, requestType);
+        System.out.println(userId+"/"+requestType);
+        System.out.println("matchingResultId 리스트 값:");
+        for (Integer id : matchingResultId) {
+            System.out.println("  -> " + id);
+        }
+        if (matchingResultId == null || matchingResultId.isEmpty()) {
+            return true;
+        }
+
+        // 값이 있으면 false 반환
+        return false;
     }
 	
 	public void acceptMatchesByUserId(int userId, String type, int idealId) {

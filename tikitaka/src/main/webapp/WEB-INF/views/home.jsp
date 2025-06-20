@@ -42,7 +42,7 @@
             <a href="${pageContext.request.contextPath}/match/matchingResultPage" style="text-decoration: none;"><img class="mRBtn" src="${pageContext.request.contextPath}/images/mRBtn.png"></a>
         </div>
         <div class="matchingResult">
-            <div class="mREmoji">🥰</div>
+            <div class="mREmoji">😎</div>
             <div class="mRText">
                 <p class="mRSubText">오늘의 매칭 알림</p>
                 <p class="mRText">오늘 매칭된 친구 상대 확인하기</p>

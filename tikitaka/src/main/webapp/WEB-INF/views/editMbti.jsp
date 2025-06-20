@@ -9,20 +9,46 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mbtiForm.css">
     <script>
+        function initializeMbti() {
+            const mbtiDropdown = document.getElementById("mbtiSelect");
+            const unknownBtn = document.getElementById("mbtiUnknown");
+            const mbtiInput = document.getElementById("mbtiInput");
+            
+            // 서버에서 전달받은 기존 MBTI 데이터
+            const existingMbti = "${user.mbti}";
+            
+            if (existingMbti && existingMbti.trim() !== "" && existingMbti !== "null") {
+                // 기존 MBTI가 있으면 드롭다운에서 선택
+                mbtiDropdown.value = existingMbti;
+                mbtiInput.value = existingMbti;
+                unknownBtn.classList.remove("selected");
+            } else {
+                // 기존 MBTI가 없거나 null이면 "몰라요" 선택
+                mbtiDropdown.selectedIndex = 0; // "선택하기"로 초기화
+                mbtiInput.value = "";
+                unknownBtn.classList.add("selected");
+            }
+        }
+
 		window.onload = function () {
 	        const mbtiDropdown = document.getElementById("mbtiSelect");
-	        const unknownBtn = document.getElementById("unknownOption");
+	        const unknownBtn = document.getElementById("mbtiUnknown");
+
+            // 기존 MBTI 데이터 초기화
+            initializeMbti();
 
 	        // 몰라요 버튼 클릭 시
 	        unknownBtn.addEventListener("click", function () {
 	            mbtiDropdown.selectedIndex = 0; // "선택하기"로 초기화
 	            unknownBtn.classList.add("selected");
+                document.getElementById("mbtiInput").value = "";
 	        });
 
 	        // 드롭다운에서 선택 시
 	        mbtiDropdown.addEventListener("change", function () {
 	            if (mbtiDropdown.value !== "") {
 	                unknownBtn.classList.remove("selected");
+                    document.getElementById("mbtiInput").value = this.value;
 	            }
 	        });
 	    };
@@ -37,7 +63,7 @@
 	            <jsp:include page="alarm.jsp" />
 	        </div>
 	    </div>
-		<form action="${pageContext.request.contextPath}/user/updateMbti" method="post" class="form-layout">
+		<form action="${pageContext.request.contextPath}/mypage/updateMbti" method="post" class="form-layout">
 		<div class="content">
 		    <div class="title">MBTI를 알려주세요</div>
 		    <div class="description">혹시 MBTI를 밝히기 싫거나 모르는 분들은 "몰라요"를 골라주세요</div>
@@ -69,18 +95,6 @@
 			        <button type="submit" class="next-button">수정하기</button>
 			    </div>
 			</form>
-			<script>
-				document.getElementById('mbtiSelect').addEventListener('change', function() {
-				    document.getElementById('mbtiInput').value = this.value;
-				    document.getElementById('mbtiUnknown').classList.remove('selected');
-				});
-
-				document.getElementById('mbtiUnknown').addEventListener('click', function() {
-				    document.getElementById('mbtiInput').value = '';
-				    document.getElementById('mbtiSelect').selectedIndex = 0; // "선택하기"로 초기화
-				    this.classList.add('selected');
-				});
-			</script>
 	</div>
 </body>
 </html>

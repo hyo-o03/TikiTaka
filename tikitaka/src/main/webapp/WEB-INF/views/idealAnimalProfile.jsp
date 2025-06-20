@@ -11,7 +11,7 @@
     <script>
 		function exit() {
 		    if (confirm("수정을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		        window.location.href = "${pageContext.request.contextPath}/mypage/mypage";
 		    }
 		}
 		
@@ -25,6 +25,7 @@
 		    // hidden input에 값 넣기
 		    document.getElementById("selectedFacialType").value = element.getAttribute("data-value");
 	    }
+		
 	</script>
 </head>
 <body>
@@ -39,15 +40,17 @@
 		        <div class="title">선호하는 이상형의 얼굴상을 골라주세요</div>
 		        
 		        <!-- 동물 선택 값 담을 hidden input -->
-				<input type="hidden" name="facialType" id="selectedFacialType">
-
+				<input type="hidden" name="facialType" id="selectedFacialType" value="${ideal.itFacialtype}">
+				
+				<c:set var="selected" value="${itFacialtype}" />
+				
 		        <div class="animal-grid">
-		            <div class="animal-card" data-value="고양이" onclick="selectAnimal(this)" style="background-color: #fff9c4;">🐱</div>
-		            <div class="animal-card" data-value="강아지" onclick="selectAnimal(this)" style="background-color: #ffecb3;">🐶</div>
-		            <div class="animal-card" data-value="햄스터" onclick="selectAnimal(this)" style="background-color: #fce4ec;">🐹</div>
-		            <div class="animal-card" data-value="토끼" onclick="selectAnimal(this)" style="background-color: #f8bbd0;">🐰</div>
-		            <div class="animal-card" data-value="곰" onclick="selectAnimal(this)" style="background-color: #bbdefb;">🐻</div>
-		            <div class="animal-card" data-value="늑대" onclick="selectAnimal(this)" style="background-color: #cfd8dc;">🐺</div>
+		            <div class="animal-card ${ideal.itFacialtype == '고양이' ? 'selected' : ''}" data-value="고양이" onclick="selectAnimal(this)" style="background-color: #fff9c4;">🐱</div>
+		            <div class="animal-card ${ideal.itFacialtype == '강아지' ? 'selected' : ''}" data-value="강아지" onclick="selectAnimal(this)" style="background-color: #ffecb3;">🐶</div>
+		            <div class="animal-card ${ideal.itFacialtype == '햄스터' ? 'selected' : ''}" data-value="햄스터" onclick="selectAnimal(this)" style="background-color: #fce4ec;">🐹</div>
+		            <div class="animal-card ${ideal.itFacialtype == '토끼' ? 'selected' : ''}" data-value="토끼" onclick="selectAnimal(this)" style="background-color: #f8bbd0;">🐰</div>
+		            <div class="animal-card ${ideal.itFacialtype == '곰' ? 'selected' : ''}" data-value="곰" onclick="selectAnimal(this)" style="background-color: #bbdefb;">🐻</div>
+		            <div class="animal-card ${ideal.itFacialtype == '늑대' ? 'selected' : ''}" data-value="늑대" onclick="selectAnimal(this)" style="background-color: #cfd8dc;">🐺</div>
 		        </div>
 		    </div>
 	        <div class="footer">

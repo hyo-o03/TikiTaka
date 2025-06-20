@@ -22,18 +22,18 @@
 	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
 	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
 	    </div>
-	    <form action="${pageContext.request.contextPath}/friend/friendHobby" method="post" class="form-layout">
+	    <form action="${pageContext.request.contextPath}/ideal/idealHobby" method="post" class="form-layout">
 			<div class="content" style="align-items: center;">
 			    <div class="title">거주지 선호도를 골라주세요</div>
 			    <div class="description">친구가 멀리 살고 있어도 괜찮나요?<br>매칭에 반영될 거주지 거리 선호도를 알려주세요</div>
 			    
 			    <div class="preference-options">
 			        <label class="option">
-			            <input ${friend.ftDistancePref == 'close' ? 'checked' : ''} type="radio" name="ftDistancePref" value="close">
+			            <input ${ideal.itDistancePref == 'close' ? 'checked' : ''} type="radio" name="itDistancePref" value="close">
 			            가까웠으면 좋겠어요
 			        </label>
 			        <label class="option">
-			            <input ${friend.ftDistancePref == 'far' ? 'checked' : ''} type="radio" name="ftDistancePref" value="far">
+			            <input ${ideal.itDistancePref == 'far' ? 'checked' : ''} type="radio" name="itDistancePref" value="far">
 			            멀어도 괜찮아요
 			        </label>
 			    </div>

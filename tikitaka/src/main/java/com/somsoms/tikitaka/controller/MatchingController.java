@@ -1,6 +1,5 @@
 package com.somsoms.tikitaka.controller;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +13,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,8 +42,19 @@ public class MatchingController {
     }
 
     @GetMapping("/prioritySelect")
-    public String showPrioritySelect(@RequestParam("requestType") String requestType, Model model) {
+    public String showPrioritySelect(@RequestParam("requestType") String requestType, HttpSession session, Model model) {
         model.addAttribute("requestType", requestType); // <-- 이게 있어야 JSP에서 ${requestType} 가능
+        
+
+        Integer userId = (Integer) session.getAttribute("userId"); // 세션에서 userId 꺼내기
+
+        if (userId == null) {  // 세션 만료 또는 로그인 안 된 상태
+            return "redirect:/signup/login";
+        }
+        
+        boolean b = matchingService.getMatchingStatus(userId, requestType);
+        model.addAttribute("status", b);
+        
         return "prioritySelect"; // prioritySelect.jsp로 이동
     }
 
@@ -53,20 +62,23 @@ public class MatchingController {
 	public String showIdealTypeLanking() {
 		return "idealTypeLanking";
 	}
-	/*
-	 * @GetMapping("/isMatchingResultPage") public String
-	 * isMatchingResultPage(@RequestParam("matchedUserId") int matchedUserId, Model
-	 * model) { model.addAttribute("matchedUserId", matchedUserId);
-	 * 
-	 * matchingRepository.acceptMatching(matchedUserId);
-	 * 
-	 * return "matchingResultPage"; }
-	 */
+	
+	@GetMapping("/isMatchingResultPage")
+	public String isMatchingResultPage(@RequestParam("matchedUserId") int matchedUserId, HttpSession session, Model model) {
+		model.addAttribute("matchedUserId", matchedUserId);
+		 
+		matchingRepository.acceptMatching(matchedUserId);
+		
+		return "matchingResultPage";
+	}
 	
 	@GetMapping("/matchingResultPage")
-	public String showMatchingResultPage(Model model) {
-	    
-	    int userId = 1066; //임시로 정해놈
+	public String showMatchingResultPage(HttpSession session, Model model) {
+	    Integer userId = (Integer) session.getAttribute("userId"); // 세션에서 userId 꺼내기
+
+	    if (userId == null) {  // 세션 만료 또는 로그인 안 된 상태
+	        return "redirect:/signup/login";
+	    }
 
 	    List<Matching> matchingList = matchingService.getMatchingResults(userId, "I");
 	    model.addAttribute("matchingList", matchingList);
@@ -75,21 +87,20 @@ public class MatchingController {
 	}
 	
 	@GetMapping("/friendMatchingResultPage")
-    public String showFriendMatchingResultPage(Model model) {
-        int userId = 1066; //임시로 정해놈
+    public String showFriendMatchingResultPage(HttpSession session, Model model) {
         
-        List<Matching> matchingList = matchingService.getMatchingResults(userId, "F");        
+	    Integer userId = (Integer) session.getAttribute("userId"); // 세션에서 userId 꺼내기
+
+	    if (userId == null) {  // 세션 만료 또는 로그인 안 된 상태
+	        return "redirect:/signup/login";
+	    }
+        
+	    List<Matching> matchingList = matchingService.getMatchingResults(userId, "F");       
         model.addAttribute("matchingList", matchingList);
         
         return "matchingResultPage";
     }
 	
-//	@PostMapping("/matchRequestDone")
-//	public String showMatchRequestDone() {
-//		return "matchRequestDone";
-//	}
-	
-
 	@GetMapping("/idealTypeInfo")
     public String showIdealTypeInfo(
     		@RequestParam("address") String address, 
@@ -149,36 +160,20 @@ public class MatchingController {
         return "idealTypeInfoInAlarm";
     }
 	
-//	@GetMapping("/matchRequestDone")
-//	public String handleMatchRequest(@RequestParam("type") String type, int idealId) {
-////	    User loginUser = (User) session.getAttribute("loginUser"); // 세션에서 로그인 사용자 가져오기
-////
-////	    if (loginUser == null) {
-////	        return "redirect:/login"; // 로그인 안 되어 있으면 로그인 페이지로
-////	    }
-//
-//	    int userId = 4; // 로그인 유저 ID
-//	    matchingService.acceptMatchesByUserId(userId, type, idealId); // 상태 변경 서비스 호출
-//
-//	    return "matchRequestDone"; // 결과 페이지로 이동
-//	}
-	
-//	@RequestParam("type") String type, HttpSession session,
 	@PostMapping("/matchRequestDone")
     public String handleMatchRequest2(
             @RequestParam String priority1,
             @RequestParam String priority2,
             @RequestParam String priority3,
             @RequestParam("requestType") String requestType,
+            HttpSession session,
             Model model) {
-//      User loginUser = (User) session.getAttribute("loginUser"); // 세션에서 로그인 사용자 가져오기
-//      
-//      if (loginUser == null) {
-//          return "redirect:/login"; // 로그인 안 되어 있으면 로그인 페이지로
-//      }
-//      
-//      int userId = loginUser.getUserId();
-		int userId = 1067;
+     
+	    Integer userId = (Integer) session.getAttribute("userId"); // 세션에서 userId 꺼내기
+
+	    if (userId == null) {  // 세션 만료 또는 로그인 안 된 상태
+	        return "redirect:/signup/login";
+	    }
 
         matchingService.requestMatching(userId, priority1, priority2, priority3, requestType);
 
@@ -236,23 +231,4 @@ public class MatchingController {
 
 	    return "idealTypeInfo"; // 위에서 작성한 팝업 JSP
 	}
-	
-//	@PostMapping("/match/request")
-//	public ResponseEntity<String> requestMatch(@RequestParam int userId) {}
-//	//매칭 요청
-//
-//	@GetMapping("/match/result/all")
-//	public ResponseEntity<List<Matching>> getMatchResults(@RequestParam int userId) {}
-//	//매칭 모든 결과값
-//
-//	@GetMapping("/match/result/one")
-//	public ResponseEntity<Matching> getMatchResult(@RequestParam int matchId) {}
-//	//매칭 하나의 결과값
-//
-//	@PostMapping("/match/respond")
-//	public ResponseEntity<String> respondToMatching(
-//	    @RequestParam int matchId,
-//	    @RequestParam String status // "ACCEPTED" or "REJECTED"
-//	) {}
-
 }
