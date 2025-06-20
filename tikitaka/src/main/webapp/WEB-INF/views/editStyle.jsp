@@ -8,27 +8,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styleForm.css">
     <meta charset="UTF-8">
-    <script>
-/* 		window.addEventListener("DOMContentLoaded", function () {
-            const buttons = document.querySelectorAll('.style-tag');
-            const hiddenInput = document.getElementById("selectedFashionType");
-
-            buttons.forEach(button => {
-                button.addEventListener("click", function (e) {
-                    e.preventDefault(); // form submit 방지
-
-                    // 기존 선택 해제
-                    buttons.forEach(b => b.classList.remove("selected"));
-
-                    // 새로 선택
-                    this.classList.add("selected");
-
-                    // 값 저장
-                    hiddenInput.value = this.innerText.trim();
-                });
-            });
-        }); */
-	</script>
 </head>
 <body>
 <div class="container">
@@ -39,17 +18,17 @@
             <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
         </div>
     </div>
-	<form action="${pageContext.request.contextPath}/user/updateFashion" method="post" id="styleForm">
+	<form action="${pageContext.request.contextPath}/mypage/updateStyle" method="post" id="styleForm">
 	    <div class="content">
 	        <div class="title">평소 사복 스타일이 궁금해요</div>
-	        <input type="hidden" name="style" id="styleInput">
+	        <input type="hidden" name="style" id="styleInput" value="${user.fashion}">
 	        <div class="style-grid">
-	            <button type="button" class="style-tag" data-value="캐주얼">캐주얼</button>
-	            <button type="button" class="style-tag" data-value="모던">모던</button>
-	            <button type="button" class="style-tag" data-value="스트릿">스트릿</button>
-	            <button type="button" class="style-tag" data-value="페미닌">페미닌</button>
-	            <button type="button" class="style-tag" data-value="클래식">클래식</button>
-	            <button type="button" class="style-tag" data-value="빈티지">빈티지</button>
+	            <button type="button" class="style-tag ${user.fashion == '캐주얼' ? 'selected' : ''}" data-value="캐주얼">캐주얼</button>
+	            <button type="button" class="style-tag ${user.fashion == '모던' ? 'selected' : ''}" data-value="모던">모던</button>
+	            <button type="button" class="style-tag ${user.fashion == '스트릿' ? 'selected' : ''}" data-value="스트릿">스트릿</button>
+	            <button type="button" class="style-tag ${user.fashion == '페미닌' ? 'selected' : ''}" data-value="페미닌">페미닌</button>
+	            <button type="button" class="style-tag ${user.fashion == '클래식' ? 'selected' : ''}" data-value="클래식">클래식</button>
+	            <button type="button" class="style-tag ${user.fashion == '빈티지' ? 'selected' : ''}" data-value="빈티지">빈티지</button>
 	        </div>
 	    </div>
 	    <div class="footer">
@@ -59,13 +38,19 @@
 	<script>
 	    const tags = document.querySelectorAll('.style-tag');
 	    const styleInput = document.getElementById('styleInput');
+	    
 	    tags.forEach(tag => {
 	        tag.addEventListener('click', function(e) {
+	            // 모든 태그의 선택 상태 해제
 	            tags.forEach(t => t.classList.remove('selected'));
+	            // 클릭된 태그 선택
 	            tag.classList.add('selected');
+	            // 숨겨진 input에 값 설정
 	            styleInput.value = tag.getAttribute('data-value');
 	        });
 	    });
+	    
+	    // 폼 제출 시 검증
 	    document.getElementById('styleForm').addEventListener('submit', function(e) {
 	        if (!styleInput.value) {
 	            alert('스타일을 하나 선택해주세요!');

@@ -11,24 +11,27 @@
     <script>
 		function exit() {
 		    if (confirm("수정을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		        window.location.href = "${pageContext.request.contextPath}/mypage/mypage";
 		    }
 		}
 		
 		window.onload = function () {
 	        const mbtiDropdown = document.getElementById("mbtiSelect");
 	        const unknownBtn = document.getElementById("unknownOption");
+	        const hiddenInput = document.getElementById("mbtiHiddenInput");
 
 	        // 몰라요 버튼 클릭 시
 	        unknownBtn.addEventListener("click", function () {
 	            mbtiDropdown.selectedIndex = 0; // "선택하기"로 초기화
 	            unknownBtn.classList.add("selected");
+	            hiddenInput.value = "상관없음";
 	        });
 
 	        // 드롭다운에서 선택 시
 	        mbtiDropdown.addEventListener("change", function () {
 	            if (mbtiDropdown.value !== "") {
 	                unknownBtn.classList.remove("selected");
+	                hiddenInput.value = mbtiDropdown.value;
 	            }
 	        });
 	    };
@@ -46,27 +49,29 @@
 		    <div class="description">무엇이든 상관없다면 '상관없어요'를 눌러주세요</div>
 		
 		    <div class="mbti-select-wrapper">
-		        <select class="mbti-dropdown" name="mbti" id="mbtiSelect">
+		        <select class="mbti-dropdown" id="mbtiSelect">
 		            <option value="" disabled selected>선택하기</option>
-		            <option value="INTJ">INTJ</option>
-		            <option value="INTP">INTP</option>
-		            <option value="ENTJ">ENTJ</option>
-		            <option value="ENTP">ENTP</option>
-		            <option value="INFJ">INFJ</option>
-		            <option value="INFP">INFP</option>
-		            <option value="ENFJ">ENFJ</option>
-		            <option value="ENFP">ENFP</option>
-		            <option value="ISTJ">ISTJ</option>
-		            <option value="ISFJ">ISFJ</option>
-		            <option value="ESTJ">ESTJ</option>
-		            <option value="ESFJ">ESFJ</option>
-		            <option value="ISTP">ISTP</option>
-		            <option value="ISFP">ISFP</option>
-		            <option value="ESTP">ESTP</option>
-		            <option value="ESFP">ESFP</option>
+		            <option ${friend.ftMbti == 'INTJ' ? 'selected' : ''} value="INTJ">INTJ</option>
+					<option ${friend.ftMbti == 'INTP' ? 'selected' : ''} value="INTP">INTP</option>
+					<option ${friend.ftMbti == 'ENTJ' ? 'selected' : ''} value="ENTJ">ENTJ</option>
+					<option ${friend.ftMbti == 'ENTP' ? 'selected' : ''} value="ENTP">ENTP</option>
+					<option ${friend.ftMbti == 'INFJ' ? 'selected' : ''} value="INFJ">INFJ</option>
+					<option ${friend.ftMbti == 'INFP' ? 'selected' : ''} value="INFP">INFP</option>
+					<option ${friend.ftMbti == 'ENFJ' ? 'selected' : ''} value="ENFJ">ENFJ</option>
+					<option ${friend.ftMbti == 'ENFP' ? 'selected' : ''} value="ENFP">ENFP</option>
+					<option ${friend.ftMbti == 'ISTJ' ? 'selected' : ''} value="ISTJ">ISTJ</option>
+					<option ${friend.ftMbti == 'ISFJ' ? 'selected' : ''} value="ISFJ">ISFJ</option>
+					<option ${friend.ftMbti == 'ESTJ' ? 'selected' : ''} value="ESTJ">ESTJ</option>
+					<option ${friend.ftMbti == 'ESFJ' ? 'selected' : ''} value="ESFJ">ESFJ</option>
+					<option ${friend.ftMbti == 'ISTP' ? 'selected' : ''} value="ISTP">ISTP</option>
+					<option ${friend.ftMbti == 'ISFP' ? 'selected' : ''} value="ISFP">ISFP</option>
+					<option ${friend.ftMbti == 'ESTP' ? 'selected' : ''} value="ESTP">ESTP</option>
+					<option ${friend.ftMbti == 'ESFP' ? 'selected' : ''} value="ESFP">ESFP</option>
 		        </select>
 		
-		        <div class="mbti-option" id="unknownOption">상관없어요</div>
+		        <div class="mbti-option ${friend.ftMbti == '상관없음' ? 'selected' : ''}" id="unknownOption" >상관없어요</div>
+		   		<input type="hidden" name="mbti" id="mbtiHiddenInput" />
+	
 		    </div>
 		</div>
         <div class="footer">

@@ -39,10 +39,15 @@ public class MatchingController {
 
 
     @GetMapping("/prioritySelect")
-    public String showPrioritySelect(@RequestParam("requestType") String requestType, Model model) {
+    public String showPrioritySelect(@RequestParam("requestType") String requestType, HttpSession session, Model model) {
         model.addAttribute("requestType", requestType); // <-- 이게 있어야 JSP에서 ${requestType} 가능
         
-        int userId = 1068;
+
+        Integer userId = (Integer) session.getAttribute("userId"); // 세션에서 userId 꺼내기
+
+        if (userId == null) {  // 세션 만료 또는 로그인 안 된 상태
+            return "redirect:/signup/login";
+        }
         
         boolean b = matchingService.getMatchingStatus(userId, requestType);
         model.addAttribute("status", b);
@@ -57,7 +62,7 @@ public class MatchingController {
 	}
 	
 	@GetMapping("/isMatchingResultPage")
-	public String isMatchingResultPage(@RequestParam("matchedUserId") int matchedUserId, Model model) {
+	public String isMatchingResultPage(@RequestParam("matchedUserId") int matchedUserId, HttpSession session, Model model) {
 		model.addAttribute("matchedUserId", matchedUserId);
 		 
 		matchingRepository.acceptMatching(matchedUserId);
@@ -66,9 +71,15 @@ public class MatchingController {
 	}
 	
 	@GetMapping("/matchingResultPage")
-	public String showMatchingResultPage(Model model) {
+	public String showMatchingResultPage(HttpSession session, Model model) {
 	    
-	    int userId = 1068; //임시로 정해놈
+	    Integer userId = (Integer) session.getAttribute("userId"); // 세션에서 userId 꺼내기
+
+	    if (userId == null) {  // 세션 만료 또는 로그인 안 된 상태
+	        return "redirect:/signup/login";
+	    }
+	    
+        System.out.println("세션에서 가져온 로그인 아이디: "+userId);
 
 	    List<User> matchingList = matchingService.getMatchingResults(userId, "I");
 
@@ -78,9 +89,13 @@ public class MatchingController {
 	}
 	
 	@GetMapping("/friendMatchingResultPage")
-    public String showFriendMatchingResultPage(Model model) {
+    public String showFriendMatchingResultPage(HttpSession session, Model model) {
         
-        int userId = 1068; //임시로 정해놈
+	    Integer userId = (Integer) session.getAttribute("userId"); // 세션에서 userId 꺼내기
+
+	    if (userId == null) {  // 세션 만료 또는 로그인 안 된 상태
+	        return "redirect:/signup/login";
+	    }
         
         List<User> matchingList = matchingService.getMatchingResults(userId, "F");        
         model.addAttribute("matchingList", matchingList);
@@ -95,7 +110,7 @@ public class MatchingController {
 	
 
 	@GetMapping("/idealTypeInfo")
-    public String showIdealTypeInfo(@RequestParam("address") String address, @RequestParam("age") int age, @RequestParam("introduce") String introduce, @RequestParam("userId") int userId, @RequestParam("facialType") String facialType, Model model) {
+    public String showIdealTypeInfo(@RequestParam("address") String address, @RequestParam("age") int age, @RequestParam("introduce") String introduce, @RequestParam("userId") int userId, @RequestParam("facialType") String facialType, HttpSession session, Model model) {
         // 디버깅용 로그 추가
 //        System.out.println("IdealType Data: " + place + ", " + age + ", " + introduce + ", " + imageUrl);
 
@@ -109,11 +124,11 @@ public class MatchingController {
 	
 //	@GetMapping("/matchRequestDone")
 //	public String handleMatchRequest(@RequestParam("type") String type, int idealId) {
-////	    User loginUser = (User) session.getAttribute("loginUser"); // 세션에서 로그인 사용자 가져오기
-////
-////	    if (loginUser == null) {
-////	        return "redirect:/login"; // 로그인 안 되어 있으면 로그인 페이지로
-////	    }
+//	    User loginUser = (User) session.getAttribute("loginUser"); // 세션에서 로그인 사용자 가져오기
+//
+//	    if (loginUser == null) {
+//	        return "redirect:/login"; // 로그인 안 되어 있으면 로그인 페이지로
+//	    }
 //
 //	    int userId = 4; // 로그인 유저 ID
 //	    matchingService.acceptMatchesByUserId(userId, type, idealId); // 상태 변경 서비스 호출
@@ -128,6 +143,7 @@ public class MatchingController {
             @RequestParam String priority2,
             @RequestParam String priority3,
             @RequestParam("requestType") String requestType,
+            HttpSession session,
             Model model) {
 //      User loginUser = (User) session.getAttribute("loginUser"); // 세션에서 로그인 사용자 가져오기
 //      
@@ -138,7 +154,11 @@ public class MatchingController {
 //      int userId = loginUser.getUserId();
       
 
-		int userId = 1068;
+	    Integer userId = (Integer) session.getAttribute("userId"); // 세션에서 userId 꺼내기
+
+	    if (userId == null) {  // 세션 만료 또는 로그인 안 된 상태
+	        return "redirect:/signup/login";
+	    }
 
         matchingService.requestMatching(userId, priority1, priority2, priority3, requestType);
 

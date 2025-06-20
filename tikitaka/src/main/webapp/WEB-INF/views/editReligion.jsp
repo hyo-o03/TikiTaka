@@ -19,34 +19,34 @@
 	            <jsp:include page="alarm.jsp" />
 	        </div>
         </div>
-		<form action="${pageContext.request.contextPath}/user/updateReligion" method="post" class="form-layout" id="religionForm">
+		<form action="${pageContext.request.contextPath}/mypage/updateReligion" method="post" class="form-layout" id="religionForm">
 		    <div class="content">
 		        <div class="title">종교는 무엇인가요?</div>
 		        <div class="description">상대와 만날 때 종교도 정말 중요해요<br>본인의 종교가 무엇인지 알려주세요</div>
 		        <div class="option-box">
 	                <label class="option">
 	                  <span class="label-text">기독교</span>
-	                  <input type="radio" name="religion" value="기독교">
+	                  <input type="radio" name="religion" value="기독교" ${user.religion == '기독교' ? 'checked' : ''}>
 	                  <span class="circle"></span>
 	                </label>
 	                <label class="option">
 	                  <span class="label-text">천주교</span>
-	                  <input type="radio" name="religion" value="천주교">
+	                  <input type="radio" name="religion" value="천주교" ${user.religion == '천주교' ? 'checked' : ''}>
 	                  <span class="circle"></span>
 	                </label>
 	                <label class="option">
 	                    <span class="label-text">불교</span>
-	                    <input type="radio" name="religion" value="불교">
+	                    <input type="radio" name="religion" value="불교" ${user.religion == '불교' ? 'checked' : ''}>
 	                    <span class="circle"></span>
 	                </label>
 	                <label class="option">
 	                    <span class="label-text">힌디</span>
-	                    <input type="radio" name="religion" value="힌디">
+	                    <input type="radio" name="religion" value="힌디" ${user.religion == '힌디' ? 'checked' : ''}>
 	                    <span class="circle"></span>
 	                </label>
 	                <label class="option">
 	                    <span class="label-text">무교</span>
-	                    <input type="radio" name="religion" value="무교">
+	                    <input type="radio" name="religion" value="무교" ${user.religion == '무교' ? 'checked' : ''}>
 	                    <span class="circle"></span>
 	                </label>
 		        </div>

@@ -11,13 +11,15 @@
     <script>
 		function exit() {
 		    if (confirm("수정을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		        window.location.href = "${pageContext.request.contextPath}/mypage/mypage";
 		    }
 		}
 		
 		const maxSelection = 5;
 		const minSelection = 2;
 	    const selected = new Set();
+	    
+	    const initialSelectedHobbies = "${ideal.itHobby != null ? ideal.itHobby : ''}".split(",");
 
 	    function toggleHobby(label) {
 	        const hobbyName = label.textContent.trim().replace(/^[^\s]+\s*/, ""); // 이모지 제거
@@ -47,6 +49,19 @@
 	                event.preventDefault(); // 제출 막기
 	            }
 	        });
+	        
+	     // 1. 기존 선택 상태 세팅
+	        const labels = document.querySelectorAll(".interest-item");
+	        labels.forEach(label => {
+	            const hobbyName = label.textContent.trim().replace(/^[^\s]+\s*/, "");
+	            if (initialSelectedHobbies.includes(hobbyName)) {
+	                label.classList.add("selected");
+	                selected.add(hobbyName);
+	            }
+	        });
+
+	        // 2. hidden input에 초기값 반영
+	        document.getElementById("selectedHobby").value = Array.from(selected).join(",");
 	    };
 	</script>
 </head>
@@ -56,7 +71,7 @@
 	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
 	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
 	    </div>
-	    <form action="${pageContext.request.contextPath}/mypage/editFormMenu" method="post" class="form-layout">
+	    <form action="${pageContext.request.contextPath}/ideal/idealMbti" method="post" class="form-layout">
 		<div class="content">
 		    <div class="title">당신의 이상형의 취미가 무엇이었으면 좋겠나요?</div>
 		    <div class="description">2개 이상 필수로 골라주세요</div>

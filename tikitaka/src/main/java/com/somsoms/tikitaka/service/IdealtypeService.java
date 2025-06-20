@@ -13,12 +13,11 @@ public class IdealtypeService {
     @Autowired
     private IdealtypeRepository idealtypeRepository;
 	
-    Idealtype getIdealtype(Long userId) {
-        return null;
+
+    public IdealtypeService(IdealtypeRepository idealtypeRepository) {
+        this.idealtypeRepository = idealtypeRepository;
     }
     
-    void updateIdealtype(Idealtype idealtypeCommand) {
-	}
     
     public void processMatching(int userId, String priority1, String priority2, String priority3) {
         Idealtype idealtype =idealtypeRepository.findByUser_UserId(userId);
@@ -46,10 +45,24 @@ public class IdealtypeService {
             case "거주지": return ideal.getItAddress();
             case "관심사": return ideal.getItHobby();
             case "MBTI": return ideal.getItMbti();
-            case "흡연유무": return ideal.isItSmoke();
+            case "흡연유무": return ideal.getItSmoke();
             case "종교": return ideal.getItFacialtype();
             default: return "";
         }
+    }
+    // ✅ 사용자 ID로 이상형 정보 가져오기
+    public Idealtype getIdealtypeByUserId(int userId) {
+        return idealtypeRepository.findByUser_UserId(userId);
+    }
+
+    // ✅ 이상형 정보 저장 (등록/수정 모두)
+    public void updateIdealtype(Idealtype idealtype) {
+        idealtypeRepository.save(idealtype); // 영속 상태이면 update
+    }
+
+    // ✅ 삭제가 필요할 경우 (실제 사용 가능)
+    public void deleteIdealtype(int id) {
+        idealtypeRepository.deleteById(id);
     }
 
 }

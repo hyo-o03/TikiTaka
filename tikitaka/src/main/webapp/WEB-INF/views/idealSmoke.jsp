@@ -14,7 +14,7 @@
     <script>
 		function exit() {
 		    if (confirm("수정을 취소하시겠습니까?")) {
-		        window.location.href = "${pageContext.request.contextPath}/signup/start";
+		        window.location.href = "${pageContext.request.contextPath}/mypage/mypage";
 		    }
 		}
 	</script>
@@ -33,19 +33,19 @@
 	            <div class="option-box">
 	                <label class="option">
 	                  <span class="label-text">🚭비흡연자</span>
-	                  <input type="radio" name="smoke" value="비흡연">
+	                  <input ${ideal.itSmoke == '비흡연' ? 'checked' : ''} name="smoke" type="radio" value="비흡연"/>
 	                  <span class="circle"></span>
 	                </label>
 	              
 	                <label class="option">
 	                  <span class="label-text">🚬흡연자</span>
-	                  <input type="radio" name="smoke" value="흡연">
+	                  <input ${ideal.itSmoke == '흡연' ? 'checked' : ''} name="smoke" type="radio" value="흡연"/>
 	                  <span class="circle"></span>
 	                </label>
 	                
 	                <label class="option">
 	                  <span class="label-text">🙅상관없어요</span>
-	                  <input type="radio" name="smoke" value="흡연">
+	                  <input ${ideal.itSmoke == '상관없음' ? 'checked' : ''} type="radio" name="smoke" value="상관없음">
 	                  <span class="circle"></span>
 	                </label>
 	              </div>

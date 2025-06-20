@@ -29,7 +29,7 @@ public class Idealtype {
 
     @Column(name = "IT_AGE")
     private Integer itAge;
-
+    
     @Column(name = "IT_HEIGHT")
     private double itHeight;
 
@@ -52,10 +52,13 @@ public class Idealtype {
     private String itHobby;
     
     @Column(name = "IT_DISTANCE_PREF", length = 10)
-    private String itDistancepref; // ✅ 새로 추가됨
+    private String itDistancePref; // ✅ 새로 추가됨
     
     @Column(name = "IT_AGE_PREFERENCE", length = 10)
-    private String itAgepreference; // ✅ 새로 추가됨
+    private String itAgePreference; // ✅ 새로 추가됨
+    
+    @Column(name = "IT_RELIGION", length = 10)
+    private String itReligion;
 
     /* Constructors */
     
@@ -67,8 +70,8 @@ public class Idealtype {
     public void setItId(int itId) { this.itId = itId; }
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
-    public int getItAge() { return itAge; }
-    public void setItAge(int itAge) { this.itAge = itAge; }
+    public Integer getItAge() { return itAge; }
+    public void setItAge(Integer itAge) { this.itAge = itAge; }
     public double getItHeight() { return itHeight; }
     public void setItHeight(double itHeight) { this.itHeight = itHeight; }
     public String getItMbti() { return itMbti; }
@@ -80,13 +83,14 @@ public class Idealtype {
 
 	public String getItFashion() { return itFashion; }
 	public void setItFashion(String itFashion) { this.itFashion = itFashion; }
-	public String isItSmoke() { return itSmoke; }
+	public String getItSmoke() { return itSmoke; }
 	public void setItSmoke(String itSmoke) { this.itSmoke = itSmoke; }
 	public String getItHobby() { return itHobby; }
 	public void setItHobby(String itHobby) { this.itHobby = itHobby; }
-	public String getItAgePreference() { return itAgepreference; } // ✅ 추가
-    public void setItAgePreference(String itAgepreference) { this.itAgepreference = itAgepreference; }
-    public String getItDistancepref() { return itDistancepref; } // ✅ 추가
-    public void setItDistancepref(String itDistancepref) { this.itDistancepref = itDistancepref; }
-
+	public String getItAgePreference() { return itAgePreference; } // ✅ 추가
+    public void setItAgePreference(String itAgePreference) { this.itAgePreference = itAgePreference; }
+    public String getItDistancePref() { return itDistancePref; } // ✅ 추가
+    public void setItDistancePref(String itDistancePref) { this.itDistancePref = itDistancePref; }
+    public String getItReligion( ) {return itReligion;}
+    public void setItReligion(String itReligion) {this.itReligion = itReligion;}
 }

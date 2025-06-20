@@ -32,6 +32,18 @@
 	            }
 	        });
 	    };
+	    
+	    function validateMbti() {
+	        const mbtiValue = document.getElementById("mbtiSelect").value;
+	        const unknownSelected = document.getElementById("unknownOption").classList.contains("selected");
+
+	        if (mbtiValue === "" && !unknownSelected) {
+	            alert("MBTI를 선택하거나 '몰라요'를 눌러주세요.");
+	            return false;
+	        }
+
+	        return true;
+	    }
 	</script>
 </head>
 <body>
@@ -40,7 +52,7 @@
 	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
 	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
 	    </div>
-	    <form action="${pageContext.request.contextPath}/user/sns" method="post" class="form-layout">
+	    <form action="${pageContext.request.contextPath}/user/sns" method="post" class="form-layout" onsubmit="return validateMbti();">
 		<div class="content">
 		    <div class="title">MBTI를 알려주세요</div>
 		    <div class="description">혹시 MBTI를 밝히기 싫거나 모르는 분들은 "몰라요"를 골라주세요</div>

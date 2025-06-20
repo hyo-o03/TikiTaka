@@ -107,7 +107,7 @@ public class MatchingService {
             case "거주지" -> predicates.add(cb.equal(user.get("address"), ideal.getItAddress()));
             case "MBTI" -> predicates.add(cb.equal(user.get("mbti"), ideal.getItMbti()));
             case "관심사" -> predicates.add(cb.equal(user.get("hobby"), ideal.getItHobby()));
-            case "흡연유무" -> predicates.add(cb.equal(user.get("smoke"), ideal.isItSmoke()));
+            case "흡연유무" -> predicates.add(cb.equal(user.get("smoke"), ideal.getItSmoke()));
             case "종교" -> predicates.add(cb.equal(user.get("facialType"), ideal.getItFacialtype()));
         }
 

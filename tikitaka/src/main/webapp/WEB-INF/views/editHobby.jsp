@@ -32,8 +32,35 @@
 	        document.getElementById("selectedHobby").value = Array.from(selected).join(",");
 	    }
 	    
+	    // 페이지 로드 시 기존 취미 데이터 초기화
+	    function initializeSelectedHobbies() {
+	        // 서버에서 전달받은 기존 취미 데이터
+	        const existingHobbies = "${user.hobby}"; // 또는 적절한 속성명 사용
+	        
+	        if (existingHobbies && existingHobbies.trim() !== "") {
+	            const hobbyArray = existingHobbies.split(",");
+	            
+	            // 모든 취미 라벨을 순회하면서 기존 취미와 매칭되는 것들을 선택 처리
+	            const labels = document.querySelectorAll('.interest-item');
+	            labels.forEach(label => {
+	                const hobbyName = label.textContent.trim().replace(/^[^\s]+\s*/, ""); // 이모지 제거
+	                
+	                if (hobbyArray.includes(hobbyName)) {
+	                    label.classList.add("selected");
+	                    selected.add(hobbyName);
+	                }
+	            });
+	            
+	            // hidden input에 초기값 설정
+	            document.getElementById("selectedHobby").value = Array.from(selected).join(",");
+	        }
+	    }
+	    
 	    // 폼 제출 전 최소 선택 수 확인
 	    window.onload = function () {
+	        // 기존 취미 데이터 초기화
+	        initializeSelectedHobbies();
+	        
 	        const form = document.querySelector("form");
 	        form.addEventListener("submit", function (event) {
 	            if (selected.size < minSelection) {
@@ -53,7 +80,7 @@
 	            <jsp:include page="alarm.jsp" />
 	        </div>
 	    </div>
-	    <form action="${pageContext.request.contextPath}/user/updateHobby" method="post" class="form-layout">
+	    <form action="${pageContext.request.contextPath}/mypage/updateHobby" method="post" class="form-layout">
 		<div class="content">
 		    <div class="title">관심사는 무엇인가요?</div>
 		    <div class="description">당신의 관심사가 무엇인지 궁금해요! 2개 이상 필수로 골라주세요</div>
@@ -97,37 +124,6 @@
             <button type="submit" class="next-button">수정하기</button>
         </div>
         </form>
-        	<script>
-				const hobbyInput = document.getElementById('hobbyInput');
-				const items = document.querySelectorAll('.interest-item');
-
-				items.forEach(function(item) {
-				    item.addEventListener('click', function() {
-				        if (item.classList.contains('selected')) {
-				            // 이미 선택되어 있다면 해제
-				            item.classList.remove('selected');
-				        } else {
-				            // 최대 5개까지 선택
-				            const selectedCount = document.querySelectorAll('.interest-item.selected').length;
-				            if (selectedCount >= 5) {
-				                alert("최대 5개까지만 선택할 수 있습니다!");
-				                return;
-				            }
-				            item.classList.add('selected');
-				        }
-				    });
-				});
-
-				document.getElementById('hobbyForm').addEventListener('submit', function(e) {
-				    const selected = Array.from(document.querySelectorAll('.interest-item.selected')).map(item => item.getAttribute('data-value'));
-				    if (selected.length === 0) {
-				        alert('최소 1개의 관심사를 선택해주세요!');
-				        e.preventDefault();
-				        return;
-				    }
-				    hobbyInput.value = selected.join(',');
-				});
-			</script>
 	</div>
 </body>
 </html>
