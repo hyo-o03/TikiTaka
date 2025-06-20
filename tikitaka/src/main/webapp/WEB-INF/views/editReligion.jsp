@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/religionForm.css">
     <meta charset="UTF-8">
+    
+    <script>
+	    window.onload = function () {
+	        document.getElementById("religionForm").addEventListener("submit", function (e) {
+	            const selected = document.querySelector('input[name="religion"]:checked');
+	            if (!selected) {
+	                alert("종교를 선택해주세요.");
+	                e.preventDefault(); // 폼 제출 막기
+	            }
+	        });
+	    };
+	</script>
 </head>
 <body>
     <div class="container">

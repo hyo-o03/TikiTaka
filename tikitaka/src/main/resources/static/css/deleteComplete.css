@@ -1,0 +1,21 @@
+.container {
+    background: linear-gradient(180deg, #ffeaf5 0%, #dfc4ff 100%);
+}
+
+.complete-container {
+    padding-top: 100px;
+    text-align: center;
+    color: #333;
+}
+
+.complete-desc {
+    font-size: 14px;
+    color: #777;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.complete-emoji {
+    font-size: 172px;
+    margin-bottom: 60px;
+}

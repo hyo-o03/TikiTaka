@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="idealTypeDetail" data-value="얼굴상">
+    얼굴상
+</div>
 <div class="idealTypeDetail" data-value="나이">
     나이
 </div>

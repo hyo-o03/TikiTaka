@@ -83,6 +83,7 @@ button {
     background: #F6F4FF;
     border-radius: 20px;
     padding: 10px 40px;
+    cursor: pointer;
 }
 
 .escBtn{

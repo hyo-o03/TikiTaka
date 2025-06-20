@@ -177,7 +177,7 @@ public class MatchingController {
 
         matchingService.requestMatching(userId, priority1, priority2, priority3, requestType);
 
-        return "redirect:/match/matchRequestDone"; // 결과 페이지로 이동
+        return "matchRequestDone"; // 결과 페이지로 이동
     }
 	
 	@PostMapping("/sendRequest")
@@ -196,7 +196,7 @@ public class MatchingController {
 	    respondedMatchIds.add(matchId);
 	    session.setAttribute("respondedMatches", respondedMatchIds);
 	    
-	    return "redirect:/match/matchingResultPage"; // 또는 매칭 완료 페이지
+	    return "redirect:/user/home"; // 또는 매칭 완료 페이지
 	}
 	
 	@PostMapping("/sendRejected")
@@ -204,7 +204,7 @@ public class MatchingController {
 //	    User sender = (User) session.getAttribute("loginUser");
 		matchingService.rejectMatch(matchId);
 	    
-	    return "redirect:/match/matchingResultPage"; // 또는 매칭 완료 페이지
+	    return "redirect:/user/home"; // 또는 매칭 완료 페이지
 	}
 	
 	@PostMapping("/accept")

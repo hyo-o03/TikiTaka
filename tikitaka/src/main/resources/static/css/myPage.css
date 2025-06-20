@@ -3,10 +3,9 @@ body {
     padding: 0;
     font-family: 'Arial', sans-serif;
     background: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+
+    height: 100vh; /* ✅ 중요: 고정된 전체 높이 */
+    overflow: auto;
 }
 
 .container {
@@ -18,6 +17,14 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+}
+
+/* ✅ wrapper로 전체를 flex 중앙정렬 */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .header {
@@ -127,4 +134,68 @@ hr {
     transform: translateY(-50%);
     color: #aaa;
     font-size: 16px;
+}
+
+/* 너가 쓰는 버튼 스타일 복붙해서 적용 */
+.swal-next-button {
+    background-color: #7a4ff7;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 30px;
+    font-size: 15px;
+    cursor: pointer;
+    width: 150px;
+    margin: 5px;
+}
+
+.swal-cancel-button {
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 30px;
+    font-size: 15px;
+    cursor: pointer;
+    width: 150px;
+    margin: 5px;
+}
+
+/* 팝업 크기랑 폰트 줄이기 */
+.swal-popup-custom {
+    font-size: 14px;
+    padding: 20px;
+}
+
+
+/* 팝업이 container에 영향을 주지 않도록 */
+body.swal2-shown .container {
+    transform: none !important;
+    scale: 1 !important;
+    filter: none !important;
+    position: relative !important; /* ✅ 추가 */
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+}
+
+/* 팝업 뜰 때 배경 흔들림 방지 - 전체 요소에 적용 */
+
+body.swal2-shown,
+html.swal2-shown {
+    height: 100vh !important; /* ✅ 중요: 고정된 전체 높이 */
+    overflow: hidden !important;
+    position: relative; /* ✅ 추가 */
+}
+
+html {
+    height: 100%;
+    overflow: auto;
+}
+
+/* 팝업 wrapper의 transform 제거 (최종 방어선) */
+.swal2-container {
+    transform: none !important;
+    animation: none !important;
 }

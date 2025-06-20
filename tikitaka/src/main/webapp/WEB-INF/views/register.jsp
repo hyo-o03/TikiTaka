@@ -91,6 +91,14 @@
 	            }
 	        });
 	    };
+	    
+	    function togglePasswordVisibility(inputId, iconElement) {
+	        const input = document.getElementById(inputId);
+	        const isPassword = input.type === "password";
+
+	        input.type = isPassword ? "text" : "password";
+	        iconElement.textContent = isPassword ? "🔒" : "🔓";
+	    }
 	</script>
 </head>
 <body>
@@ -109,8 +117,9 @@
 				    <input type="text" class="text-input" name="registeremailOrPhone" id="registeremailOrPhone" placeholder="전화번호 혹은 이메일을 입력해주세요">
 				</div>	
 				<br>
-				<div class="input-wrapper">
-					<input type="text" class="text-input" name="registerPassword" id="registerPassword" placeholder="비밀번호를 입력해주세요">
+				<div class="input-wrapper" style="position: relative;">
+					<input type="password" class="text-input" name="registerPassword" id="registerPassword" placeholder="비밀번호를 입력해주세요">
+					<span class="toggle-password" onclick="togglePasswordVisibility('registerPassword', this)">🔓</span>  	
 			    </div>
 			    <div class="footer">
 			         <button type="submit" class="sibutton" name="registerPageButton">SignIn</button>

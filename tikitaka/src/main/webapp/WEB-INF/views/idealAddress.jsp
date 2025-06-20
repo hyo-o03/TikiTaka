@@ -25,7 +25,7 @@
 	    <form action="${pageContext.request.contextPath}/ideal/idealHobby" method="post" class="form-layout">
 			<div class="content" style="align-items: center;">
 			    <div class="title">거주지 선호도를 골라주세요</div>
-			    <div class="description">친구가 멀리 살고 있어도 괜찮나요?<br>매칭에 반영될 거주지 거리 선호도를 알려주세요</div>
+			    <div class="description">연인이 멀리 살고 있어도 괜찮나요?<br>매칭에 반영될 거주지 거리 선호도를 알려주세요</div>
 			    
 			    <div class="preference-options">
 			        <label class="option">

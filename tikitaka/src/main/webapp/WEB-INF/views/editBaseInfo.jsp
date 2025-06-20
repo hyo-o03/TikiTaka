@@ -166,8 +166,11 @@
 <body>
 	<div class="container">
 	    <div class="header">
-	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
-	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
+	        <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
+	        <div class="icons">
+	            <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
+	            <jsp:include page="alarm.jsp" />
+	        </div>
 	    </div>
 	
 	    <form id="editBaseInfoForm" class="form-layout" action="${pageContext.request.contextPath}/mypage/updateBaseInfo" method="post">

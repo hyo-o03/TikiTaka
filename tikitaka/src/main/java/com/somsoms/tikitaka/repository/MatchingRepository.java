@@ -26,6 +26,10 @@ public interface MatchingRepository extends JpaRepository<Matching, Integer> {
     Optional<Matching> findByUser_UserIdAndMatchedUserId(int userId, int matchedUserId);
     
     @Modifying
+    @Query("DELETE FROM Matching m WHERE m.user.id = :userId OR m.matchedUser.id = :userId")
+    void deleteByUserIdOrMatchedUserId(@Param("userId") int userId);
+    
+    @Modifying
     @Transactional
     @Query("""
         UPDATE Matching m

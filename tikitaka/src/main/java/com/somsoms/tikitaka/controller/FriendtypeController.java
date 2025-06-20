@@ -116,13 +116,11 @@ public class FriendtypeController {
     	Friendtype friend = friendtypeService.getFriendtypeByUserId(userId);
         
         if (friend != null) {
-        	if (mbti == null) {
-        		friend.setFtMbti(null); // null이면 그대로 null
-            } else if (mbti.trim().isEmpty()) {
-            	friend.setFtMbti("상관없음"); // 빈 문자열이면 상관없음
-            } else {
-            	friend.setFtMbti(mbti); // 정상 값
-            }
+        	if (mbti == null || mbti.trim().isEmpty()) {
+        	    friend.setFtMbti(null); // 선택 안 했을 때
+        	} else {
+        		friend.setFtMbti(mbti); // "상관없음" 포함, 선택한 값 그대로
+        	}
         	friendtypeService.updateFriendtype(friend);
         }
         

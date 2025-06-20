@@ -30,16 +30,23 @@ public class UserController {
         this.userService = userService;
     }
     
- // 마이페이지 홈
     @GetMapping("/myPage")
-    public String showMyPage() {
+    public String showMyPage(HttpSession session, Model model) {
+		Integer userId = (Integer) session.getAttribute("userId");
+	    if (userId == null) {
+	        return "redirect:/signup/login"; // 로그인 안 되어있으면 로그인으로
+	    }
+	    
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+    	
         return "myPage";
     }
     
     // 프로필 정보 폼
-    @GetMapping("/profile")
+    @PostMapping("/animalProfile")
     public String showProfileForm() {
-        return "profileForm";
+        return "animalProfileForm";
     }
     
  // 마이페이지 정보 수정 (editMyProfile.jsp)
@@ -48,10 +55,8 @@ public class UserController {
         User user = userService.getUserById(1066); // 임시 ID
         model.addAttribute("user", user);
         return "editMyProfile";
-    }
-	
-//	private UserService userService;
-	
+	}
+    
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -65,7 +70,8 @@ public class UserController {
 	    User user = userRepository.findById(userId).orElseThrow();
 	    user.setFacialType(facialType);
 	    userRepository.save(user);
-		return "animalProfileForm";
+	    
+		return "hobbyForm";
 	}
 
  // 자기소개 수정
@@ -79,11 +85,6 @@ public class UserController {
     public String showEditProfile() {
         return "editProfile";
     }
-    
-	@GetMapping("/address")
-	public String showAddress() {
-		return "addressForm";
-	}
 
 	@PostMapping("/mbti")
     public String showMbti(@RequestParam String hobby,
@@ -169,70 +170,6 @@ public class UserController {
         userRepository.save(user);
         return "finishSurvey";
     }
-	
-    
-    @PostMapping("/updateIntroduce")
-    public String updateIntroduce(@RequestParam("introduce") String introduce,
-                                  HttpSession session) {
-//        int userId = (Integer) session.getAttribute("userId");
-    	int userId = 1;
-        User user = userRepository.findById(userId).orElseThrow();
-        user.setIntroduce(introduce);
-        userRepository.save(user);
-        
-        return "editIntroduce";    
-    }
-    
-    @PostMapping("/updateFacialType")
-    public String updateFacialType(@RequestParam("facialType") String facialType,
-                                   HttpSession session) {
-        int userId = 1; //임시
-        User user = userRepository.findById(userId).orElseThrow();
-        user.setFacialType(facialType);
-        userRepository.save(user);
-        return "editProfile";
-    }
-    
-    @PostMapping("/updateAddress")
-    public String updateAddress(@RequestParam("userRegion") String address,
-                                HttpSession session) {
-        int userId = 1; //
-        User user = userRepository.findById(userId).orElseThrow();
-        user.setAddress(address);
-        userRepository.save(user);
-        return "editAddress";
-    }
-    
-    @PostMapping("/updateHobby")
-    public String updateHobby(@RequestParam("hobby") String hobby,
-                              HttpSession session) {
-        int userId = 1; //
-        User user = userRepository.findById(userId).orElseThrow();
-        user.setHobby(hobby); // 쉼표로 구분된 문자열
-        userRepository.save(user);
-        return "editHobby";
-    }
-    
-    @PostMapping("/updateMbti")
-    public void updateMbti(@RequestParam(value = "mbti", required = false) String mbti,
-                             HttpSession session) {
-        int userId = 1; // 
-        User user = userRepository.findById(userId).orElseThrow();
-        if (mbti == null || mbti.isBlank()) {
-            user.setMbti(null);
-        } else {
-            user.setMbti(mbti);
-        }
-        userRepository.save(user);
-      
-    }
-
-	// MBTI 수정
-    @GetMapping("/editMbti")
-    public String showEditMbti() {
-
-        return "editMbti";
-    }
 
 	@GetMapping("/sns")
 	public String showSns() {
@@ -248,13 +185,7 @@ public class UserController {
 	public String showSmoke() {
 		return "smokeForm";
 	}
-	
-	// 종교 수정
-    @GetMapping("/editReligion")
-    public String showEditReligion() {
-        return "editReligion";
-    }
-	
+
 	@GetMapping("/home")
 	public String showHome(HttpSession session, Model model) {
 		Integer userId = (Integer) session.getAttribute("userId");
@@ -282,5 +213,26 @@ public class UserController {
     @GetMapping("/finishSurvey")
     public String showFinishSurvey() {
         return "finishSurvey";
+    }
+        
+	// ✅ 로그아웃 처리
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // 세션 전체 삭제
+        return "redirect:/signup/start";  // 첫화면으로 이동
+    }
+
+    // ✅ 회원 탈퇴 처리
+    @GetMapping("/deleteComplete")
+    public String deleteUser(HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId != null) {
+            // 회원 탈퇴 처리
+            userService.deleteById(userId);
+            session.invalidate(); // 세션도 삭제
+        }
+
+        return "deleteComplete";  // 탈퇴 완료 페이지로 이동
     }
 }

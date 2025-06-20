@@ -9,6 +9,19 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userForm.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/smokeForm.css">
     <meta charset="UTF-8">
+    
+    <script>
+	    window.onload = function () {
+	        document.querySelector("form").addEventListener("submit", function (e) {
+	            const selected = document.querySelector('input[name="smoke"]:checked');
+	            if (!selected) {
+	                alert("흡연 여부를 선택해주세요.");
+	                e.preventDefault(); // 제출 막기
+	            }
+	        });
+	    };
+	</script>
+    
 </head>
 
 <body>

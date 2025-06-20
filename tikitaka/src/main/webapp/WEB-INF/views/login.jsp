@@ -14,6 +14,14 @@
 		    }
 		}
 		
+	    function togglePasswordVisibility(inputId, iconElement) {
+	        const input = document.getElementById(inputId);
+	        const isPassword = input.type === "password";
+
+	        input.type = isPassword ? "text" : "password";
+	        iconElement.textContent = isPassword ? "🔒" : "🔓";
+	    }
+		
 		<c:if test="${notFound}">
         alert('이메일/전화번호 또는 비밀번호가 올바르지 않습니다.');
     </c:if>
@@ -35,8 +43,9 @@
 				    <input type="text" class="text-input" name="emailOrPhone" placeholder="이메일 혹은 전화번호를 입력해주세요">
 				</div>	
 				<br>
-				<div class="input-wrapper">
-					<input type="text" class="text-input" name="password" placeholder="비밀번호를 입력해주세요">
+				<div class="input-wrapper" style="position: relative;">
+					<input type="password" class="text-input" name="password" id="password" placeholder="비밀번호를 입력해주세요">
+			    	<span class="toggle-password" onclick="togglePasswordVisibility('password', this)">🔓</span>  	
 			    </div>
 			    <div class="footer">
 			         <button type="submit" class="sibutton" name="loginPageButton">Login</button>

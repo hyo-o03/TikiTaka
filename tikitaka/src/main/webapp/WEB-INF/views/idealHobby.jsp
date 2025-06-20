@@ -112,7 +112,7 @@
 		    </div>
 		</div>
         <div class="footer">
-            <button type="submit" class="next-button">수정하기</button>
+            <button type="submit" class="next-button">다음단계</button>
         </div>
         </form>
 	</div>

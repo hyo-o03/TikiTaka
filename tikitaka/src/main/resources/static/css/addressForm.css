@@ -53,3 +53,14 @@
 .region-input input:focus {
     border-color: #7a4ff7;
 }
+
+.toggle-password {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    font-size: 18px;
+    color: #666;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10;
+}

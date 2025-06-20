@@ -17,6 +17,10 @@ public interface MatchingResultRepository extends JpaRepository<MatchingResult, 
     
     MatchingResult findTopByUserUserIdAndRequestTypeOrderByRequestTimeDesc(int userId, String requestType);
     
+    @Modifying
+    @Query("DELETE FROM MatchingResult m WHERE m.user.id = :userId")
+    void deleteByUserId(@Param("userId") int userId);
+    
     @Query("SELECT m.resultId FROM MatchingResult m WHERE m.user.userId = :userId AND m.requestType = :requestType")
     List<Integer> findResultIdsByUserIdAndRequestType(@Param("userId") int userId, @Param("requestType") String requestType);
     

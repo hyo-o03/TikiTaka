@@ -15,7 +15,7 @@
         <div class="logo"><a href="${pageContext.request.contextPath}/user/home" class="homeBtn">Tiki-Taka</a></div>
         <div class="icons">
             <a href="${pageContext.request.contextPath}/user/myPage" class="mypageBtn">👤</a>
-            <a href="${pageContext.request.contextPath}/user/alarm" class="alarmBtn">🔔</a>
+            <jsp:include page="alarm.jsp" />
         </div>
     </div>
 	<form action="${pageContext.request.contextPath}/mypage/updateStyle" method="post" id="styleForm">

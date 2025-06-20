@@ -64,7 +64,7 @@
 	            </div>
 	        </div>
 	        <div class="footer">
-	            <button type="submit" class="next-button">다음단계</button>
+	            <button type="submit" class="next-button">완료</button>
 	        </div>
 		</form>
     </div>

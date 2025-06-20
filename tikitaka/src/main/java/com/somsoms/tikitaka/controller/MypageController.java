@@ -1,5 +1,7 @@
 package com.somsoms.tikitaka.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.somsoms.tikitaka.domain.Alarm;
 import com.somsoms.tikitaka.domain.User;
+import com.somsoms.tikitaka.repository.AlarmRepository;
 import com.somsoms.tikitaka.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -19,6 +23,9 @@ public class MypageController {
 	
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private AlarmRepository alarmRepository;
 
     @GetMapping("/mypage")
     public String myPage() { return "myPage"; }
@@ -27,7 +34,17 @@ public class MypageController {
     public String postMyPage() { return "myPage"; }
     
     @GetMapping("/editPassword")
-    public String editPassword() { return "editPassword"; }
+    public String editPassword(HttpSession session, Model model) { 
+		Integer userId = (Integer) session.getAttribute("userId");
+	    if (userId == null) {
+	        return "redirect:/signup/login"; // 로그인 안 되어있으면 로그인으로
+	    }
+	    
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+    	
+    	return "editPassword"; 
+    }
     
     @PostMapping("/updatePassword")
     public String updatePassword(@RequestParam String currentPassword, 
@@ -36,6 +53,9 @@ public class MypageController {
                                Model model) {
     	int userId = (int) session.getAttribute("userId");
     	boolean success = userService.updatePassword(userId, currentPassword, newPassword);
+    	
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
         
         if (success) {
             return "redirect:/mypage/mypage";
@@ -54,6 +74,10 @@ public class MypageController {
 		int userId = (int) session.getAttribute("userId");
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "editBaseInfo"; 
     }
     
@@ -77,14 +101,38 @@ public class MypageController {
         user.setAddress(address);
         user.setWeightPrivate(weightPrivate != null ? "Y" : "N");
         userService.updateUser(user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "redirect:/mypage/mypage";
     }
     
     @GetMapping("/editFormMenu")
-    public String editFormMenu() { return "editFormMenu"; }
+    public String editFormMenu(HttpSession session, Model model) { 
+		Integer userId = (Integer) session.getAttribute("userId");
+	    if (userId == null) {
+	        return "redirect:/signup/login"; // 로그인 안 되어있으면 로그인으로
+	    }
+	    
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
+    	return "editFormMenu"; 
+    }
     
     @PostMapping("/editFormMenu")
-    public String postEditFormMenu() { return "editFormMenu"; }
+    public String postEditFormMenu(HttpSession session, Model model) { 
+		Integer userId = (Integer) session.getAttribute("userId");
+	    if (userId == null) {
+	        return "redirect:/signup/login"; // 로그인 안 되어있으면 로그인으로
+	    }
+	    
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
+    	return "editFormMenu"; 
+    }
     
     @GetMapping("/checkIdealForm")
     public String checkIdealForm() { return "checkIdealForm"; }
@@ -101,6 +149,10 @@ public class MypageController {
 		int userId = (int) session.getAttribute("userId");
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "editAnimalProfile"; 
     }
     
@@ -112,6 +164,10 @@ public class MypageController {
         User user = userService.getUserById(userId);
         user.setFacialType(facialType);
         userService.updateUser(user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "redirect:/mypage/editFormMenu";
     }
     
@@ -121,6 +177,10 @@ public class MypageController {
     	int userId = (int) session.getAttribute("userId");
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "editAddress"; 
     }
     
@@ -132,6 +192,10 @@ public class MypageController {
         User user = userService.getUserById(userId);
         user.setAddress(address);
         userService.updateUser(user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "redirect:/mypage/editFormMenu";
     }
     
@@ -141,8 +205,13 @@ public class MypageController {
     	int userId = (int) session.getAttribute("userId");
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "editHobby"; 
     }
+    
     @PostMapping("/updateHobby")
     public String updateHobby(@RequestParam(value = "hobby", required = false) String[] hobbies,
 					    		HttpSession session,
@@ -156,6 +225,10 @@ public class MypageController {
             user.setHobby("");
         }
         userService.updateUser(user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "redirect:/mypage/editFormMenu";
     }
     
@@ -165,6 +238,10 @@ public class MypageController {
     	int userId = (int) session.getAttribute("userId");
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "editMbti"; 
     }
     
@@ -176,6 +253,10 @@ public class MypageController {
         User user = userService.getUserById(userId);
         user.setMbti(mbti);
         userService.updateUser(user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "redirect:/mypage/editFormMenu";
     }
     
@@ -185,6 +266,10 @@ public class MypageController {
     	int userId = (int) session.getAttribute("userId");
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "editSns"; 
     }
     
@@ -198,6 +283,10 @@ public class MypageController {
         user.setSnsId(snsId);
         user.setKakaoId(kakaoId);
         userService.updateUser(user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "redirect:/mypage/editFormMenu";
     }
     
@@ -207,6 +296,10 @@ public class MypageController {
     	int userId = (int) session.getAttribute("userId");
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "editStyle"; 
     }
     
@@ -218,6 +311,10 @@ public class MypageController {
         User user = userService.getUserById(userId);
         user.setFashion(style);
         userService.updateUser(user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "redirect:/mypage/editFormMenu";
     }
     
@@ -227,8 +324,13 @@ public class MypageController {
     	int userId = (int) session.getAttribute("userId");
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "editReligion"; 
     }
+    
     @PostMapping("/updateReligion")
     public String updateReligion(@RequestParam String religion,
     							HttpSession session,
@@ -237,9 +339,12 @@ public class MypageController {
         User user = userService.getUserById(userId);
         user.setReligion(religion);
         userService.updateUser(user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "redirect:/mypage/editFormMenu";
     }
-
     
     @GetMapping("/editSmoke")
     public String editSmoke(HttpSession session,
@@ -247,8 +352,13 @@ public class MypageController {
     	int userId = (int) session.getAttribute("userId");
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "editSmoke"; 
     }
+    
     @PostMapping("/updateSmoke")
     public String updateSmoke(@RequestParam String smoke,
     						HttpSession session,
@@ -257,6 +367,10 @@ public class MypageController {
         User user = userService.getUserById(userId);
         user.setSmoke(smoke);
         userService.updateUser(user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "redirect:/mypage/editFormMenu";
     }
     
@@ -267,6 +381,10 @@ public class MypageController {
     	int userId = (int) session.getAttribute("userId");
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "editIntroduce"; 
     }
     @PostMapping("/updateIntroduce")
@@ -277,6 +395,10 @@ public class MypageController {
         User user = userService.getUserById(userId);
         user.setIntroduce(introduce);
         userService.updateUser(user);
+        
+	    List<Alarm> alarmList = alarmRepository.findByReceiver_UserId(userId);
+	    model.addAttribute("alarmList", alarmList);
+	    
         return "redirect:/mypage/editFormMenu";
     }
 }
