@@ -3,6 +3,7 @@ package com.somsoms.tikitaka.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,15 @@ public interface MatchingRepository extends JpaRepository<Matching, Integer> {
     List<Matching> findByMatchingResultResultId(int matchingResultId);
     
     List<Matching> findByMatchingResult_ResultIdIn(List<Integer> resultIds);
+    
+    @Modifying
+    @Transactional
+    @Query("""
+        UPDATE Matching m
+        SET m.status = 'ACCEPTED'
+        WHERE m.matchedUserId = :matchedUserId
+    """)
+    int acceptMatching(@Param("matchedUserId") int matchedUserId);
     
     @Modifying
     @Transactional

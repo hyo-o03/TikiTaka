@@ -18,4 +18,3 @@
 <div class="escBtn" onclick="closePopup()">
     <img src="${pageContext.request.contextPath}/images/escBtn.png">
 </div>
-

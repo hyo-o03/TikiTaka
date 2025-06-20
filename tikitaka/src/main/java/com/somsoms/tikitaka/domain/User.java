@@ -93,11 +93,12 @@ public class User {
 	
 	public User() {}
 	
-    public User(String address, int age, String introduce, int userId) {
+    public User(String address, int age, String introduce, int userId, String facialType) {
         this.address = address;
         this.age = age;
         this.introduce = introduce;
         this.userId = userId;
+        this.facialType = facialType;
     }
     
 	/* Getter/Setter */

@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/prioritySelect.css">
     <title>Tiki Taka</title>
     <script>
-        let requestType = "${requestType}";
+
 		function exit() {
 		    if (confirm("시작 페이지로 돌아가시겠습니까?")) {
 		        window.location.href = "${pageContext.request.contextPath}/signup/start";
 		    }
 		}
+		
 		let currentRank = 0;
-
+		let requestType = "${requestType}";
+		let matchingStatus = ${status};
 		
 		function selectItemFromPopup(value) {
             document.getElementById('choiceResult' + currentRank).innerText = value;
@@ -24,38 +26,42 @@
         }
 		
 		function loadChoicePopup(rank) {
-		    currentRank = rank;
+			if (!matchingStatus) {
+                alert("이미 매칭이 진행중입니다.");
+                return;
+            }
+            currentRank = rank;
 
-		    let url = "";
-		    if (requestType === 'F') {
-		        url = "${pageContext.request.contextPath}/ideal/friendIdealTypeChoice";
-		        System.out.println(requestType);
-		    } else if (requestType === 'I') {
-		        url = "${pageContext.request.contextPath}/ideal/idealTypeChoice";
-		    }
+            let url = "";
+            if (requestType === 'F') {
+                url = "${pageContext.request.contextPath}/ideal/friendIdealTypeChoice";
+            } else {
+                url = "${pageContext.request.contextPath}/ideal/idealTypeChoice";
+            }
 
-		    fetch(url)
-		        .then(response => response.text())
-		        .then(data => {
-		            document.getElementById('choicePopupContent').innerHTML = data;
-		            document.getElementById('choicePopup').style.display = 'block';
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('choicePopupContent').innerHTML = data;
+                    document.getElementById('choicePopup').style.display = 'block';
 
-		            document.querySelectorAll('#choicePopupContent .idealTypeDetail').forEach(item => {
-		                item.addEventListener('click', () => {
-		                    const value = item.getAttribute('data-value');
-		                    selectItemFromPopup(value);
-		                });
-		            });
-		        });
-		}
-
-
-
+                    document.querySelectorAll('#choicePopupContent .idealTypeDetail').forEach(item => {
+                        item.addEventListener('click', () => {
+                            const value = item.getAttribute('data-value');
+                            selectItemFromPopup(value);
+                        });
+                    });
+                });
+        }
 		function closePopup() {
 		    document.getElementById('choicePopup').style.display = 'none';
 		}
 		
 		function validatePriorities() {
+			if (!matchingStatus) {
+		        alert("이미 매칭이 진행중입니다.");
+		        return false;
+		    }
 		    for (let i = 1; i <= 3; i++) {
 		        const val = document.getElementById('priority' + i).value;
 		        if (!val) {

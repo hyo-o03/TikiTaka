@@ -28,7 +28,7 @@ public class Idealtype {
     private User user;
 
     @Column(name = "IT_AGE")
-    private int itAge;
+    private Integer itAge;
 
     @Column(name = "IT_HEIGHT")
     private double itHeight;

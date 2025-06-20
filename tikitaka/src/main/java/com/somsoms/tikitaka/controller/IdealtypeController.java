@@ -36,9 +36,11 @@ public class IdealtypeController {
     public String idealTypeChoice() {
         return "idealTypeChoice";
     }
+
+    
     @GetMapping("/friendIdealTypeChoice")
-    public String showFriendIdealTypeChoicePage() {
-        return "friendIdealTypeChoice"; // friendIdealTypeChoice.jsp 보여주기
+    public String friendIdealTypeChoice() {
+        return "friendIdealTypeChoice";
     }
 	
     @GetMapping("/checkIdealForm")

@@ -2,6 +2,7 @@ package com.somsoms.tikitaka.service;
 
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,35 +41,87 @@ public class MatchingService {
     
     @PersistenceContext
     private EntityManager entityManager;
+    
+    private List<User> getCandidatesByPriorityStep(int requesterId, Idealtype ideal, String p1, String p2, String p3) {
+        List<User> result = new ArrayList<>();
 
-	private List<User> findCandidatesByPriorities(int requesterId, Idealtype ideal, String p1, String p2, String p3) {
-	    CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-	    CriteriaQuery<User> cq = cb.createQuery(User.class);
-	    Root<User> user = cq.from(User.class);
+        // 1순위
+        List<User> first = filterByPriority(requesterId, ideal, p1);
+        List<User> firstPicked = pickRandom(first, 3);
+        result.addAll(firstPicked);
+        if (result.size() >= 3) return result;
 
-	    List<Predicate> predicates = new ArrayList<>();
-	    predicates.add(cb.notEqual(user.get("userId"), requesterId));
+        // 2순위 (1순위 중복 제거)
+        List<User> second = filterByPriority(requesterId, ideal, p2);
+        second.removeAll(result);
+        List<User> secondPicked = pickRandom(second, 3 - result.size());
+        result.addAll(secondPicked);
+        if (result.size() >= 3) return result;
 
-	    for (String priority : List.of(p1, p2, p3)) {
-	        switch (priority) {
-	            case "나이" -> predicates.add(cb.greaterThanOrEqualTo(user.get("age"), ideal.getItAge()));
-	            case "키" -> predicates.add(cb.greaterThanOrEqualTo(user.get("height"), ideal.getItHeight()));
-	            case "거주지" -> predicates.add(cb.equal(user.get("address"), ideal.getItAddress()));
-	            case "MBTI" -> predicates.add(cb.equal(user.get("mbti"), ideal.getItMbti()));
-	            case "관심사" -> predicates.add(cb.equal(user.get("hobby"), ideal.getItHobby()));
-	            case "흡연유무" -> predicates.add(cb.equal(user.get("smoke"), ideal.isItSmoke()));
-	            case "종교" -> predicates.add(cb.equal(user.get("facialType"), ideal.getItFacialtype())); // 여기에 종교 저장된 거 맞지?
-	        }
-	    }
+        // 3순위 (1,2순위 중복 제거)
+        List<User> third = filterByPriority(requesterId, ideal, p3);
+        third.removeAll(result);
+        List<User> thirdPicked = pickRandom(third, 3 - result.size());
+        result.addAll(thirdPicked);
+        if (result.size() >= 3) return result;
 
-	    cq.where(predicates.toArray(new Predicate[0]));
-	    cq.orderBy(cb.asc(cb.function("DBMS_RANDOM.VALUE", Double.class))); // 랜덤 정렬 유지
-	    return entityManager.createQuery(cq).setMaxResults(3).getResultList();
-	}
+        // 랜덤 (1,2,3순위 전부 중복 제거)
+        List<User> random = getCompletelyRandom(requesterId);
+        random.removeAll(result);
+        List<User> randomPicked = pickRandom(random, 3 - result.size());
+        result.addAll(randomPicked);
+
+        return result;
+    }
+    
+    private List<User> pickRandom(List<User> list, int count) {
+        Collections.shuffle(list);
+        return list.stream().limit(count).toList();
+    }
+    
+    private List<User> getCompletelyRandom(int requesterId) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+        Root<User> user = cq.from(User.class);
+
+        Predicate excludeSelf = cb.notEqual(user.get("userId"), requesterId);
+        cq.where(excludeSelf);
+        cq.orderBy(cb.asc(cb.function("DBMS_RANDOM.VALUE", Double.class)));
+
+        return entityManager.createQuery(cq)
+                .setMaxResults(3)
+                .getResultList();
+    }
+
+    private List<User> filterByPriority(int requesterId, Idealtype ideal, String priority) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+        Root<User> user = cq.from(User.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(cb.notEqual(user.get("userId"), requesterId));
+
+        switch (priority) {
+            case "나이" -> predicates.add(cb.between(user.get("age"), ideal.getItAge() - 2, ideal.getItAge() + 2));
+            case "키" -> predicates.add(cb.between(user.get("height"), ideal.getItHeight() - 5, ideal.getItHeight() + 5));
+            case "거주지" -> predicates.add(cb.equal(user.get("address"), ideal.getItAddress()));
+            case "MBTI" -> predicates.add(cb.equal(user.get("mbti"), ideal.getItMbti()));
+            case "관심사" -> predicates.add(cb.equal(user.get("hobby"), ideal.getItHobby()));
+            case "흡연유무" -> predicates.add(cb.equal(user.get("smoke"), ideal.isItSmoke()));
+            case "종교" -> predicates.add(cb.equal(user.get("facialType"), ideal.getItFacialtype()));
+        }
+
+        cq.where(cb.and(predicates.toArray(new Predicate[0])));
+        cq.orderBy(cb.asc(cb.function("DBMS_RANDOM.VALUE", Double.class)));
+
+        return entityManager.createQuery(cq).getResultList();
+    }
 	
 	void respondToMatching(int matchId, String status) {}
 	  // updateMatchStatus로 결과 업데이트
 
+	
+	
 
 	Matching getMatchingResult(int matchId) {
         return null;}
@@ -86,6 +139,25 @@ public class MatchingService {
 	    }
 	    
 	    return userRepository.findAllById(matchedUserIds);
+    }
+	
+	public boolean getMatchingStatus(int userId, String requestType) {
+        
+        List<Integer> matchingResultId = matchingResultRepository.findResultIdsByUserIdAndRequestType(userId, requestType);
+        System.out.println(userId+"/"+requestType);
+        System.out.println("matchingResultId 리스트 값:");
+        for (Integer id : matchingResultId) {
+            System.out.println("  -> " + id);
+        }
+//        List<Matching> matchings = matchingRepository.findByMatchingResult_ResultIdIn(matchingResultId);
+//        List<Integer> matchedUserIds = new ArrayList<>();
+     // matchingResultId가 비어있으면 true 반환
+        if (matchingResultId == null || matchingResultId.isEmpty()) {
+            return true;
+        }
+
+        // 값이 있으면 false 반환
+        return false;
     }
 	
 	public void acceptMatchesByUserId(int userId, String type, int idealId) {
@@ -118,8 +190,7 @@ public class MatchingService {
 	    matchingResultRepository.save(result);
 
 	    // 2. 전체 유저 중 3명 추천 (임의 예시: 무작위 3명)
-	    List<User> candidates = findCandidatesByPriorities(requesterId, ideal, priority1, priority2, priority3);
-	    		userRepository.findMatchingUser(requesterId); // 쿼리로 exclude 처리
+	    List<User> candidates = getCandidatesByPriorityStep(requesterId, ideal, priority1, priority2, priority3);
 
 	    // 3. Matching 3건 생성
 	    for (User matched : candidates) {

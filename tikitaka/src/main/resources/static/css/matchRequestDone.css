@@ -74,9 +74,10 @@ button {
     border-radius: 25px;
     background: #7656D6;
     color: #FFFFFF;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .completeBtn {
     margin-top: 150px;
+    cursor: pointer;
 }

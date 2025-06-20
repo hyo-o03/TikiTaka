@@ -3,6 +3,7 @@ package com.somsoms.tikitaka.controller;
 import java.util.ArrayList;
 import java.util.List;
 import com.somsoms.tikitaka.domain.*;
+import com.somsoms.tikitaka.repository.MatchingRepository;
 import com.somsoms.tikitaka.service.IdealtypeService;
 import com.somsoms.tikitaka.service.MatchingService;
 
@@ -28,26 +29,46 @@ public class MatchingController {
     @Autowired
     private IdealtypeService idealtypeService;
     
+    @Autowired
+    private MatchingRepository matchingRepository;
+    
     @PostConstruct
     public void checkInit() {
         System.out.println("💡 IdealtypeService 주입 여부: " + idealtypeService);
     }
 
-	@GetMapping("/prioritySelect")
-	public String showPrioritySelect(@RequestParam("requestType") String requestType, Model model) {
-	    model.addAttribute("requestType", requestType);
-		return "prioritySelect";
-	}
+
+    @GetMapping("/prioritySelect")
+    public String showPrioritySelect(@RequestParam("requestType") String requestType, Model model) {
+        model.addAttribute("requestType", requestType); // <-- 이게 있어야 JSP에서 ${requestType} 가능
+        
+        int userId = 1068;
+        
+        boolean b = matchingService.getMatchingStatus(userId, requestType);
+        model.addAttribute("status", b);
+        
+        return "prioritySelect"; // prioritySelect.jsp로 이동
+    }
+
 
 	@GetMapping("/idealTypeLanking")
 	public String showIdealTypeLanking() {
 		return "idealTypeLanking";
 	}
 	
+	@GetMapping("/isMatchingResultPage")
+	public String isMatchingResultPage(@RequestParam("matchedUserId") int matchedUserId, Model model) {
+		model.addAttribute("matchedUserId", matchedUserId);
+		 
+		matchingRepository.acceptMatching(matchedUserId);
+		
+		return "matchingResultPage";
+	}
+	
 	@GetMapping("/matchingResultPage")
 	public String showMatchingResultPage(Model model) {
 	    
-	    int userId = 1065; //임시로 정해놈
+	    int userId = 1068; //임시로 정해놈
 
 	    List<User> matchingList = matchingService.getMatchingResults(userId, "I");
 
@@ -59,7 +80,7 @@ public class MatchingController {
 	@GetMapping("/friendMatchingResultPage")
     public String showFriendMatchingResultPage(Model model) {
         
-        int userId = 1065; //임시로 정해놈
+        int userId = 1068; //임시로 정해놈
         
         List<User> matchingList = matchingService.getMatchingResults(userId, "F");        
         model.addAttribute("matchingList", matchingList);
@@ -74,14 +95,15 @@ public class MatchingController {
 	
 
 	@GetMapping("/idealTypeInfo")
-    public String showIdealTypeInfo(@RequestParam("address") String address, @RequestParam("age") int age, @RequestParam("introduce") String introduce, @RequestParam("userId") int userId, Model model) {
+    public String showIdealTypeInfo(@RequestParam("address") String address, @RequestParam("age") int age, @RequestParam("introduce") String introduce, @RequestParam("userId") int userId, @RequestParam("facialType") String facialType, Model model) {
         // 디버깅용 로그 추가
 //        System.out.println("IdealType Data: " + place + ", " + age + ", " + introduce + ", " + imageUrl);
 
         // 모델에 데이터를 담아서 뷰로 전달
-        User userInfo = new User(address, age, introduce, userId);
-        System.out.println("User Data: " + address + ", " + age + ", " + introduce +", "+userId);
+        User userInfo = new User(address, age, introduce, userId, facialType);
+        System.out.println("User Data: " + address + ", " + age + ", " + introduce +", " + userId + "," + facialType);
         model.addAttribute("userInfo", userInfo);
+        
         return "idealTypeInfo";
     }
 	
@@ -116,9 +138,7 @@ public class MatchingController {
 //      int userId = loginUser.getUserId();
       
 
-      System.out.println(requestType);
-
-		int userId = 1064;
+		int userId = 1068;
 
         matchingService.requestMatching(userId, priority1, priority2, priority3, requestType);
 
