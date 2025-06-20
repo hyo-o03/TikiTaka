@@ -1,56 +1,21 @@
 .container {
-    position: relative;
-    background:
-        radial-gradient(circle at left bottom, rgba(200, 200, 200, 0.3) 0.1%, transparent 50%),
-        radial-gradient(circle at right top, rgba(200, 200, 200, 0.3) 0.1%, transparent 50%);
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 100vh;
+    background: linear-gradient(180deg, #ffeaf5 0%, #dfc4ff 100%);
 }
 
-.header {
-    display: flex;
-    justify-content: flex-end;
-    padding: 20px;
-}
-
-.textCog {
-    font-size: 24px;
-    font-weight: bold;
+.complete-container {
+    padding-top: 100px;
     text-align: center;
-    margin-top: 40px;
-    color: #444;
+    color: #333;
 }
 
-.content {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.emoji {
-    font-size: 64px;
-    text-align: center;
-    margin-top: 10px;
-}
-
-.message {
-    color: #808080;
-    margin-top: 10px;
+.complete-desc {
+    font-size: 14px;
+    color: #777;
     line-height: 1.6;
+    margin-bottom: 40px;
 }
 
-.footer {
-    margin-top: 40px;
-    text-align: center;
-}
-
-.next-button {
-    background-color: #7a4ff7;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 30px;
-    font-size: 15px;
-    cursor: pointer;
-    width: 150px;
+.complete-emoji {
+    font-size: 172px;
+    margin-bottom: 60px;
 }
