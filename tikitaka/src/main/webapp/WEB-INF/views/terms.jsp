@@ -80,7 +80,7 @@
         <img src="${pageContext.request.contextPath}/images/escBtn.png">
     </div>
 
-    <form action="${pageContext.request.contextPath}/signup/verifyCode" method="post" class="form-layout">
+    <form action="${pageContext.request.contextPath}/signup/baseInfo" method="post" class="form-layout">
         <div class="content">
             <div class="title">약관에 동의해주세요</div>
             <div class="description">

@@ -116,30 +116,8 @@ public class MatchingService {
 
         return entityManager.createQuery(cq).getResultList();
     }
-	
-	void respondToMatching(int matchId, String status) {}
-	  // updateMatchStatus로 결과 업데이트
-
-	
-	
-
-	Matching getMatchingResult(int matchId) {
-        return null;}
-	  // findResultByMatchId로 매칭 하나의 결과 받아오기
-	  // 이 결과로 매칭된 유저 프로필도 가져올 수 있음
 
 	public List<Matching> getMatchingResults(int userId, String requestType) {
-	    
-//	    List<Integer> matchingResultId = matchingResultRepository.findResultIdsByUserIdAndRequestType(userId, requestType);
-//	    
-//	    List<Matching> matchings = matchingRepository.findByMatchingResult_ResultIdIn(matchingResultId);
-//	    List<Integer> matchedUserIds = new ArrayList<>();
-//	    for (Matching m : matchings) {
-//	        matchedUserIds.add(m.getMatchedUserId());
-//	    }
-//	    
-//	    return userRepository.findAllById(matchedUserIds);
-		
 	    List<Integer> matchingResultId = matchingResultRepository.findResultIdsByUserIdAndRequestType(userId, requestType);
 	    
 	    return matchingRepository.findByMatchingResult_ResultIdIn(matchingResultId);

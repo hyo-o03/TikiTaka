@@ -85,11 +85,6 @@ public class SignupController {
 		return "checkLogin";
 	}
 	
-	@PostMapping("/agree")
-	public String showAgree() {
-		return "agree";
-	}
-	
 	@PostMapping("/terms")
 	public String showCertification(@RequestParam String registeremailOrPhone,
             @RequestParam(required = false) String registerPassword,
@@ -135,16 +130,11 @@ public class SignupController {
 		return "terms";
 	}
 	
-	@PostMapping("/verifyCode")
+	@PostMapping("/baseInfo")
 	public String showVerifyCode(@RequestParam(name = "agree4", defaultValue = "N") String alarmAgree,
 		            			HttpSession session) {
 		session.setAttribute("alarmAgree", alarmAgree);
 		System.out.println("alarmAgree = " + alarmAgree);
-		return "verifyCode";
-	}
-	
-	@PostMapping("/baseInfo")
-	public String showBaseInfo() {
 		return "baseInfo";
 	}
 	

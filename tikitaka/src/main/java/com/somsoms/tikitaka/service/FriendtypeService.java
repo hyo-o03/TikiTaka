@@ -1,7 +1,6 @@
 package com.somsoms.tikitaka.service;
 
 import org.springframework.stereotype.Service;
-import com.somsoms.tikitaka.dao.FriendtypeDao;
 import com.somsoms.tikitaka.domain.*;
 import com.somsoms.tikitaka.repository.FriendtypeRepository;
 import com.somsoms.tikitaka.repository.IdealtypeRepository;

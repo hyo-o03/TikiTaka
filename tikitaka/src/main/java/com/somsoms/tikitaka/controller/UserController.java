@@ -24,6 +24,12 @@ import com.somsoms.tikitaka.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 	private final UserService userService;
+    
+	@Autowired
+	private UserRepository userRepository;
+	
+    @Autowired
+    private AlarmRepository alarmRepository;
 
     @Autowired
     public UserController(UserService userService) {
@@ -48,20 +54,6 @@ public class UserController {
     public String showProfileForm() {
         return "animalProfileForm";
     }
-    
- // 마이페이지 정보 수정 (editMyProfile.jsp)
-    @GetMapping("/mypage/edit")
-    public String showEditMyProfile(Model model) {
-        User user = userService.getUserById(1066); // 임시 ID
-        model.addAttribute("user", user);
-        return "editMyProfile";
-	}
-    
-	@Autowired
-	private UserRepository userRepository;
-	
-    @Autowired
-    private AlarmRepository alarmRepository;
 	
 	@PostMapping("/hobby")
 	public String showHobby(@RequestParam String facialType, HttpSession session) {
@@ -73,18 +65,6 @@ public class UserController {
 	    
 		return "hobbyForm";
 	}
-
- // 자기소개 수정
-    @GetMapping("/editIntroduce")
-    public String showEditIntroduce() {
-        return "editIntroduce";
-    }
-    
- // 프로필 동물 수정
-    @GetMapping("/editProfile")
-    public String showEditProfile() {
-        return "editProfile";
-    }
 
 	@PostMapping("/mbti")
     public String showMbti(@RequestParam String hobby,
@@ -171,21 +151,6 @@ public class UserController {
         return "finishSurvey";
     }
 
-	@GetMapping("/sns")
-	public String showSns() {
-		return "snsForm";
-	}
-	
-	@GetMapping("/style")
-	public String showStyle() {
-		return "styleForm";
-	}
-	
-	@GetMapping("/smoke")
-	public String showSmoke() {
-		return "smokeForm";
-	}
-
 	@GetMapping("/home")
 	public String showHome(HttpSession session, Model model) {
 		Integer userId = (Integer) session.getAttribute("userId");
@@ -202,19 +167,6 @@ public class UserController {
 		return "home";
 	}
 	
-	@PostMapping("/mypage/edit")
-	public String updateMyProfile(User user) {
-	    user.setUserId(1066); // 임시로 userId 고정 (세션 처리 전용)
-	    userService.updateUser(user);
-	    return "redirect:/user/myPage"; // 수정 후 마이페이지로 이동
-	}
-	
-    // 설문 완료
-    @GetMapping("/finishSurvey")
-    public String showFinishSurvey() {
-        return "finishSurvey";
-    }
-        
 	// ✅ 로그아웃 처리
     @GetMapping("/logout")
     public String logout(HttpSession session) {
