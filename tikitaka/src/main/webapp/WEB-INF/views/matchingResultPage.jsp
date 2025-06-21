@@ -78,8 +78,8 @@
 	
 	<script>
 	    function exit() {
-	        if (confirm("시작 페이지로 돌아가시겠습니까?")) {
-	            window.location.href = "${pageContext.request.contextPath}/signup/start";
+	        if (confirm("홈으로 돌아가시겠습니까?")) {
+	            window.location.href = "${pageContext.request.contextPath}/user/home";
 	        }
 	    }
 	

@@ -42,31 +42,27 @@ public class MatchingService {
     @PersistenceContext
     private EntityManager entityManager;
     
-    private List<User> getCandidatesByPriorityStep(int requesterId, Idealtype ideal, String p1, String p2, String p3) {
+    private List<User> getCandidatesByPriorityStep(int requesterId, Idealtype ideal, String p1, String p2, String p3, String requestType, String requesterGender) {
         List<User> result = new ArrayList<>();
 
-        // 1순위
-        List<User> first = filterByPriority(requesterId, ideal, p1);
+        List<User> first = filterByPriority(requesterId, ideal, p1, requestType, requesterGender);
         List<User> firstPicked = pickRandom(first, 3);
         result.addAll(firstPicked);
         if (result.size() >= 3) return result;
 
-        // 2순위 (1순위 중복 제거)
-        List<User> second = filterByPriority(requesterId, ideal, p2);
+        List<User> second = filterByPriority(requesterId, ideal, p2, requestType, requesterGender);
         second.removeAll(result);
         List<User> secondPicked = pickRandom(second, 3 - result.size());
         result.addAll(secondPicked);
         if (result.size() >= 3) return result;
 
-        // 3순위 (1,2순위 중복 제거)
-        List<User> third = filterByPriority(requesterId, ideal, p3);
+        List<User> third = filterByPriority(requesterId, ideal, p3, requestType, requesterGender);
         third.removeAll(result);
         List<User> thirdPicked = pickRandom(third, 3 - result.size());
         result.addAll(thirdPicked);
-        if (result.size() >= 3) return result;
-
-        // 랜덤 (1,2,3순위 전부 중복 제거)
-        List<User> random = getCompletelyRandom(requesterId);
+        
+        // 🔽 성별만 유지한 랜덤 후보 보충
+        List<User> random = getRandomByGenderOnly(requesterId, requestType, requesterGender);
         random.removeAll(result);
         List<User> randomPicked = pickRandom(random, 3 - result.size());
         result.addAll(randomPicked);
@@ -79,21 +75,7 @@ public class MatchingService {
         return list.stream().limit(count).toList();
     }
     
-    private List<User> getCompletelyRandom(int requesterId) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<User> cq = cb.createQuery(User.class);
-        Root<User> user = cq.from(User.class);
-
-        Predicate excludeSelf = cb.notEqual(user.get("userId"), requesterId);
-        cq.where(excludeSelf);
-        cq.orderBy(cb.asc(cb.function("DBMS_RANDOM.VALUE", Double.class)));
-
-        return entityManager.createQuery(cq)
-                .setMaxResults(3)
-                .getResultList();
-    }
-
-    private List<User> filterByPriority(int requesterId, Idealtype ideal, String priority) {
+    private List<User> getRandomByGenderOnly(int requesterId, String requestType, String requesterGender) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<User> cq = cb.createQuery(User.class);
         Root<User> user = cq.from(User.class);
@@ -101,10 +83,38 @@ public class MatchingService {
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(cb.notEqual(user.get("userId"), requesterId));
 
+        // 성별 조건만 유지
+        if ("F".equals(requestType)) {
+            predicates.add(cb.equal(user.get("gender"), requesterGender)); // 동성
+        } else if ("I".equals(requestType)) {
+            predicates.add(cb.notEqual(user.get("gender"), requesterGender)); // 이성
+        }
+
+        cq.where(cb.and(predicates.toArray(new Predicate[0])));
+        cq.orderBy(cb.asc(cb.function("DBMS_RANDOM.VALUE", Double.class)));
+
+        return entityManager.createQuery(cq).getResultList();
+    }
+
+    private List<User> filterByPriority(int requesterId, Idealtype ideal, String priority, String requestType, String requesterGender) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+        Root<User> user = cq.from(User.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(cb.notEqual(user.get("userId"), requesterId));
+
+        // ✅ 성별 필터 추가
+        if ("F".equals(requestType)) {
+            predicates.add(cb.equal(user.get("gender"), requesterGender)); // 동성만
+        } else if ("I".equals(requestType)) {
+            predicates.add(cb.notEqual(user.get("gender"), requesterGender)); // 이성만
+        }
+
         switch (priority) {
             case "나이" -> predicates.add(cb.between(user.get("age"), ideal.getItAge() - 2, ideal.getItAge() + 2));
             case "키" -> predicates.add(cb.between(user.get("height"), ideal.getItHeight() - 5, ideal.getItHeight() + 5));
-            case "거주지" -> predicates.add(cb.equal(user.get("address"), ideal.getItAddress()));
+            case "거주지" -> predicates.add(cb.equal(user.get("address"), ideal.getItDistancePref()));
             case "MBTI" -> predicates.add(cb.equal(user.get("mbti"), ideal.getItMbti()));
             case "관심사" -> predicates.add(cb.equal(user.get("hobby"), ideal.getItHobby()));
             case "흡연유무" -> predicates.add(cb.equal(user.get("smoke"), ideal.getItSmoke()));
@@ -169,8 +179,9 @@ public class MatchingService {
 	    matchingResultRepository.save(result);
 
 	    // 2. 전체 유저 중 3명 추천 (임의 예시: 무작위 3명)
-	    List<User> candidates = getCandidatesByPriorityStep(requesterId, ideal, priority1, priority2, priority3);
-
+	    List<User> candidates = getCandidatesByPriorityStep(
+                requesterId, ideal, priority1, priority2, priority3, requestType, requester.getGender()
+            );
 	    // 3. Matching 3건 생성
 	    for (User matched : candidates) {
 	        Matching m = new Matching();

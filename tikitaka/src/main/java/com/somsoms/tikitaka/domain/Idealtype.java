@@ -36,9 +36,6 @@ public class Idealtype {
     @Column(name = "IT_MBTI", length = 5)
     private String itMbti;
 
-    @Column(name = "IT_ADDRESS", length = 10)
-    private String itAddress;
-
     @Column(name = "IT_FACIAL_TYPE", length = 10)
     private String itFacialtype;
 
@@ -76,8 +73,6 @@ public class Idealtype {
     public void setItHeight(double itHeight) { this.itHeight = itHeight; }
     public String getItMbti() { return itMbti; }
     public void setItMbti(String itMbti) { this.itMbti = itMbti; }
-    public String getItAddress() { return itAddress; }
-    public void setItAddress(String itAddress) { this.itAddress = itAddress; }
     public String getItFacialtype() { return itFacialtype; }
     public void setItFacialtype(String itFacialtype) { this.itFacialtype = itFacialtype; }
 

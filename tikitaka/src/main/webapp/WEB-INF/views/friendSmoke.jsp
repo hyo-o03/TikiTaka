@@ -17,6 +17,25 @@
 		        window.location.href = "${pageContext.request.contextPath}/mypage/mypage";
 		    }
 		}
+		
+		function validateSmoke() {
+            const radios = document.getElementsByName("smoke");
+            let selected = false;
+
+            for (let i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    selected = true;
+                    break;
+                }
+            }
+
+            if (!selected) {
+                alert("흡연 여부를 선택해주세요.");
+                return false;
+            }
+
+            return true;
+        }
 	</script>
 </head>
 
@@ -26,7 +45,7 @@
 	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
 	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
         </div>
-        <form action="${pageContext.request.contextPath}/friend/checkFriendForm" method="post" class="form-layout">
+        <form action="${pageContext.request.contextPath}/friend/checkFriendForm" method="post" class="form-layout" onsubmit="return validateSmoke();">
 	        <div class="content">
 	        	<div class="title">친구의 흡연 여부를 알려주세요</div>
 	        	<div class="description">친구가 흡연을 해도 괜찮은지 알려주세요!</div>

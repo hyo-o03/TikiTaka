@@ -36,9 +36,6 @@ public class Friendtype {
     @Column(name = "FT_HOBBY", length = 10)
     private String ftHobby;
 
-    @Column(name = "FT_ADDRESS", length = 10)
-    private String ftAddress;
-
     @Column(name = "FT_SMOKE")
     private String ftSmoke;
     
@@ -64,8 +61,6 @@ public class Friendtype {
     public void setFtMbti(String ftMbti) { this.ftMbti = ftMbti; }
     public String getFtHobby() { return ftHobby; }
     public void setFtHobby(String ftHobby) { this.ftHobby = ftHobby; }
-    public String getFtAddress() { return ftAddress; }
-    public void setFtAddress(String ftAddress) { this.ftAddress = ftAddress; }
     public String getFtSmoke() { return ftSmoke; }
     public void setFtSmoke(String ftSmoke) { this.ftSmoke = ftSmoke; }
     public String getFtAgePreference() { return ftAgePreference; } // ✅ 추가

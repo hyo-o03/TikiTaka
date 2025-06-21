@@ -36,7 +36,29 @@
 	                hiddenInput.value = ""; // 드롭다운 초기화 시 명시적 처리
 	            }
 	        });
+	        
+	     // ✅ 페이지 진입 시 초기값 세팅 (수정 모드에서 필요함)
+	        const selectedValue = mbtiDropdown.value;
+	        const unknownSelected = unknownBtn.classList.contains("selected");
+
+	        if (unknownSelected) {
+	            hiddenInput.value = "상관없음";
+	        } else if (selectedValue !== "") {
+	            hiddenInput.value = selectedValue;
+	        }
 	    };
+	    
+	    function validateMbti() {
+	        const hiddenValue = document.getElementById("mbtiHiddenInput").value;
+
+	        if (!hiddenValue || hiddenValue.trim() === "") {
+	            alert("MBTI를 선택하거나 '상관없어요'를 눌러주세요.");
+	            return false;
+	        }
+
+	        return true;
+	    }
+
 	</script>
 </head>
 <body>
@@ -45,7 +67,7 @@
 	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
 	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
 	    </div>
-	    <form action="${pageContext.request.contextPath}/friend/friendSmoke" method="post" class="form-layout">
+	    <form action="${pageContext.request.contextPath}/friend/friendSmoke" method="post" class="form-layout" onsubmit="return validateMbti();">
 		<div class="content">
 		    <div class="title">당신의 친구의 MBTI는 무엇이었으면 좋겠나요?</div>
 		    <div class="description">무엇이든 상관없다면 '상관없어요'를 눌러주세요</div>

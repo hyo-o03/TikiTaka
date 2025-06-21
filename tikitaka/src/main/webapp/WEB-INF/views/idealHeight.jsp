@@ -49,6 +49,18 @@
                 });
             });
         });
+		
+		function validateHeight() {
+			const isSelected = Array.from(document.querySelectorAll('.height-tag'))
+	        .some(btn => btn.classList.contains("selected"));
+			
+		    if (!isSelected) {
+		        alert("선호하는 키를 선택해주세요.");
+		        return false;
+		    }
+
+		    return true;
+		}
 	</script>
 </head>
 <body>
@@ -58,7 +70,7 @@
         <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
     </div>
    
-	<form action="${pageContext.request.contextPath}/ideal/idealAddress" method="post" class="form-layout">
+	<form action="${pageContext.request.contextPath}/ideal/idealAddress" method="post" class="form-layout" onsubmit="return validateHeight();">
 	    <div class="content">
 			<div class="title">선호하는 이상형의 키를 골라주세요</div>
 			

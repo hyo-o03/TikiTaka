@@ -17,6 +17,24 @@
 		    }
 		}
 
+		function validateReligion() {
+            const radios = document.getElementsByName("religion");
+            let selected = false;
+
+            for (let i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    selected = true;
+                    break;
+                }
+            }
+
+            if (!selected) {
+                alert("종교를 선택해주세요.");
+                return false;
+            }
+
+            return true;
+        }
 	</script>
 </head>
 
@@ -26,7 +44,7 @@
 	        <img src="${pageContext.request.contextPath}/images/leftBtn.png" onclick="history.back()">
 	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
         </div>
-		<form action="${pageContext.request.contextPath}/ideal/checkIdealForm" method="post" class="form-layout">
+		<form action="${pageContext.request.contextPath}/ideal/checkIdealForm" method="post" class="form-layout" onsubmit="return validateReligion();">
 	        <div class="content">
 	        	<div class="title">선호하는 이상형의 종교는 무엇인가요?</div>
 	        	<div class="description">상대와 만날 때 종교도 정말 중요해요<br>본인의 종교가 무엇인지 알려주세요</div>

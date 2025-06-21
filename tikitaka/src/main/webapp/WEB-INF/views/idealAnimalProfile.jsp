@@ -26,6 +26,15 @@
 		    document.getElementById("selectedFacialType").value = element.getAttribute("data-value");
 	    }
 		
+		function validateAnimalSelection() {
+	        const selected = document.getElementById("selectedFacialType").value.trim();
+	        if (selected === "") {
+	            alert("동물을 하나 선택해주세요.");
+	            return false;
+	        }
+	        return true;
+	    }
+		
 	</script>
 </head>
 <body>
@@ -35,7 +44,7 @@
 	        <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
 	    </div>
 	    
-	    <form action="${pageContext.request.contextPath}/ideal/idealAge" method="post" class="form-layout" style="align-items: center;">
+	    <form action="${pageContext.request.contextPath}/ideal/idealAge" method="post" class="form-layout" style="align-items: center;" onsubmit="return validateAnimalSelection();">
 		    <div class="content">
 		        <div class="title">선호하는 이상형의 얼굴상을 골라주세요</div>
 		        

@@ -35,6 +35,16 @@
                 });
             });
         });
+		
+		function validateFashion() {
+		    const selectedFashion = document.getElementById("selectedFashionType").value;
+		    if (!selectedFashion || selectedFashion.trim() === "") {
+		        alert("패션 스타일을 선택해주세요.");
+		        return false; // 제출 방지
+		    }
+		    return true;
+		}
+
 	</script>
 </head>
 <body>
@@ -44,7 +54,7 @@
         <img src="${pageContext.request.contextPath}/images/escBtn.png" onclick="exit()">
     </div>
    
-	<form action="${pageContext.request.contextPath}/ideal/idealReligion" method="post" class="form-layout">
+	<form action="${pageContext.request.contextPath}/ideal/idealReligion" method="post" class="form-layout" onsubmit="return validateFashion();">
 	    <div class="content">
 			<div class="title">이상형의 패션 스타일은 어땠으면 좋겠나요?</div>
 			
